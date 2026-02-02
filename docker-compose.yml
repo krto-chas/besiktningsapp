@@ -1,0 +1,138 @@
+services:
+  # =============================================================================
+  # PostgreSQL Database
+  # =============================================================================
+  postgres:
+    image: postgres:15-alpine
+    container_name: besiktningsapp-postgres
+    restart: unless-stopped
+    environment:
+      POSTGRES_DB: besiktningsapp
+      POSTGRES_USER: besiktning
+      POSTGRES_PASSWORD: besiktning
+      POSTGRES_INITDB_ARGS: "--encoding=UTF8 --locale=sv_SE.UTF-8"
+    volumes:
+      - postgres_data:/var/lib/postgresql/data
+    ports:
+      - "5432:5432"
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U besiktning -d besiktningsapp"]
+      interval: 10s
+      timeout: 5s
+      retries: 5
+    networks:
+      - besiktningsapp
+
+  # =============================================================================
+  # Redis (for rate limiting, caching, Celery)
+  # =============================================================================
+  redis:
+    image: redis:7-alpine
+    container_name: besiktningsapp-redis
+    restart: unless-stopped
+    command: redis-server --appendonly yes
+    volumes:
+      - redis_data:/data
+    ports:
+      - "6379:6379"
+    healthcheck:
+      test: ["CMD", "redis-cli", "ping"]
+      interval: 10s
+      timeout: 5s
+      retries: 5
+    networks:
+      - besiktningsapp
+
+  # =============================================================================
+  # Backend API (Flask)
+  # =============================================================================
+  backend:
+    build:
+      context: ./backend
+      dockerfile: Dockerfile
+    container_name: besiktningsapp-backend
+    restart: unless-stopped
+    depends_on:
+      postgres:
+        condition: service_healthy
+      redis:
+        condition: service_healthy
+    environment:
+      # Application
+      FLASK_APP: app
+      FLASK_ENV: development
+      DEBUG: "true"
+      SECRET_KEY: dev-secret-key-change-in-prod
+      
+      # Database
+      DATABASE_URL: postgresql://besiktning:besiktning@postgres:5432/besiktningsapp
+      
+      # JWT
+      JWT_SECRET_KEY: dev-jwt-secret-change-in-prod
+      JWT_ACCESS_TOKEN_EXPIRES: "3600"
+      
+      # Storage
+      STORAGE_BACKEND: local
+      LOCAL_STORAGE_PATH: /app/storage
+      
+      # Redis
+      REDIS_URL: redis://redis:6379/0
+      
+      # CORS
+      CORS_ORIGINS: "*"
+      
+      # Logging
+      LOG_LEVEL: DEBUG
+      
+      # Timezone
+      TZ: Europe/Stockholm
+    volumes:
+      - ./backend:/app
+      - backend_storage:/app/storage
+    ports:
+      - "5000:5000"
+    command: flask run --host=0.0.0.0 --port=5000 --reload
+    healthcheck:
+      test: ["CMD", "curl", "-f", "http://localhost:5000/health"]
+      interval: 30s
+      timeout: 10s
+      retries: 3
+      start_period: 40s
+    networks:
+      - besiktningsapp
+
+  # =============================================================================
+  # Adminer (Database management UI)
+  # =============================================================================
+  adminer:
+    image: adminer:latest
+    container_name: besiktningsapp-adminer
+    restart: unless-stopped
+    depends_on:
+      - postgres
+    ports:
+      - "8080:8080"
+    environment:
+      ADMINER_DEFAULT_SERVER: postgres
+      ADMINER_DESIGN: dracula
+    networks:
+      - besiktningsapp
+
+# =============================================================================
+# VOLUMES
+# =============================================================================
+volumes:
+  postgres_data:
+    driver: local
+  redis_data:
+    driver: local
+  backend_storage:
+    driver: local
+
+# =============================================================================
+# NETWORKS
+# =============================================================================
+networks:
+  besiktningsapp:
+    driver: bridge
+    name: besiktningsapp-network
