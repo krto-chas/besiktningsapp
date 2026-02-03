@@ -1,3 +1,5 @@
+from __future__ import annotations
+
 """
 =============================================================================
 BESIKTNINGSAPP BACKEND - IMAGE MODEL
@@ -7,8 +9,6 @@ Image model (Bildmetadata).
 Stores metadata about images uploaded for defects.
 Actual image files are stored in storage service (local or S3).
 """
-from __future__ import annotations
-
 
 from sqlalchemy import Column, String, Integer, BigInteger, ForeignKey
 from sqlalchemy.orm import relationship

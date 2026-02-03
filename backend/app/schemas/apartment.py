@@ -1,11 +1,11 @@
+from __future__ import annotations
+
 """
 =============================================================================
 BESIKTNINGSAPP BACKEND - APARTMENT SCHEMAS
 =============================================================================
 Pydantic schemas for Apartment and Room operations.
 """
-from __future__ import annotations
-
 
 from typing import List, Optional
 

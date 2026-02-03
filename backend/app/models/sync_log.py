@@ -1,3 +1,5 @@
+from __future__ import annotations
+
 """
 =============================================================================
 BESIKTNINGSAPP BACKEND - SYNC LOG MODEL
@@ -6,8 +8,6 @@ Sync Log model for tracking sync operations and ensuring idempotency.
 
 Stores processed operations to prevent duplicate processing.
 """
-from __future__ import annotations
-
 
 from datetime import datetime, timedelta
 

@@ -1,11 +1,11 @@
+from __future__ import annotations
+
 """
 =============================================================================
 BESIKTNINGSAPP BACKEND - DEFECT SCHEMAS
 =============================================================================
 Pydantic schemas for Defect (Felrapport) operations.
 """
-from __future__ import annotations
-
 
 from typing import List, Optional
 

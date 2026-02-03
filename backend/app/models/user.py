@@ -1,3 +1,5 @@
+from __future__ import annotations
+
 """
 =============================================================================
 BESIKTNINGSAPP BACKEND - USER MODEL
@@ -6,8 +8,6 @@ User model representing besiktningsmän (inspectors).
 
 Stores authentication credentials and inspector profile information.
 """
-from __future__ import annotations
-
 
 from typing import Optional
 

@@ -1,3 +1,5 @@
+from __future__ import annotations
+
 """
 =============================================================================
 BESIKTNINGSAPP BACKEND - COMMON SCHEMAS
@@ -10,8 +12,6 @@ Includes:
 - Error response formats
 - Field validation errors
 """
-from __future__ import annotations
-
 from typing import Any, Dict, Generic, List, Optional, TypeVar
 from datetime import datetime
 
@@ -246,7 +246,7 @@ class BaseSchema(BaseModel):
         str_strip_whitespace = True
 
 
-class TimestampMixin(BaseModel):
+class TimestampMixin:
     """Mixin for timestamp fields."""
     
     created_at: datetime = Field(
@@ -258,7 +258,7 @@ class TimestampMixin(BaseModel):
     )
 
 
-class RevisionMixin(BaseModel):
+class RevisionMixin:
     """Mixin for revision tracking."""
     
     revision: int = Field(
@@ -267,7 +267,7 @@ class RevisionMixin(BaseModel):
     )
 
 
-class ClientIdMixin(BaseModel):
+class ClientIdMixin:
     """Mixin for client ID."""
     
     client_id: Optional[str] = Field(

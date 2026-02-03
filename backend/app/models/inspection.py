@@ -1,3 +1,5 @@
+from __future__ import annotations
+
 """
 =============================================================================
 BESIKTNINGSAPP BACKEND - INSPECTION MODEL
@@ -6,8 +8,6 @@ Inspection model (Besiktning).
 
 Represents a single inspection event at a property.
 """
-from __future__ import annotations
-
 
 from sqlalchemy import Column, String, Integer, Date, ForeignKey, Enum
 from sqlalchemy.orm import relationship

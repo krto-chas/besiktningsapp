@@ -1,3 +1,5 @@
+from __future__ import annotations
+
 """
 =============================================================================
 BESIKTNINGSAPP BACKEND - STANDARD DEFECT MODEL
@@ -7,8 +9,6 @@ Standard Defect model (Standardfel).
 Pre-defined defect templates that users can reference.
 Users can create their own or modify standard ones.
 """
-from __future__ import annotations
-
 
 from sqlalchemy import Column, String, Text, Enum, Boolean
 

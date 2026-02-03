@@ -1,11 +1,11 @@
+from __future__ import annotations
+
 """
 =============================================================================
 BESIKTNINGSAPP BACKEND - AUTH SCHEMAS
 =============================================================================
 Pydantic schemas for authentication and authorization.
 """
-from __future__ import annotations
-
 
 from typing import Optional
 from datetime import datetime

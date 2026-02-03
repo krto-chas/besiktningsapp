@@ -1,3 +1,5 @@
+from __future__ import annotations
+
 """
 =============================================================================
 BESIKTNINGSAPP BACKEND - PDF VERSION MODEL
@@ -7,8 +9,6 @@ PDF Version model for tracking all generated PDF versions.
 Each PDF generation creates a NEW immutable version.
 Old versions are NEVER deleted automatically.
 """
-from __future__ import annotations
-
 
 from sqlalchemy import Column, String, Integer, BigInteger, ForeignKey, Enum
 from sqlalchemy.orm import relationship

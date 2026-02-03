@@ -1,11 +1,11 @@
+from __future__ import annotations
+
 """
 =============================================================================
 BESIKTNINGSAPP BACKEND - PROPERTY SCHEMAS
 =============================================================================
 Pydantic schemas for Property (Fastighet) operations.
 """
-from __future__ import annotations
-
 
 from typing import List, Optional
 

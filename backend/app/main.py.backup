@@ -290,19 +290,6 @@ def register_cli_commands(app: Flask) -> None:
             )
             db.session.add(admin)
         
-        # Create default inspector user
-        if not User.query.filter_by(email="inspector@besiktningsapp.se").first():
-            inspector = User(
-                email="inspector@besiktningsapp.se",
-                name="Inspector User",
-                password_hash=bcrypt.hashpw(
-                    "inspector123".encode("utf-8"),
-                    bcrypt.gensalt()
-                ).decode("utf-8"),
-                role="inspector",
-            )
-            db.session.add(inspector)
-        
         # Create standard defects (templates)
         standard_defects = [
             {

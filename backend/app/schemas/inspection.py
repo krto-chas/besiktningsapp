@@ -1,14 +1,14 @@
+from __future__ import annotations
+
 """
 =============================================================================
 BESIKTNINGSAPP BACKEND - INSPECTION SCHEMAS
 =============================================================================
 Pydantic schemas for Inspection (Besiktning) operations.
 """
-from __future__ import annotations
-
 
 from typing import List, Optional
-from datetime import date
+from datetime import date as date_type
 
 from pydantic import BaseModel, Field
 
@@ -43,7 +43,7 @@ class InspectionCreate(BaseModel):
         description="Property client ID (for offline creation)",
     )
     
-    date: date = Field(
+    date: date_type = Field(
         description="Inspection date",
     )
     
@@ -87,7 +87,7 @@ class InspectionUpdate(BaseModel):
         description="Current revision for optimistic locking",
     )
     
-    date: Optional[date] = Field(
+    date: Optional[date_type] = Field(
         default=None,
         description="Inspection date",
     )
@@ -127,7 +127,7 @@ class InspectionResponse(BaseSchema, TimestampMixin, RevisionMixin, ClientIdMixi
         description="Inspector user ID",
     )
     
-    date: date = Field(
+    date: date_type = Field(
         description="Inspection date",
     )
     

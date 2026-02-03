@@ -1,3 +1,5 @@
+from __future__ import annotations
+
 """
 =============================================================================
 BESIKTNINGSAPP BACKEND - BASE MODEL
@@ -10,8 +12,6 @@ Provides:
 - Revision (for optimistic locking and conflict detection)
 - Timestamps (created_at, updated_at)
 """
-from __future__ import annotations
-
 
 from datetime import datetime
 from typing import Any, Dict

@@ -1,3 +1,5 @@
+from __future__ import annotations
+
 """
 =============================================================================
 BESIKTNINGSAPP BACKEND - SCHEMAS PACKAGE
@@ -10,8 +12,6 @@ All schemas follow the API contract specification and provide:
 - Documentation for API endpoints
 - Request/Response models
 """
-from __future__ import annotations
-
 from app.schemas.common import (
     PaginationParams,
     PaginationMeta,

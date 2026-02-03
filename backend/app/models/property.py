@@ -1,3 +1,5 @@
+from __future__ import annotations
+
 """
 =============================================================================
 BESIKTNINGSAPP BACKEND - PROPERTY MODEL
@@ -6,8 +8,6 @@ Property model (Fastighet).
 
 Represents a property/building where inspections are performed.
 """
-from __future__ import annotations
-
 
 from sqlalchemy import Column, String, Integer, Text
 from sqlalchemy.orm import relationship

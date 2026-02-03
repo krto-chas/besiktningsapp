@@ -1,0 +1,248 @@
+<!DOCTYPE html>
+<html lang="sv">
+<head>
+    <meta charset="UTF-8">
+    <title>Besiktningsrapport - {{ property.designation }}</title>
+</head>
+<body>
+    <!-- Header -->
+    <div class="header">
+        <h1>BESIKTNINGSRAPPORT</h1>
+        <h2>OVK (Obligatorisk Ventilationskontroll)</h2>
+    </div>
+
+    <!-- Property Information -->
+    <div class="summary-box">
+        <h2>Fastighetsinformation</h2>
+        <table>
+            <tr>
+                <th>Fastighetsbeteckning:</th>
+                <td>{{ property.designation }}</td>
+            </tr>
+            <tr>
+                <th>Adress:</th>
+                <td>{{ property.address }}</td>
+            </tr>
+            <tr>
+                <th>Postnummer & Ort:</th>
+                <td>{{ property.postal_code }} {{ property.city }}</td>
+            </tr>
+            <tr>
+                <th>Fastighetstyp:</th>
+                <td>{{ property.property_type|capitalize }}</td>
+            </tr>
+            {% if property.owner %}
+            <tr>
+                <th>Ägare:</th>
+                <td>{{ property.owner }}</td>
+            </tr>
+            {% endif %}
+            {% if property.num_apartments %}
+            <tr>
+                <th>Antal lägenheter:</th>
+                <td>{{ property.num_apartments }}</td>
+            </tr>
+            {% endif %}
+            {% if property.construction_year %}
+            <tr>
+                <th>Byggnadsår:</th>
+                <td>{{ property.construction_year }}</td>
+            </tr>
+            {% endif %}
+        </table>
+    </div>
+
+    <!-- Inspection Information -->
+    <div class="summary-box">
+        <h2>Besiktningsinformation</h2>
+        <table>
+            <tr>
+                <th>Besiktningsdatum:</th>
+                <td>{{ inspection.date }}</td>
+            </tr>
+            <tr>
+                <th>Besiktningsman:</th>
+                <td>{{ inspector.name }}</td>
+            </tr>
+            {% if inspector.certification_number %}
+            <tr>
+                <th>Certifieringsnummer:</th>
+                <td>{{ inspector.certification_number }}</td>
+            </tr>
+            {% endif %}
+            <tr>
+                <th>E-post:</th>
+                <td>{{ inspector.email }}</td>
+            </tr>
+            <tr>
+                <th>Aktiv tid:</th>
+                <td>{{ inspection.active_time_formatted }}</td>
+            </tr>
+            <tr>
+                <th>Status:</th>
+                <td>{{ inspection.status|upper }}</td>
+            </tr>
+        </table>
+    </div>
+
+    <!-- Summary Statistics -->
+    <div class="summary-box">
+        <h2>Sammanfattning</h2>
+        <table>
+            <tr>
+                <th>Antal besiktigade lägenheter:</th>
+                <td>{{ summary.total_apartments }}</td>
+            </tr>
+            <tr>
+                <th>Totalt antal fel:</th>
+                <td>{{ summary.total_defects }}</td>
+            </tr>
+            <tr>
+                <th class="severity-high">Allvarliga fel (HIGH):</th>
+                <td class="severity-high">{{ summary.defects_by_severity.HIGH or 0 }}</td>
+            </tr>
+            <tr>
+                <th class="severity-medium">Medelallvarliga fel (MEDIUM):</th>
+                <td class="severity-medium">{{ summary.defects_by_severity.MEDIUM or 0 }}</td>
+            </tr>
+            <tr>
+                <th class="severity-low">Mindre allvarliga fel (LOW):</th>
+                <td class="severity-low">{{ summary.defects_by_severity.LOW or 0 }}</td>
+            </tr>
+        </table>
+    </div>
+
+    {% if inspection.notes %}
+    <!-- General Notes -->
+    <div>
+        <h2>Allmänna anteckningar</h2>
+        <p>{{ inspection.notes }}</p>
+    </div>
+    {% endif %}
+
+    <!-- Apartments and Defects -->
+    <h2>Detaljerad rapport per lägenhet</h2>
+
+    {% for apartment in apartments %}
+    <div style="page-break-before: {% if not loop.first %}always{% else %}auto{% endif %};">
+        <h2>Lägenhet {{ apartment.apartment_number }}</h2>
+
+        <!-- Apartment Info -->
+        <table>
+            <tr>
+                <th>Lägenhetsnummer:</th>
+                <td>{{ apartment.apartment_number }}</td>
+            </tr>
+            <tr>
+                <th>Antal rum:</th>
+                <td>{{ apartment.rooms|length }}</td>
+            </tr>
+            <tr>
+                <th>Antal fel:</th>
+                <td>{{ apartment.defect_count }}</td>
+            </tr>
+        </table>
+
+        <!-- Room Layout -->
+        {% if apartment.rooms %}
+        <h3>Rumslayout</h3>
+        <table>
+            <thead>
+                <tr>
+                    <th>Index</th>
+                    <th>Rumstyp</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for room in apartment.rooms %}
+                <tr>
+                    <td>{{ room.index }}</td>
+                    <td>{{ room.type|capitalize }}</td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+        {% endif %}
+
+        {% if apartment.notes %}
+        <p><strong>Anteckningar:</strong> {{ apartment.notes }}</p>
+        {% endif %}
+
+        <!-- Defects -->
+        {% if apartment.defects %}
+        <h3>Registrerade fel</h3>
+
+        {% for defect in apartment.defects %}
+        <div class="defect-box">
+            <table>
+                <tr>
+                    <th>Rum:</th>
+                    <td>{{ defect.room_type }} (Index: {{ defect.room_index }})</td>
+                </tr>
+                {% if defect.code %}
+                <tr>
+                    <th>Felkod:</th>
+                    <td>{{ defect.code }}</td>
+                </tr>
+                {% endif %}
+                {% if defect.title %}
+                <tr>
+                    <th>Titel:</th>
+                    <td>{{ defect.title }}</td>
+                </tr>
+                {% endif %}
+                <tr>
+                    <th>Allvarlighetsgrad:</th>
+                    <td class="severity-{{ defect.severity|lower }}">
+                        {{ defect.severity }}
+                    </td>
+                </tr>
+                <tr>
+                    <th>Beskrivning:</th>
+                    <td>{{ defect.description }}</td>
+                </tr>
+                {% if defect.remedy %}
+                <tr>
+                    <th>Åtgärd:</th>
+                    <td>{{ defect.remedy }}</td>
+                </tr>
+                {% endif %}
+            </table>
+
+            {% if defect.photos %}
+            <p><strong>Bilder:</strong> {{ defect.photos|length }} st bifogade</p>
+            <ul>
+                {% for photo in defect.photos %}
+                <li>{{ photo.filename }}</li>
+                {% endfor %}
+            </ul>
+            {% endif %}
+        </div>
+        {% endfor %}
+
+        {% else %}
+        <p><em>Inga fel registrerade för denna lägenhet.</em></p>
+        {% endif %}
+    </div>
+    {% endfor %}
+
+    <!-- Footer -->
+    <div class="footer">
+        <hr>
+        <p>
+            Denna rapport har genererats av Besiktningsapp<br>
+            Genererad: {{ generated_at }}<br>
+            Besiktningsman: {{ inspector.name }} ({{ inspector.email }})
+        </p>
+        {% if inspector.certification_number %}
+        <p>Certifieringsnummer: {{ inspector.certification_number }}</p>
+        {% endif %}
+        <p>
+            <em>
+                Denna rapport är en sammanställning av besiktningen och ska läsas i sin helhet.
+                Eventuella åtgärder ska utföras av behörig personal enligt gällande lagstiftning.
+            </em>
+        </p>
+    </div>
+</body>
+</html>

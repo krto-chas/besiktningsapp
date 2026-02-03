@@ -121,7 +121,7 @@ class Config:
     # Rate Limiting
     RATE_LIMIT_ENABLED = os.getenv("RATE_LIMIT_ENABLED", "true").lower() == "true"
     RATE_LIMIT_DEFAULT = os.getenv("RATE_LIMIT_DEFAULT", "100/hour")
-    RATE_LIMIT_STORAGE_URL = os.getenv("RATE_LIMIT_STORAGE_URL", os.getenv("REDIS_URL", "redis://redis:6379/0"))
+    RATE_LIMIT_STORAGE_URL = os.getenv("RATE_LIMIT_STORAGE_URL", "redis://localhost:6379/0")
     
     # Redis
     REDIS_URL = os.getenv("REDIS_URL", "redis://localhost:6379/0")

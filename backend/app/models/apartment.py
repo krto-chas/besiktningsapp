@@ -1,3 +1,5 @@
+from __future__ import annotations
+
 """
 =============================================================================
 BESIKTNINGSAPP BACKEND - APARTMENT MODEL
@@ -7,8 +9,6 @@ Apartment model (Lägenhet).
 Represents an apartment within an inspection.
 Rooms are stored as JSON array for flexibility.
 """
-from __future__ import annotations
-
 
 from typing import List, Dict, Any
 

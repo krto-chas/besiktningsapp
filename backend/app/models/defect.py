@@ -1,3 +1,5 @@
+from __future__ import annotations
+
 """
 =============================================================================
 BESIKTNINGSAPP BACKEND - DEFECT MODEL
@@ -6,8 +8,6 @@ Defect model (Felrapport).
 
 Represents a defect/issue found during inspection.
 """
-from __future__ import annotations
-
 
 from sqlalchemy import Column, String, Integer, Text, ForeignKey, Enum
 from sqlalchemy.orm import relationship
@@ -18,9 +18,9 @@ from app.models.base import BaseModel
 
 class DefectSeverity(enum.Enum):
     """Defect severity levels."""
-    LOW = "low"
-    MEDIUM = "medium"
-    HIGH = "high"
+    LOW = "LOW"
+    MEDIUM = "MEDIUM"
+    HIGH = "HIGH"
 
 
 class Defect(BaseModel):

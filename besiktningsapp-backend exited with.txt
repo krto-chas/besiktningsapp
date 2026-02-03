@@ -1,0 +1,1853 @@
+besiktningsapp-backend exited with code 1 (restarting)
+besiktningsapp-backend  | [2026-02-02 16:08:27,537] INFO in extensions: Extensions initialized successfully
+besiktningsapp-backend  | Traceback (most recent call last):
+besiktningsapp-backend  |   File "/usr/local/bin/flask", line 6, in <module>
+besiktningsapp-backend  |     sys.exit(main())
+besiktningsapp-backend  |              ^^^^^^
+besiktningsapp-backend  |   File "/usr/local/lib/python3.11/site-packages/flask/cli.py", line 1064, in main
+besiktningsapp-backend  |     cli.main()
+besiktningsapp-backend  |   File "/usr/local/lib/python3.11/site-packages/click/core.py", line 1078, in main
+besiktningsapp-backend  |     rv = self.invoke(ctx)
+besiktningsapp-backend  |          ^^^^^^^^^^^^^^^^
+besiktningsapp-backend  |   File "/usr/local/lib/python3.11/site-packages/click/core.py", line 1688, in invoke
+besiktningsapp-backend  |     return _process_result(sub_ctx.command.invoke(sub_ctx))
+besiktningsapp-backend  |                            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+besiktningsapp-backend  |   File "/usr/local/lib/python3.11/site-packages/click/core.py", line 1434, in invoke
+besiktningsapp-backend  |     return ctx.invoke(self.callback, **ctx.params)
+besiktningsapp-backend  |            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+besiktningsapp-backend  |   File "/usr/local/lib/python3.11/site-packages/click/core.py", line 783, in invoke
+besiktningsapp-backend  |     return __callback(*args, **kwargs)
+besiktningsapp-backend  |            ^^^^^^^^^^^^^^^^^^^^^^^^^^^
+besiktningsapp-backend  |   File "/usr/local/lib/python3.11/site-packages/click/decorators.py", line 92, in new_func
+besiktningsapp-backend  |     return ctx.invoke(f, obj, *args, **kwargs)
+besiktningsapp-backend  |            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+besiktningsapp-backend  |   File "/usr/local/lib/python3.11/site-packages/click/core.py", line 783, in invoke
+besiktningsapp-backend  |     return __callback(*args, **kwargs)
+besiktningsapp-backend  |            ^^^^^^^^^^^^^^^^^^^^^^^^^^^
+besiktningsapp-backend  |   File "/usr/local/lib/python3.11/site-packages/flask/cli.py", line 912, in run_command
+besiktningsapp-backend  |     raise e from None
+besiktningsapp-backend  |   File "/usr/local/lib/python3.11/site-packages/flask/cli.py", line 898, in run_command
+besiktningsapp-backend  |     app = info.load_app()
+besiktningsapp-backend  |           ^^^^^^^^^^^^^^^
+besiktningsapp-backend  |   File "/usr/local/lib/python3.11/site-packages/flask/cli.py", line 309, in load_app
+besiktningsapp-backend  |     app = locate_app(import_name, name)
+besiktningsapp-backend  |           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+besiktningsapp-backend  |   File "/usr/local/lib/python3.11/site-packages/flask/cli.py", line 236, in locate_app
+besiktningsapp-backend  |     return find_best_app(module)
+besiktningsapp-backend  |            ^^^^^^^^^^^^^^^^^^^^^
+besiktningsapp-backend  |   File "/usr/local/lib/python3.11/site-packages/flask/cli.py", line 64, in find_best_app
+besiktningsapp-backend  |     app = app_factory()
+besiktningsapp-backend  |           ^^^^^^^^^^^^^
+besiktningsapp-backend  |   File "/app/app/main.py", line 49, in create_app
+besiktningsapp-backend  |     register_blueprints(app)
+besiktningsapp-backend  |   File "/app/app/main.py", line 68, in register_blueprints
+besiktningsapp-backend  |     from app.api.v1 import api_v1_bp
+besiktningsapp-backend  |   File "/app/app/api/v1/__init__.py", line 16, in <module>
+besiktningsapp-backend  |     from app.api.v1 import (
+besiktningsapp-backend  |   File "/app/app/api/v1/auth.py", line 14, in <module>
+besiktningsapp-backend  |     from app.schemas import LoginRequest, UserProfile, ErrorResponse
+besiktningsapp-backend  |   File "/app/app/schemas/__init__.py", line 35, in <module>
+besiktningsapp-backend  |     from app.schemas.inspection import (
+besiktningsapp-backend  |   File "/app/app/schemas/inspection.py", line 28, in <module>
+besiktningsapp-backend  |     class InspectionCreate(BaseModel):
+besiktningsapp-backend  |   File "/usr/local/lib/python3.11/site-packages/pydantic/_internal/_model_construction.py", line 182, in __new__
+besiktningsapp-backend  |     complete_model_class(
+besiktningsapp-backend  |   File "/usr/local/lib/python3.11/site-packages/pydantic/_internal/_model_construction.py", line 491, in complete_model_class
+besiktningsapp-backend  |     schema = cls.__get_pydantic_core_schema__(cls, handler)
+besiktningsapp-backend  |              ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+besiktningsapp-backend  |   File "/usr/local/lib/python3.11/site-packages/pydantic/main.py", line 578, in __get_pydantic_core_schema__
+besiktningsapp-backend  |     return __handler(__source)
+besiktningsapp-backend  |            ^^^^^^^^^^^^^^^^^^^
+besiktningsapp-backend  |   File "/usr/local/lib/python3.11/site-packages/pydantic/_internal/_schema_generation_shared.py", line 82, in __call__
+besiktningsapp-backend  |     schema = self._handler(__source_type)
+besiktningsapp-backend  |              ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+besiktningsapp-backend  |   File "/usr/local/lib/python3.11/site-packages/pydantic/_internal/_generate_schema.py", line 468, in generate_schema
+besiktningsapp-backend  |     schema = self._generate_schema(obj)
+besiktningsapp-backend  |              ^^^^^^^^^^^^^^^^^^^^^^^^^^
+besiktningsapp-backend  |   File "/usr/local/lib/python3.11/site-packages/pydantic/_internal/_generate_schema.py", line 700, in _generate_schema
+besiktningsapp-backend  |     schema = self._post_process_generated_schema(self._generate_schema_inner(obj))
+besiktningsapp-backend  |                                                  ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+besiktningsapp-backend  |   File "/usr/local/lib/python3.11/site-packages/pydantic/_internal/_generate_schema.py", line 722, in _generate_schema_inner
+besiktningsapp-backend  |     return self._model_schema(obj)
+besiktningsapp-backend  |            ^^^^^^^^^^^^^^^^^^^^^^^
+besiktningsapp-backend  |   File "/usr/local/lib/python3.11/site-packages/pydantic/_internal/_generate_schema.py", line 541, in _model_schema
+besiktningsapp-backend  |     {k: self._generate_md_field_schema(k, v, decorators) for k, v in fields.items()},
+besiktningsapp-backend  |     ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+besiktningsapp-backend  |   File "/usr/local/lib/python3.11/site-packages/pydantic/_internal/_generate_schema.py", line 541, in <dictcomp>
+besiktningsapp-backend  |     {k: self._generate_md_field_schema(k, v, decorators) for k, v in fields.items()},
+besiktningsapp-backend  |         ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+besiktningsapp-backend  |   File "/usr/local/lib/python3.11/site-packages/pydantic/_internal/_generate_schema.py", line 886, in _generate_md_field_schema
+besiktningsapp-backend  |     common_field = self._common_field_schema(name, field_info, decorators)
+besiktningsapp-backend  |                    ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+besiktningsapp-backend  |   File "/usr/local/lib/python3.11/site-packages/pydantic/_internal/_generate_schema.py", line 951, in _common_field_schema
+besiktningsapp-backend  |     schema = self._apply_annotations(
+besiktningsapp-backend  |              ^^^^^^^^^^^^^^^^^^^^^^^^
+besiktningsapp-backend  |   File "/usr/local/lib/python3.11/site-packages/pydantic/_internal/_generate_schema.py", line 1654, in _apply_annotations
+besiktningsapp-backend  |     schema = get_inner_schema(source_type)
+besiktningsapp-backend  |              ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+besiktningsapp-backend  |   File "/usr/local/lib/python3.11/site-packages/pydantic/_internal/_schema_generation_shared.py", line 82, in __call__
+besiktningsapp-backend  |     schema = self._handler(__source_type)
+besiktningsapp-backend  |              ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+besiktningsapp-backend  |   File "/usr/local/lib/python3.11/site-packages/pydantic/_internal/_generate_schema.py", line 1635, in inner_handler
+besiktningsapp-backend  |     schema = self._generate_schema(obj)
+besiktningsapp-backend  |              ^^^^^^^^^^^^^^^^^^^^^^^^^^
+besiktningsapp-backend  |   File "/usr/local/lib/python3.11/site-packages/pydantic/_internal/_generate_schema.py", line 700, in _generate_schema
+besiktningsapp-backend  |     schema = self._post_process_generated_schema(self._generate_schema_inner(obj))
+besiktningsapp-backend  |                                                  ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+besiktningsapp-backend  |   File "/usr/local/lib/python3.11/site-packages/pydantic/_internal/_generate_schema.py", line 727, in _generate_schema_inner
+besiktningsapp-backend  |     return self.match_type(obj)
+besiktningsapp-backend  |            ^^^^^^^^^^^^^^^^^^^^
+besiktningsapp-backend  |   File "/usr/local/lib/python3.11/site-packages/pydantic/_internal/_generate_schema.py", line 814, in match_type
+besiktningsapp-backend  |     return self._unknown_type_schema(obj)
+besiktningsapp-backend  |            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+besiktningsapp-backend  |   File "/usr/local/lib/python3.11/site-packages/pydantic/_internal/_generate_schema.py", line 367, in _unknown_type_schema
+besiktningsapp-backend  |     f'Unable to generate pydantic-core schema for {obj!r}. '
+besiktningsapp-backend  |   File "/usr/local/lib/python3.11/site-packages/pydantic/_internal/_repr.py", line 82, in __repr__
+besiktningsapp-backend  |     return f'{self.__repr_name__()}({self.__repr_str__(", ")})'
+besiktningsapp-backend  |                                      ^^^^^^^^^^^^^^^^^^^^^^^
+besiktningsapp-backend  |   File "/usr/local/lib/python3.11/site-packages/pydantic/_internal/_repr.py", line 55, in __repr_str__
+besiktningsapp-backend  |     return join_str.join(repr(v) if a is None else f'{a}={v!r}' for a, v in self.__repr_args__())
+besiktningsapp-backend  |            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+besiktningsapp-backend  |   File "/usr/local/lib/python3.11/site-packages/pydantic/_internal/_repr.py", line 55, in <genexpr>
+besiktningsapp-backend  |     return join_str.join(repr(v) if a is None else f'{a}={v!r}' for a, v in self.__repr_args__())
+besiktningsapp-backend  |                         ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+besiktningsapp-backend  |   File "/usr/local/lib/python3.11/site-packages/pydantic/fields.py", line 556, in __repr_args__
+besiktningsapp-backend  |     yield 'annotation', _repr.PlainRepr(_repr.display_as_type(self.annotation))
+besiktningsapp-backend  |                                         ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+besiktningsapp-backend  |   File "/usr/local/lib/python3.11/site-packages/pydantic/_internal/_repr.py", line 95, in display_as_type
+besiktningsapp-backend  |     return repr(obj)
+besiktningsapp-backend  |            ^^^^^^^^^
+besiktningsapp-backend  |   File "/usr/local/lib/python3.11/site-packages/pydantic/_internal/_repr.py", line 82, in __repr__
+besiktningsapp-backend  |     return f'{self.__repr_name__()}({self.__repr_str__(", ")})'
+besiktningsapp-backend  |                                      ^^^^^^^^^^^^^^^^^^^^^^^
+besiktningsapp-backend  |   File "/usr/local/lib/python3.11/site-packages/pydantic/_internal/_repr.py", line 55, in __repr_str__
+besiktningsapp-backend  |     return join_str.join(repr(v) if a is None else f'{a}={v!r}' for a, v in self.__repr_args__())
+besiktningsapp-backend  |            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+besiktningsapp-backend  |   File "/usr/local/lib/python3.11/site-packages/pydantic/_internal/_repr.py", line 55, in <genexpr>
+besiktningsapp-backend  |     return join_str.join(repr(v) if a is None else f'{a}={v!r}' for a, v in self.__repr_args__())
+besiktningsapp-backend  |                         ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+besiktningsapp-backend  |   File "/usr/local/lib/python3.11/site-packages/pydantic/fields.py", line 556, in __repr_args__
+besiktningsapp-backend  |     yield 'annotation', _repr.PlainRepr(_repr.display_as_type(self.annotation))
+besiktningsapp-backend  |                                         ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+besiktningsapp-backend  |   File "/usr/local/lib/python3.11/site-packages/pydantic/_internal/_repr.py", line 95, in display_as_type
+besiktningsapp-backend  |     return repr(obj)
+besiktningsapp-backend  |            ^^^^^^^^^
+besiktningsapp-backend  |   File "/usr/local/lib/python3.11/site-packages/pydantic/_internal/_repr.py", line 82, in __repr__
+besiktningsapp-backend  |     return f'{self.__repr_name__()}({self.__repr_str__(", ")})'
+besiktningsapp-backend  |                                      ^^^^^^^^^^^^^^^^^^^^^^^
+besiktningsapp-backend  |   File "/usr/local/lib/python3.11/site-packages/pydantic/_internal/_repr.py", line 55, in __repr_str__
+besiktningsapp-backend  |     return join_str.join(repr(v) if a is None else f'{a}={v!r}' for a, v in self.__repr_args__())
+besiktningsapp-backend  |            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+besiktningsapp-backend  |   File "/usr/local/lib/python3.11/site-packages/pydantic/_internal/_repr.py", line 55, in <genexpr>
+besiktningsapp-backend  |     return join_str.join(repr(v) if a is None else f'{a}={v!r}' for a, v in self.__repr_args__())
+besiktningsapp-backend  |                         ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+besiktningsapp-backend  |   File "/usr/local/lib/python3.11/site-packages/pydantic/fields.py", line 556, in __repr_args__
+besiktningsapp-backend  |     yield 'annotation', _repr.PlainRepr(_repr.display_as_type(self.annotation))
+besiktningsapp-backend  |                                         ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+besiktningsapp-backend  |   File "/usr/local/lib/python3.11/site-packages/pydantic/_internal/_repr.py", line 95, in display_as_type
+besiktningsapp-backend  |     return repr(obj)
+besiktningsapp-backend  |            ^^^^^^^^^
+besiktningsapp-backend  |   File "/usr/local/lib/python3.11/site-packages/pydantic/_internal/_repr.py", line 82, in __repr__
+besiktningsapp-backend  |     return f'{self.__repr_name__()}({self.__repr_str__(", ")})'
+besiktningsapp-backend  |                                      ^^^^^^^^^^^^^^^^^^^^^^^
+besiktningsapp-backend  |   File "/usr/local/lib/python3.11/site-packages/pydantic/_internal/_repr.py", line 55, in __repr_str__
+besiktningsapp-backend  |     return join_str.join(repr(v) if a is None else f'{a}={v!r}' for a, v in self.__repr_args__())
+besiktningsapp-backend  |            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+besiktningsapp-backend  |   File "/usr/local/lib/python3.11/site-packages/pydantic/_internal/_repr.py", line 55, in <genexpr>
+besiktningsapp-backend  |     return join_str.join(repr(v) if a is None else f'{a}={v!r}' for a, v in self.__repr_args__())
+besiktningsapp-backend  |                         ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+besiktningsapp-backend  |   File "/usr/local/lib/python3.11/site-packages/pydantic/fields.py", line 556, in __repr_args__
+besiktningsapp-backend  |     yield 'annotation', _repr.PlainRepr(_repr.display_as_type(self.annotation))
+besiktningsapp-backend  |                                         ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+besiktningsapp-backend  |   File "/usr/local/lib/python3.11/site-packages/pydantic/_internal/_repr.py", line 95, in display_as_type
+besiktningsapp-backend  |     return repr(obj)
+besiktningsapp-backend  |            ^^^^^^^^^
+besiktningsapp-backend  |   File "/usr/local/lib/python3.11/site-packages/pydantic/_internal/_repr.py", line 82, in __repr__
+besiktningsapp-backend  |     return f'{self.__repr_name__()}({self.__repr_str__(", ")})'
+besiktningsapp-backend  |                                      ^^^^^^^^^^^^^^^^^^^^^^^
+besiktningsapp-backend  |   File "/usr/local/lib/python3.11/site-packages/pydantic/_internal/_repr.py", line 55, in __repr_str__
+besiktningsapp-backend  |     return join_str.join(repr(v) if a is None else f'{a}={v!r}' for a, v in self.__repr_args__())
+besiktningsapp-backend  |            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+besiktningsapp-backend  |   File "/usr/local/lib/python3.11/site-packages/pydantic/_internal/_repr.py", line 55, in <genexpr>
+besiktningsapp-backend  |     return join_str.join(repr(v) if a is None else f'{a}={v!r}' for a, v in self.__repr_args__())
+besiktningsapp-backend  |                         ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+besiktningsapp-backend  |   File "/usr/local/lib/python3.11/site-packages/pydantic/fields.py", line 556, in __repr_args__
+besiktningsapp-backend  |     yield 'annotation', _repr.PlainRepr(_repr.display_as_type(self.annotation))
+besiktningsapp-backend  |                                         ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+besiktningsapp-backend  |   File "/usr/local/lib/python3.11/site-packages/pydantic/_internal/_repr.py", line 95, in display_as_type
+besiktningsapp-backend  |     return repr(obj)
+besiktningsapp-backend  |            ^^^^^^^^^
+besiktningsapp-backend  |   File "/usr/local/lib/python3.11/site-packages/pydantic/_internal/_repr.py", line 82, in __repr__
+besiktningsapp-backend  |     return f'{self.__repr_name__()}({self.__repr_str__(", ")})'
+besiktningsapp-backend  |                                      ^^^^^^^^^^^^^^^^^^^^^^^
+besiktningsapp-backend  |   File "/usr/local/lib/python3.11/site-packages/pydantic/_internal/_repr.py", line 55, in __repr_str__
+besiktningsapp-backend  |     return join_str.join(repr(v) if a is None else f'{a}={v!r}' for a, v in self.__repr_args__())
+besiktningsapp-backend  |            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+besiktningsapp-backend  |   File "/usr/local/lib/python3.11/site-packages/pydantic/_internal/_repr.py", line 55, in <genexpr>
+besiktningsapp-backend  |     return join_str.join(repr(v) if a is None else f'{a}={v!r}' for a, v in self.__repr_args__())
+besiktningsapp-backend  |                         ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+besiktningsapp-backend  |   File "/usr/local/lib/python3.11/site-packages/pydantic/fields.py", line 556, in __repr_args__
+besiktningsapp-backend  |     yield 'annotation', _repr.PlainRepr(_repr.display_as_type(self.annotation))
+besiktningsapp-backend  |                                         ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+besiktningsapp-backend  |   File "/usr/local/lib/python3.11/site-packages/pydantic/_internal/_repr.py", line 95, in display_as_type
+besiktningsapp-backend  |     return repr(obj)
+besiktningsapp-backend  |            ^^^^^^^^^
+besiktningsapp-backend  |   File "/usr/local/lib/python3.11/site-packages/pydantic/_internal/_repr.py", line 82, in __repr__
+besiktningsapp-backend  |     return f'{self.__repr_name__()}({self.__repr_str__(", ")})'
+besiktningsapp-backend  |                                      ^^^^^^^^^^^^^^^^^^^^^^^
+besiktningsapp-backend  |   File "/usr/local/lib/python3.11/site-packages/pydantic/_internal/_repr.py", line 55, in __repr_str__
+besiktningsapp-backend  |     return join_str.join(repr(v) if a is None else f'{a}={v!r}' for a, v in self.__repr_args__())
+besiktningsapp-backend  |            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+besiktningsapp-backend  |   File "/usr/local/lib/python3.11/site-packages/pydantic/_internal/_repr.py", line 55, in <genexpr>
+besiktningsapp-backend  |     return join_str.join(repr(v) if a is None else f'{a}={v!r}' for a, v in self.__repr_args__())
+besiktningsapp-backend  |                         ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+besiktningsapp-backend  |   File "/usr/local/lib/python3.11/site-packages/pydantic/fields.py", line 556, in __repr_args__
+besiktningsapp-backend  |     yield 'annotation', _repr.PlainRepr(_repr.display_as_type(self.annotation))
+besiktningsapp-backend  |                                         ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+besiktningsapp-backend  |   File "/usr/local/lib/python3.11/site-packages/pydantic/_internal/_repr.py", line 95, in display_as_type
+besiktningsapp-backend  |     return repr(obj)
+besiktningsapp-backend  |            ^^^^^^^^^
+besiktningsapp-backend  |   File "/usr/local/lib/python3.11/site-packages/pydantic/_internal/_repr.py", line 82, in __repr__
+besiktningsapp-backend  |     return f'{self.__repr_name__()}({self.__repr_str__(", ")})'
+besiktningsapp-backend  |                                      ^^^^^^^^^^^^^^^^^^^^^^^
+besiktningsapp-backend  |   File "/usr/local/lib/python3.11/site-packages/pydantic/_internal/_repr.py", line 55, in __repr_str__
+besiktningsapp-backend  |     return join_str.join(repr(v) if a is None else f'{a}={v!r}' for a, v in self.__repr_args__())
+besiktningsapp-backend  |            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+besiktningsapp-backend  |   File "/usr/local/lib/python3.11/site-packages/pydantic/_internal/_repr.py", line 55, in <genexpr>
+besiktningsapp-backend  |     return join_str.join(repr(v) if a is None else f'{a}={v!r}' for a, v in self.__repr_args__())
+besiktningsapp-backend  |                         ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+besiktningsapp-backend  |   File "/usr/local/lib/python3.11/site-packages/pydantic/fields.py", line 556, in __repr_args__
+besiktningsapp-backend  |     yield 'annotation', _repr.PlainRepr(_repr.display_as_type(self.annotation))
+besiktningsapp-backend  |                                         ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+besiktningsapp-backend  |   File "/usr/local/lib/python3.11/site-packages/pydantic/_internal/_repr.py", line 95, in display_as_type
+besiktningsapp-backend  |     return repr(obj)
+besiktningsapp-backend  |            ^^^^^^^^^
+besiktningsapp-backend  |   File "/usr/local/lib/python3.11/site-packages/pydantic/_internal/_repr.py", line 82, in __repr__
+besiktningsapp-backend  |     return f'{self.__repr_name__()}({self.__repr_str__(", ")})'
+besiktningsapp-backend  |                                      ^^^^^^^^^^^^^^^^^^^^^^^
+besiktningsapp-backend  |   File "/usr/local/lib/python3.11/site-packages/pydantic/_internal/_repr.py", line 55, in __repr_str__
+besiktningsapp-backend  |     return join_str.join(repr(v) if a is None else f'{a}={v!r}' for a, v in self.__repr_args__())
+besiktningsapp-backend  |            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+besiktningsapp-backend  |   File "/usr/local/lib/python3.11/site-packages/pydantic/_internal/_repr.py", line 55, in <genexpr>
+besiktningsapp-backend  |     return join_str.join(repr(v) if a is None else f'{a}={v!r}' for a, v in self.__repr_args__())
+besiktningsapp-backend  |                         ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+besiktningsapp-backend  |   File "/usr/local/lib/python3.11/site-packages/pydantic/fields.py", line 556, in __repr_args__
+besiktningsapp-backend  |     yield 'annotation', _repr.PlainRepr(_repr.display_as_type(self.annotation))
+besiktningsapp-backend  |                                         ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+besiktningsapp-backend  |   File "/usr/local/lib/python3.11/site-packages/pydantic/_internal/_repr.py", line 95, in display_as_type
+besiktningsapp-backend  |     return repr(obj)
+besiktningsapp-backend  |            ^^^^^^^^^
+besiktningsapp-backend  |   File "/usr/local/lib/python3.11/site-packages/pydantic/_internal/_repr.py", line 82, in __repr__
+besiktningsapp-backend  |     return f'{self.__repr_name__()}({self.__repr_str__(", ")})'
+besiktningsapp-backend  |                                      ^^^^^^^^^^^^^^^^^^^^^^^
+besiktningsapp-backend  |   File "/usr/local/lib/python3.11/site-packages/pydantic/_internal/_repr.py", line 55, in __repr_str__
+besiktningsapp-backend  |     return join_str.join(repr(v) if a is None else f'{a}={v!r}' for a, v in self.__repr_args__())
+besiktningsapp-backend  |            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+besiktningsapp-backend  |   File "/usr/local/lib/python3.11/site-packages/pydantic/_internal/_repr.py", line 55, in <genexpr>
+besiktningsapp-backend  |     return join_str.join(repr(v) if a is None else f'{a}={v!r}' for a, v in self.__repr_args__())
+besiktningsapp-backend  |                         ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+besiktningsapp-backend  |   File "/usr/local/lib/python3.11/site-packages/pydantic/fields.py", line 556, in __repr_args__
+besiktningsapp-backend  |     yield 'annotation', _repr.PlainRepr(_repr.display_as_type(self.annotation))
+besiktningsapp-backend  |                                         ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+besiktningsapp-backend  |   File "/usr/local/lib/python3.11/site-packages/pydantic/_internal/_repr.py", line 95, in display_as_type
+besiktningsapp-backend  |     return repr(obj)
+besiktningsapp-backend  |            ^^^^^^^^^
+besiktningsapp-backend  |   File "/usr/local/lib/python3.11/site-packages/pydantic/_internal/_repr.py", line 82, in __repr__
+besiktningsapp-backend  |     return f'{self.__repr_name__()}({self.__repr_str__(", ")})'
+besiktningsapp-backend  |                                      ^^^^^^^^^^^^^^^^^^^^^^^
+besiktningsapp-backend  |   File "/usr/local/lib/python3.11/site-packages/pydantic/_internal/_repr.py", line 55, in __repr_str__
+besiktningsapp-backend  |     return join_str.join(repr(v) if a is None else f'{a}={v!r}' for a, v in self.__repr_args__())
+besiktningsapp-backend  |            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+besiktningsapp-backend  |   File "/usr/local/lib/python3.11/site-packages/pydantic/_internal/_repr.py", line 55, in <genexpr>
+besiktningsapp-backend  |     return join_str.join(repr(v) if a is None else f'{a}={v!r}' for a, v in self.__repr_args__())
+besiktningsapp-backend  |                         ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+besiktningsapp-backend  |   File "/usr/local/lib/python3.11/site-packages/pydantic/fields.py", line 556, in __repr_args__
+besiktningsapp-backend  |     yield 'annotation', _repr.PlainRepr(_repr.display_as_type(self.annotation))
+besiktningsapp-backend  |                                         ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+besiktningsapp-backend  |   File "/usr/local/lib/python3.11/site-packages/pydantic/_internal/_repr.py", line 95, in display_as_type
+besiktningsapp-backend  |     return repr(obj)
+besiktningsapp-backend  |            ^^^^^^^^^
+besiktningsapp-backend  |   File "/usr/local/lib/python3.11/site-packages/pydantic/_internal/_repr.py", line 82, in __repr__
+besiktningsapp-backend  |     return f'{self.__repr_name__()}({self.__repr_str__(", ")})'
+besiktningsapp-backend  |                                      ^^^^^^^^^^^^^^^^^^^^^^^
+besiktningsapp-backend  |   File "/usr/local/lib/python3.11/site-packages/pydantic/_internal/_repr.py", line 55, in __repr_str__
+besiktningsapp-backend  |     return join_str.join(repr(v) if a is None else f'{a}={v!r}' for a, v in self.__repr_args__())
+besiktningsapp-backend  |            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+besiktningsapp-backend  |   File "/usr/local/lib/python3.11/site-packages/pydantic/_internal/_repr.py", line 55, in <genexpr>
+besiktningsapp-backend  |     return join_str.join(repr(v) if a is None else f'{a}={v!r}' for a, v in self.__repr_args__())
+besiktningsapp-backend  |                         ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+besiktningsapp-backend  |   File "/usr/local/lib/python3.11/site-packages/pydantic/fields.py", line 556, in __repr_args__
+besiktningsapp-backend  |     yield 'annotation', _repr.PlainRepr(_repr.display_as_type(self.annotation))
+besiktningsapp-backend  |                                         ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+besiktningsapp-backend  |   File "/usr/local/lib/python3.11/site-packages/pydantic/_internal/_repr.py", line 95, in display_as_type
+besiktningsapp-backend  |     return repr(obj)
+besiktningsapp-backend  |            ^^^^^^^^^
+besiktningsapp-backend  |   File "/usr/local/lib/python3.11/site-packages/pydantic/_internal/_repr.py", line 82, in __repr__
+besiktningsapp-backend  |     return f'{self.__repr_name__()}({self.__repr_str__(", ")})'
+besiktningsapp-backend  |                                      ^^^^^^^^^^^^^^^^^^^^^^^
+besiktningsapp-backend  |   File "/usr/local/lib/python3.11/site-packages/pydantic/_internal/_repr.py", line 55, in __repr_str__
+besiktningsapp-backend  |     return join_str.join(repr(v) if a is None else f'{a}={v!r}' for a, v in self.__repr_args__())
+besiktningsapp-backend  |            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+besiktningsapp-backend  |   File "/usr/local/lib/python3.11/site-packages/pydantic/_internal/_repr.py", line 55, in <genexpr>
+besiktningsapp-backend  |     return join_str.join(repr(v) if a is None else f'{a}={v!r}' for a, v in self.__repr_args__())
+besiktningsapp-backend  |                         ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+besiktningsapp-backend  |   File "/usr/local/lib/python3.11/site-packages/pydantic/fields.py", line 556, in __repr_args__
+besiktningsapp-backend  |     yield 'annotation', _repr.PlainRepr(_repr.display_as_type(self.annotation))
+besiktningsapp-backend  |                                         ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+besiktningsapp-backend  |   File "/usr/local/lib/python3.11/site-packages/pydantic/_internal/_repr.py", line 95, in display_as_type
+besiktningsapp-backend  |     return repr(obj)
+besiktningsapp-backend  |            ^^^^^^^^^
+besiktningsapp-backend  |   File "/usr/local/lib/python3.11/site-packages/pydantic/_internal/_repr.py", line 82, in __repr__
+besiktningsapp-backend  |     return f'{self.__repr_name__()}({self.__repr_str__(", ")})'
+besiktningsapp-backend  |                                      ^^^^^^^^^^^^^^^^^^^^^^^
+besiktningsapp-backend  |   File "/usr/local/lib/python3.11/site-packages/pydantic/_internal/_repr.py", line 55, in __repr_str__
+besiktningsapp-backend  |     return join_str.join(repr(v) if a is None else f'{a}={v!r}' for a, v in self.__repr_args__())
+besiktningsapp-backend  |            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+besiktningsapp-backend  |   File "/usr/local/lib/python3.11/site-packages/pydantic/_internal/_repr.py", line 55, in <genexpr>
+besiktningsapp-backend  |     return join_str.join(repr(v) if a is None else f'{a}={v!r}' for a, v in self.__repr_args__())
+besiktningsapp-backend  |                         ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+besiktningsapp-backend  |   File "/usr/local/lib/python3.11/site-packages/pydantic/fields.py", line 556, in __repr_args__
+besiktningsapp-backend  |     yield 'annotation', _repr.PlainRepr(_repr.display_as_type(self.annotation))
+besiktningsapp-backend  |                                         ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+besiktningsapp-backend  |   File "/usr/local/lib/python3.11/site-packages/pydantic/_internal/_repr.py", line 95, in display_as_type
+besiktningsapp-backend  |     return repr(obj)
+besiktningsapp-backend  |            ^^^^^^^^^
+besiktningsapp-backend  |   File "/usr/local/lib/python3.11/site-packages/pydantic/_internal/_repr.py", line 82, in __repr__
+besiktningsapp-backend  |     return f'{self.__repr_name__()}({self.__repr_str__(", ")})'
+besiktningsapp-backend  |                                      ^^^^^^^^^^^^^^^^^^^^^^^
+besiktningsapp-backend  |   File "/usr/local/lib/python3.11/site-packages/pydantic/_internal/_repr.py", line 55, in __repr_str__
+besiktningsapp-backend  |     return join_str.join(repr(v) if a is None else f'{a}={v!r}' for a, v in self.__repr_args__())
+besiktningsapp-backend  |            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+besiktningsapp-backend  |   File "/usr/local/lib/python3.11/site-packages/pydantic/_internal/_repr.py", line 55, in <genexpr>
+besiktningsapp-backend  |     return join_str.join(repr(v) if a is None else f'{a}={v!r}' for a, v in self.__repr_args__())
+besiktningsapp-backend  |                         ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+besiktningsapp-backend  |   File "/usr/local/lib/python3.11/site-packages/pydantic/fields.py", line 556, in __repr_args__
+besiktningsapp-backend  |     yield 'annotation', _repr.PlainRepr(_repr.display_as_type(self.annotation))
+besiktningsapp-backend  |                                         ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+besiktningsapp-backend  |   File "/usr/local/lib/python3.11/site-packages/pydantic/_internal/_repr.py", line 95, in display_as_type
+besiktningsapp-backend  |     return repr(obj)
+besiktningsapp-backend  |            ^^^^^^^^^
+besiktningsapp-backend  |   File "/usr/local/lib/python3.11/site-packages/pydantic/_internal/_repr.py", line 82, in __repr__
+besiktningsapp-backend  |     return f'{self.__repr_name__()}({self.__repr_str__(", ")})'
+besiktningsapp-backend  |                                      ^^^^^^^^^^^^^^^^^^^^^^^
+besiktningsapp-backend  |   File "/usr/local/lib/python3.11/site-packages/pydantic/_internal/_repr.py", line 55, in __repr_str__
+besiktningsapp-backend  |     return join_str.join(repr(v) if a is None else f'{a}={v!r}' for a, v in self.__repr_args__())
+besiktningsapp-backend  |            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+besiktningsapp-backend  |   File "/usr/local/lib/python3.11/site-packages/pydantic/_internal/_repr.py", line 55, in <genexpr>
+besiktningsapp-backend  |     return join_str.join(repr(v) if a is None else f'{a}={v!r}' for a, v in self.__repr_args__())
+besiktningsapp-backend  |                         ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+besiktningsapp-backend  |   File "/usr/local/lib/python3.11/site-packages/pydantic/fields.py", line 556, in __repr_args__
+besiktningsapp-backend  |     yield 'annotation', _repr.PlainRepr(_repr.display_as_type(self.annotation))
+besiktningsapp-backend  |                                         ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+besiktningsapp-backend  |   File "/usr/local/lib/python3.11/site-packages/pydantic/_internal/_repr.py", line 95, in display_as_type
+besiktningsapp-backend  |     return repr(obj)
+besiktningsapp-backend  |            ^^^^^^^^^
+besiktningsapp-backend  |   File "/usr/local/lib/python3.11/site-packages/pydantic/_internal/_repr.py", line 82, in __repr__
+besiktningsapp-backend  |     return f'{self.__repr_name__()}({self.__repr_str__(", ")})'
+besiktningsapp-backend  |                                      ^^^^^^^^^^^^^^^^^^^^^^^
+besiktningsapp-backend  |   File "/usr/local/lib/python3.11/site-packages/pydantic/_internal/_repr.py", line 55, in __repr_str__
+besiktningsapp-backend  |     return join_str.join(repr(v) if a is None else f'{a}={v!r}' for a, v in self.__repr_args__())
+besiktningsapp-backend  |            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+besiktningsapp-backend  |   File "/usr/local/lib/python3.11/site-packages/pydantic/_internal/_repr.py", line 55, in <genexpr>
+besiktningsapp-backend  |     return join_str.join(repr(v) if a is None else f'{a}={v!r}' for a, v in self.__repr_args__())
+besiktningsapp-backend  |                         ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+besiktningsapp-backend  |   File "/usr/local/lib/python3.11/site-packages/pydantic/fields.py", line 556, in __repr_args__
+besiktningsapp-backend  |     yield 'annotation', _repr.PlainRepr(_repr.display_as_type(self.annotation))
+besiktningsapp-backend  |                                         ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+besiktningsapp-backend  |   File "/usr/local/lib/python3.11/site-packages/pydantic/_internal/_repr.py", line 95, in display_as_type
+besiktningsapp-backend  |     return repr(obj)
+besiktningsapp-backend  |            ^^^^^^^^^
+besiktningsapp-backend  |   File "/usr/local/lib/python3.11/site-packages/pydantic/_internal/_repr.py", line 82, in __repr__
+besiktningsapp-backend  |     return f'{self.__repr_name__()}({self.__repr_str__(", ")})'
+besiktningsapp-backend  |                                      ^^^^^^^^^^^^^^^^^^^^^^^
+besiktningsapp-backend  |   File "/usr/local/lib/python3.11/site-packages/pydantic/_internal/_repr.py", line 55, in __repr_str__
+besiktningsapp-backend  |     return join_str.join(repr(v) if a is None else f'{a}={v!r}' for a, v in self.__repr_args__())
+besiktningsapp-backend  |            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+besiktningsapp-backend  |   File "/usr/local/lib/python3.11/site-packages/pydantic/_internal/_repr.py", line 55, in <genexpr>
+besiktningsapp-backend  |     return join_str.join(repr(v) if a is None else f'{a}={v!r}' for a, v in self.__repr_args__())
+besiktningsapp-backend  |                         ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+besiktningsapp-backend  |   File "/usr/local/lib/python3.11/site-packages/pydantic/fields.py", line 556, in __repr_args__
+besiktningsapp-backend  |     yield 'annotation', _repr.PlainRepr(_repr.display_as_type(self.annotation))
+besiktningsapp-backend  |                                         ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+besiktningsapp-backend  |   File "/usr/local/lib/python3.11/site-packages/pydantic/_internal/_repr.py", line 95, in display_as_type
+besiktningsapp-backend  |     return repr(obj)
+besiktningsapp-backend  |            ^^^^^^^^^
+besiktningsapp-backend  |   File "/usr/local/lib/python3.11/site-packages/pydantic/_internal/_repr.py", line 82, in __repr__
+besiktningsapp-backend  |     return f'{self.__repr_name__()}({self.__repr_str__(", ")})'
+besiktningsapp-backend  |                                      ^^^^^^^^^^^^^^^^^^^^^^^
+besiktningsapp-backend  |   File "/usr/local/lib/python3.11/site-packages/pydantic/_internal/_repr.py", line 55, in __repr_str__
+besiktningsapp-backend  |     return join_str.join(repr(v) if a is None else f'{a}={v!r}' for a, v in self.__repr_args__())
+besiktningsapp-backend  |            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+besiktningsapp-backend  |   File "/usr/local/lib/python3.11/site-packages/pydantic/_internal/_repr.py", line 55, in <genexpr>
+besiktningsapp-backend  |     return join_str.join(repr(v) if a is None else f'{a}={v!r}' for a, v in self.__repr_args__())
+besiktningsapp-backend  |                         ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+besiktningsapp-backend  |   File "/usr/local/lib/python3.11/site-packages/pydantic/fields.py", line 556, in __repr_args__
+besiktningsapp-backend  |     yield 'annotation', _repr.PlainRepr(_repr.display_as_type(self.annotation))
+besiktningsapp-backend  |                                         ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+besiktningsapp-backend  |   File "/usr/local/lib/python3.11/site-packages/pydantic/_internal/_repr.py", line 95, in display_as_type
+besiktningsapp-backend  |     return repr(obj)
+besiktningsapp-backend  |            ^^^^^^^^^
+besiktningsapp-backend  |   File "/usr/local/lib/python3.11/site-packages/pydantic/_internal/_repr.py", line 82, in __repr__
+besiktningsapp-backend  |     return f'{self.__repr_name__()}({self.__repr_str__(", ")})'
+besiktningsapp-backend  |                                      ^^^^^^^^^^^^^^^^^^^^^^^
+besiktningsapp-backend  |   File "/usr/local/lib/python3.11/site-packages/pydantic/_internal/_repr.py", line 55, in __repr_str__
+besiktningsapp-backend  |     return join_str.join(repr(v) if a is None else f'{a}={v!r}' for a, v in self.__repr_args__())
+besiktningsapp-backend  |            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+besiktningsapp-backend  |   File "/usr/local/lib/python3.11/site-packages/pydantic/_internal/_repr.py", line 55, in <genexpr>
+besiktningsapp-backend  |     return join_str.join(repr(v) if a is None else f'{a}={v!r}' for a, v in self.__repr_args__())
+besiktningsapp-backend  |                         ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+besiktningsapp-backend  |   File "/usr/local/lib/python3.11/site-packages/pydantic/fields.py", line 556, in __repr_args__
+besiktningsapp-backend  |     yield 'annotation', _repr.PlainRepr(_repr.display_as_type(self.annotation))
+besiktningsapp-backend  |                                         ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+besiktningsapp-backend  |   File "/usr/local/lib/python3.11/site-packages/pydantic/_internal/_repr.py", line 95, in display_as_type
+besiktningsapp-backend  |     return repr(obj)
+besiktningsapp-backend  |            ^^^^^^^^^
+besiktningsapp-backend  |   File "/usr/local/lib/python3.11/site-packages/pydantic/_internal/_repr.py", line 82, in __repr__
+besiktningsapp-backend  |     return f'{self.__repr_name__()}({self.__repr_str__(", ")})'
+besiktningsapp-backend  |                                      ^^^^^^^^^^^^^^^^^^^^^^^
+besiktningsapp-backend  |   File "/usr/local/lib/python3.11/site-packages/pydantic/_internal/_repr.py", line 55, in __repr_str__
+besiktningsapp-backend  |     return join_str.join(repr(v) if a is None else f'{a}={v!r}' for a, v in self.__repr_args__())
+besiktningsapp-backend  |            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+besiktningsapp-backend  |   File "/usr/local/lib/python3.11/site-packages/pydantic/_internal/_repr.py", line 55, in <genexpr>
+besiktningsapp-backend  |     return join_str.join(repr(v) if a is None else f'{a}={v!r}' for a, v in self.__repr_args__())
+besiktningsapp-backend  |                         ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+besiktningsapp-backend  |   File "/usr/local/lib/python3.11/site-packages/pydantic/fields.py", line 556, in __repr_args__
+besiktningsapp-backend  |     yield 'annotation', _repr.PlainRepr(_repr.display_as_type(self.annotation))
+besiktningsapp-backend  |                                         ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+besiktningsapp-backend  |   File "/usr/local/lib/python3.11/site-packages/pydantic/_internal/_repr.py", line 95, in display_as_type
+besiktningsapp-backend  |     return repr(obj)
+besiktningsapp-backend  |            ^^^^^^^^^
+besiktningsapp-backend  |   File "/usr/local/lib/python3.11/site-packages/pydantic/_internal/_repr.py", line 82, in __repr__
+besiktningsapp-backend  |     return f'{self.__repr_name__()}({self.__repr_str__(", ")})'
+besiktningsapp-backend  |                                      ^^^^^^^^^^^^^^^^^^^^^^^
+besiktningsapp-backend  |   File "/usr/local/lib/python3.11/site-packages/pydantic/_internal/_repr.py", line 55, in __repr_str__
+besiktningsapp-backend  |     return join_str.join(repr(v) if a is None else f'{a}={v!r}' for a, v in self.__repr_args__())
+besiktningsapp-backend  |            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+besiktningsapp-backend  |   File "/usr/local/lib/python3.11/site-packages/pydantic/_internal/_repr.py", line 55, in <genexpr>
+besiktningsapp-backend  |     return join_str.join(repr(v) if a is None else f'{a}={v!r}' for a, v in self.__repr_args__())
+besiktningsapp-backend  |                         ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+besiktningsapp-backend  |   File "/usr/local/lib/python3.11/site-packages/pydantic/fields.py", line 556, in __repr_args__
+besiktningsapp-backend  |     yield 'annotation', _repr.PlainRepr(_repr.display_as_type(self.annotation))
+besiktningsapp-backend  |                                         ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+besiktningsapp-backend  |   File "/usr/local/lib/python3.11/site-packages/pydantic/_internal/_repr.py", line 95, in display_as_type
+besiktningsapp-backend  |     return repr(obj)
+besiktningsapp-backend  |            ^^^^^^^^^
+besiktningsapp-backend  |   File "/usr/local/lib/python3.11/site-packages/pydantic/_internal/_repr.py", line 82, in __repr__
+besiktningsapp-backend  |     return f'{self.__repr_name__()}({self.__repr_str__(", ")})'
+besiktningsapp-backend  |                                      ^^^^^^^^^^^^^^^^^^^^^^^
+besiktningsapp-backend  |   File "/usr/local/lib/python3.11/site-packages/pydantic/_internal/_repr.py", line 55, in __repr_str__
+besiktningsapp-backend  |     return join_str.join(repr(v) if a is None else f'{a}={v!r}' for a, v in self.__repr_args__())
+besiktningsapp-backend  |            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+besiktningsapp-backend  |   File "/usr/local/lib/python3.11/site-packages/pydantic/_internal/_repr.py", line 55, in <genexpr>
+besiktningsapp-backend  |     return join_str.join(repr(v) if a is None else f'{a}={v!r}' for a, v in self.__repr_args__())
+besiktningsapp-backend  |                         ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+besiktningsapp-backend  |   File "/usr/local/lib/python3.11/site-packages/pydantic/fields.py", line 556, in __repr_args__
+besiktningsapp-backend  |     yield 'annotation', _repr.PlainRepr(_repr.display_as_type(self.annotation))
+besiktningsapp-backend  |                                         ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+besiktningsapp-backend  |   File "/usr/local/lib/python3.11/site-packages/pydantic/_internal/_repr.py", line 95, in display_as_type
+besiktningsapp-backend  |     return repr(obj)
+besiktningsapp-backend  |            ^^^^^^^^^
+besiktningsapp-backend  |   File "/usr/local/lib/python3.11/site-packages/pydantic/_internal/_repr.py", line 82, in __repr__
+besiktningsapp-backend  |     return f'{self.__repr_name__()}({self.__repr_str__(", ")})'
+besiktningsapp-backend  |                                      ^^^^^^^^^^^^^^^^^^^^^^^
+besiktningsapp-backend  |   File "/usr/local/lib/python3.11/site-packages/pydantic/_internal/_repr.py", line 55, in __repr_str__
+besiktningsapp-backend  |     return join_str.join(repr(v) if a is None else f'{a}={v!r}' for a, v in self.__repr_args__())
+besiktningsapp-backend  |            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+besiktningsapp-backend  |   File "/usr/local/lib/python3.11/site-packages/pydantic/_internal/_repr.py", line 55, in <genexpr>
+besiktningsapp-backend  |     return join_str.join(repr(v) if a is None else f'{a}={v!r}' for a, v in self.__repr_args__())
+besiktningsapp-backend  |                         ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+besiktningsapp-backend  |   File "/usr/local/lib/python3.11/site-packages/pydantic/fields.py", line 556, in __repr_args__
+besiktningsapp-backend  |     yield 'annotation', _repr.PlainRepr(_repr.display_as_type(self.annotation))
+besiktningsapp-backend  |                                         ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+besiktningsapp-backend  |   File "/usr/local/lib/python3.11/site-packages/pydantic/_internal/_repr.py", line 95, in display_as_type
+besiktningsapp-backend  |     return repr(obj)
+besiktningsapp-backend  |            ^^^^^^^^^
+besiktningsapp-backend  |   File "/usr/local/lib/python3.11/site-packages/pydantic/_internal/_repr.py", line 82, in __repr__
+besiktningsapp-backend  |     return f'{self.__repr_name__()}({self.__repr_str__(", ")})'
+besiktningsapp-backend  |                                      ^^^^^^^^^^^^^^^^^^^^^^^
+besiktningsapp-backend  |   File "/usr/local/lib/python3.11/site-packages/pydantic/_internal/_repr.py", line 55, in __repr_str__
+besiktningsapp-backend  |     return join_str.join(repr(v) if a is None else f'{a}={v!r}' for a, v in self.__repr_args__())
+besiktningsapp-backend  |            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+besiktningsapp-backend  |   File "/usr/local/lib/python3.11/site-packages/pydantic/_internal/_repr.py", line 55, in <genexpr>
+besiktningsapp-backend  |     return join_str.join(repr(v) if a is None else f'{a}={v!r}' for a, v in self.__repr_args__())
+besiktningsapp-backend  |                         ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+besiktningsapp-backend  |   File "/usr/local/lib/python3.11/site-packages/pydantic/fields.py", line 556, in __repr_args__
+besiktningsapp-backend  |     yield 'annotation', _repr.PlainRepr(_repr.display_as_type(self.annotation))
+besiktningsapp-backend  |                                         ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+besiktningsapp-backend  |   File "/usr/local/lib/python3.11/site-packages/pydantic/_internal/_repr.py", line 95, in display_as_type
+besiktningsapp-backend  |     return repr(obj)
+besiktningsapp-backend  |            ^^^^^^^^^
+besiktningsapp-backend  |   File "/usr/local/lib/python3.11/site-packages/pydantic/_internal/_repr.py", line 82, in __repr__
+besiktningsapp-backend  |     return f'{self.__repr_name__()}({self.__repr_str__(", ")})'
+besiktningsapp-backend  |                                      ^^^^^^^^^^^^^^^^^^^^^^^
+besiktningsapp-backend  |   File "/usr/local/lib/python3.11/site-packages/pydantic/_internal/_repr.py", line 55, in __repr_str__
+besiktningsapp-backend  |     return join_str.join(repr(v) if a is None else f'{a}={v!r}' for a, v in self.__repr_args__())
+besiktningsapp-backend  |            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+besiktningsapp-backend  |   File "/usr/local/lib/python3.11/site-packages/pydantic/_internal/_repr.py", line 55, in <genexpr>
+besiktningsapp-backend  |     return join_str.join(repr(v) if a is None else f'{a}={v!r}' for a, v in self.__repr_args__())
+besiktningsapp-backend  |                         ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+besiktningsapp-backend  |   File "/usr/local/lib/python3.11/site-packages/pydantic/fields.py", line 556, in __repr_args__
+besiktningsapp-backend  |     yield 'annotation', _repr.PlainRepr(_repr.display_as_type(self.annotation))
+besiktningsapp-backend  |                                         ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+besiktningsapp-backend  |   File "/usr/local/lib/python3.11/site-packages/pydantic/_internal/_repr.py", line 95, in display_as_type
+besiktningsapp-backend  |     return repr(obj)
+besiktningsapp-backend  |            ^^^^^^^^^
+besiktningsapp-backend  |   File "/usr/local/lib/python3.11/site-packages/pydantic/_internal/_repr.py", line 82, in __repr__
+besiktningsapp-backend  |     return f'{self.__repr_name__()}({self.__repr_str__(", ")})'
+besiktningsapp-backend  |                                      ^^^^^^^^^^^^^^^^^^^^^^^
+besiktningsapp-backend  |   File "/usr/local/lib/python3.11/site-packages/pydantic/_internal/_repr.py", line 55, in __repr_str__
+besiktningsapp-backend  |     return join_str.join(repr(v) if a is None else f'{a}={v!r}' for a, v in self.__repr_args__())
+besiktningsapp-backend  |            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+besiktningsapp-backend  |   File "/usr/local/lib/python3.11/site-packages/pydantic/_internal/_repr.py", line 55, in <genexpr>
+besiktningsapp-backend  |     return join_str.join(repr(v) if a is None else f'{a}={v!r}' for a, v in self.__repr_args__())
+besiktningsapp-backend  |                         ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+besiktningsapp-backend  |   File "/usr/local/lib/python3.11/site-packages/pydantic/fields.py", line 556, in __repr_args__
+besiktningsapp-backend  |     yield 'annotation', _repr.PlainRepr(_repr.display_as_type(self.annotation))
+besiktningsapp-backend  |                                         ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+besiktningsapp-backend  |   File "/usr/local/lib/python3.11/site-packages/pydantic/_internal/_repr.py", line 95, in display_as_type
+besiktningsapp-backend  |     return repr(obj)
+besiktningsapp-backend  |            ^^^^^^^^^
+besiktningsapp-backend  |   File "/usr/local/lib/python3.11/site-packages/pydantic/_internal/_repr.py", line 82, in __repr__
+besiktningsapp-backend  |     return f'{self.__repr_name__()}({self.__repr_str__(", ")})'
+besiktningsapp-backend  |                                      ^^^^^^^^^^^^^^^^^^^^^^^
+besiktningsapp-backend  |   File "/usr/local/lib/python3.11/site-packages/pydantic/_internal/_repr.py", line 55, in __repr_str__
+besiktningsapp-backend  |     return join_str.join(repr(v) if a is None else f'{a}={v!r}' for a, v in self.__repr_args__())
+besiktningsapp-backend  |            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+besiktningsapp-backend  |   File "/usr/local/lib/python3.11/site-packages/pydantic/_internal/_repr.py", line 55, in <genexpr>
+besiktningsapp-backend  |     return join_str.join(repr(v) if a is None else f'{a}={v!r}' for a, v in self.__repr_args__())
+besiktningsapp-backend  |                         ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+besiktningsapp-backend  |   File "/usr/local/lib/python3.11/site-packages/pydantic/fields.py", line 556, in __repr_args__
+besiktningsapp-backend  |     yield 'annotation', _repr.PlainRepr(_repr.display_as_type(self.annotation))
+besiktningsapp-backend  |                                         ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+besiktningsapp-backend  |   File "/usr/local/lib/python3.11/site-packages/pydantic/_internal/_repr.py", line 95, in display_as_type
+besiktningsapp-backend  |     return repr(obj)
+besiktningsapp-backend  |            ^^^^^^^^^
+besiktningsapp-backend  |   File "/usr/local/lib/python3.11/site-packages/pydantic/_internal/_repr.py", line 82, in __repr__
+besiktningsapp-backend  |     return f'{self.__repr_name__()}({self.__repr_str__(", ")})'
+besiktningsapp-backend  |                                      ^^^^^^^^^^^^^^^^^^^^^^^
+besiktningsapp-backend  |   File "/usr/local/lib/python3.11/site-packages/pydantic/_internal/_repr.py", line 55, in __repr_str__
+besiktningsapp-backend  |     return join_str.join(repr(v) if a is None else f'{a}={v!r}' for a, v in self.__repr_args__())
+besiktningsapp-backend  |            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+besiktningsapp-backend  |   File "/usr/local/lib/python3.11/site-packages/pydantic/_internal/_repr.py", line 55, in <genexpr>
+besiktningsapp-backend  |     return join_str.join(repr(v) if a is None else f'{a}={v!r}' for a, v in self.__repr_args__())
+besiktningsapp-backend  |                         ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+besiktningsapp-backend  |   File "/usr/local/lib/python3.11/site-packages/pydantic/fields.py", line 556, in __repr_args__
+besiktningsapp-backend  |     yield 'annotation', _repr.PlainRepr(_repr.display_as_type(self.annotation))
+besiktningsapp-backend  |                                         ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+besiktningsapp-backend  |   File "/usr/local/lib/python3.11/site-packages/pydantic/_internal/_repr.py", line 95, in display_as_type
+besiktningsapp-backend  |     return repr(obj)
+besiktningsapp-backend  |            ^^^^^^^^^
+besiktningsapp-backend  |   File "/usr/local/lib/python3.11/site-packages/pydantic/_internal/_repr.py", line 82, in __repr__
+besiktningsapp-backend  |     return f'{self.__repr_name__()}({self.__repr_str__(", ")})'
+besiktningsapp-backend  |                                      ^^^^^^^^^^^^^^^^^^^^^^^
+besiktningsapp-backend  |   File "/usr/local/lib/python3.11/site-packages/pydantic/_internal/_repr.py", line 55, in __repr_str__
+besiktningsapp-backend  |     return join_str.join(repr(v) if a is None else f'{a}={v!r}' for a, v in self.__repr_args__())
+besiktningsapp-backend  |            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+besiktningsapp-backend  |   File "/usr/local/lib/python3.11/site-packages/pydantic/_internal/_repr.py", line 55, in <genexpr>
+besiktningsapp-backend  |     return join_str.join(repr(v) if a is None else f'{a}={v!r}' for a, v in self.__repr_args__())
+besiktningsapp-backend  |                         ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+besiktningsapp-backend  |   File "/usr/local/lib/python3.11/site-packages/pydantic/fields.py", line 556, in __repr_args__
+besiktningsapp-backend  |     yield 'annotation', _repr.PlainRepr(_repr.display_as_type(self.annotation))
+besiktningsapp-backend  |                                         ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+besiktningsapp-backend  |   File "/usr/local/lib/python3.11/site-packages/pydantic/_internal/_repr.py", line 95, in display_as_type
+besiktningsapp-backend  |     return repr(obj)
+besiktningsapp-backend  |            ^^^^^^^^^
+besiktningsapp-backend  |   File "/usr/local/lib/python3.11/site-packages/pydantic/_internal/_repr.py", line 82, in __repr__
+besiktningsapp-backend  |     return f'{self.__repr_name__()}({self.__repr_str__(", ")})'
+besiktningsapp-backend  |                                      ^^^^^^^^^^^^^^^^^^^^^^^
+besiktningsapp-backend  |   File "/usr/local/lib/python3.11/site-packages/pydantic/_internal/_repr.py", line 55, in __repr_str__
+besiktningsapp-backend  |     return join_str.join(repr(v) if a is None else f'{a}={v!r}' for a, v in self.__repr_args__())
+besiktningsapp-backend  |            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+besiktningsapp-backend  |   File "/usr/local/lib/python3.11/site-packages/pydantic/_internal/_repr.py", line 55, in <genexpr>
+besiktningsapp-backend  |     return join_str.join(repr(v) if a is None else f'{a}={v!r}' for a, v in self.__repr_args__())
+besiktningsapp-backend  |                         ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+besiktningsapp-backend  |   File "/usr/local/lib/python3.11/site-packages/pydantic/fields.py", line 556, in __repr_args__
+besiktningsapp-backend  |     yield 'annotation', _repr.PlainRepr(_repr.display_as_type(self.annotation))
+besiktningsapp-backend  |                                         ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+besiktningsapp-backend  |   File "/usr/local/lib/python3.11/site-packages/pydantic/_internal/_repr.py", line 95, in display_as_type
+besiktningsapp-backend  |     return repr(obj)
+besiktningsapp-backend  |            ^^^^^^^^^
+besiktningsapp-backend  |   File "/usr/local/lib/python3.11/site-packages/pydantic/_internal/_repr.py", line 82, in __repr__
+besiktningsapp-backend  |     return f'{self.__repr_name__()}({self.__repr_str__(", ")})'
+besiktningsapp-backend  |                                      ^^^^^^^^^^^^^^^^^^^^^^^
+besiktningsapp-backend  |   File "/usr/local/lib/python3.11/site-packages/pydantic/_internal/_repr.py", line 55, in __repr_str__
+besiktningsapp-backend  |     return join_str.join(repr(v) if a is None else f'{a}={v!r}' for a, v in self.__repr_args__())
+besiktningsapp-backend  |            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+besiktningsapp-backend  |   File "/usr/local/lib/python3.11/site-packages/pydantic/_internal/_repr.py", line 55, in <genexpr>
+besiktningsapp-backend  |     return join_str.join(repr(v) if a is None else f'{a}={v!r}' for a, v in self.__repr_args__())
+besiktningsapp-backend  |                         ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+besiktningsapp-backend  |   File "/usr/local/lib/python3.11/site-packages/pydantic/fields.py", line 556, in __repr_args__
+besiktningsapp-backend  |     yield 'annotation', _repr.PlainRepr(_repr.display_as_type(self.annotation))
+besiktningsapp-backend  |                                         ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+besiktningsapp-backend  |   File "/usr/local/lib/python3.11/site-packages/pydantic/_internal/_repr.py", line 95, in display_as_type
+besiktningsapp-backend  |     return repr(obj)
+besiktningsapp-backend  |            ^^^^^^^^^
+besiktningsapp-backend  |   File "/usr/local/lib/python3.11/site-packages/pydantic/_internal/_repr.py", line 82, in __repr__
+besiktningsapp-backend  |     return f'{self.__repr_name__()}({self.__repr_str__(", ")})'
+besiktningsapp-backend  |                                      ^^^^^^^^^^^^^^^^^^^^^^^
+besiktningsapp-backend  |   File "/usr/local/lib/python3.11/site-packages/pydantic/_internal/_repr.py", line 55, in __repr_str__
+besiktningsapp-backend  |     return join_str.join(repr(v) if a is None else f'{a}={v!r}' for a, v in self.__repr_args__())
+besiktningsapp-backend  |            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+besiktningsapp-backend  |   File "/usr/local/lib/python3.11/site-packages/pydantic/_internal/_repr.py", line 55, in <genexpr>
+besiktningsapp-backend  |     return join_str.join(repr(v) if a is None else f'{a}={v!r}' for a, v in self.__repr_args__())
+besiktningsapp-backend  |                         ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+besiktningsapp-backend  |   File "/usr/local/lib/python3.11/site-packages/pydantic/fields.py", line 556, in __repr_args__
+besiktningsapp-backend  |     yield 'annotation', _repr.PlainRepr(_repr.display_as_type(self.annotation))
+besiktningsapp-backend  |                                         ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+besiktningsapp-backend  |   File "/usr/local/lib/python3.11/site-packages/pydantic/_internal/_repr.py", line 95, in display_as_type
+besiktningsapp-backend  |     return repr(obj)
+besiktningsapp-backend  |            ^^^^^^^^^
+besiktningsapp-backend  |   File "/usr/local/lib/python3.11/site-packages/pydantic/_internal/_repr.py", line 82, in __repr__
+besiktningsapp-backend  |     return f'{self.__repr_name__()}({self.__repr_str__(", ")})'
+besiktningsapp-backend  |                                      ^^^^^^^^^^^^^^^^^^^^^^^
+besiktningsapp-backend  |   File "/usr/local/lib/python3.11/site-packages/pydantic/_internal/_repr.py", line 55, in __repr_str__
+besiktningsapp-backend  |     return join_str.join(repr(v) if a is None else f'{a}={v!r}' for a, v in self.__repr_args__())
+besiktningsapp-backend  |            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+besiktningsapp-backend  |   File "/usr/local/lib/python3.11/site-packages/pydantic/_internal/_repr.py", line 55, in <genexpr>
+besiktningsapp-backend  |     return join_str.join(repr(v) if a is None else f'{a}={v!r}' for a, v in self.__repr_args__())
+besiktningsapp-backend  |                         ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+besiktningsapp-backend  |   File "/usr/local/lib/python3.11/site-packages/pydantic/fields.py", line 556, in __repr_args__
+besiktningsapp-backend  |     yield 'annotation', _repr.PlainRepr(_repr.display_as_type(self.annotation))
+besiktningsapp-backend  |                                         ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+besiktningsapp-backend  |   File "/usr/local/lib/python3.11/site-packages/pydantic/_internal/_repr.py", line 95, in display_as_type
+besiktningsapp-backend  |     return repr(obj)
+besiktningsapp-backend  |            ^^^^^^^^^
+besiktningsapp-backend  |   File "/usr/local/lib/python3.11/site-packages/pydantic/_internal/_repr.py", line 82, in __repr__
+besiktningsapp-backend  |     return f'{self.__repr_name__()}({self.__repr_str__(", ")})'
+besiktningsapp-backend  |                                      ^^^^^^^^^^^^^^^^^^^^^^^
+besiktningsapp-backend  |   File "/usr/local/lib/python3.11/site-packages/pydantic/_internal/_repr.py", line 55, in __repr_str__
+besiktningsapp-backend  |     return join_str.join(repr(v) if a is None else f'{a}={v!r}' for a, v in self.__repr_args__())
+besiktningsapp-backend  |            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+besiktningsapp-backend  |   File "/usr/local/lib/python3.11/site-packages/pydantic/_internal/_repr.py", line 55, in <genexpr>
+besiktningsapp-backend  |     return join_str.join(repr(v) if a is None else f'{a}={v!r}' for a, v in self.__repr_args__())
+besiktningsapp-backend  |                         ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+besiktningsapp-backend  |   File "/usr/local/lib/python3.11/site-packages/pydantic/fields.py", line 556, in __repr_args__
+besiktningsapp-backend  |     yield 'annotation', _repr.PlainRepr(_repr.display_as_type(self.annotation))
+besiktningsapp-backend  |                                         ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+besiktningsapp-backend  |   File "/usr/local/lib/python3.11/site-packages/pydantic/_internal/_repr.py", line 95, in display_as_type
+besiktningsapp-backend  |     return repr(obj)
+besiktningsapp-backend  |            ^^^^^^^^^
+besiktningsapp-backend  |   File "/usr/local/lib/python3.11/site-packages/pydantic/_internal/_repr.py", line 82, in __repr__
+besiktningsapp-backend  |     return f'{self.__repr_name__()}({self.__repr_str__(", ")})'
+besiktningsapp-backend  |                                      ^^^^^^^^^^^^^^^^^^^^^^^
+besiktningsapp-backend  |   File "/usr/local/lib/python3.11/site-packages/pydantic/_internal/_repr.py", line 55, in __repr_str__
+besiktningsapp-backend  |     return join_str.join(repr(v) if a is None else f'{a}={v!r}' for a, v in self.__repr_args__())
+besiktningsapp-backend  |            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+besiktningsapp-backend  |   File "/usr/local/lib/python3.11/site-packages/pydantic/_internal/_repr.py", line 55, in <genexpr>
+besiktningsapp-backend  |     return join_str.join(repr(v) if a is None else f'{a}={v!r}' for a, v in self.__repr_args__())
+besiktningsapp-backend  |                         ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+besiktningsapp-backend  |   File "/usr/local/lib/python3.11/site-packages/pydantic/fields.py", line 556, in __repr_args__
+besiktningsapp-backend  |     yield 'annotation', _repr.PlainRepr(_repr.display_as_type(self.annotation))
+besiktningsapp-backend  |                                         ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+besiktningsapp-backend  |   File "/usr/local/lib/python3.11/site-packages/pydantic/_internal/_repr.py", line 95, in display_as_type
+besiktningsapp-backend  |     return repr(obj)
+besiktningsapp-backend  |            ^^^^^^^^^
+besiktningsapp-backend  |   File "/usr/local/lib/python3.11/site-packages/pydantic/_internal/_repr.py", line 82, in __repr__
+besiktningsapp-backend  |     return f'{self.__repr_name__()}({self.__repr_str__(", ")})'
+besiktningsapp-backend  |                                      ^^^^^^^^^^^^^^^^^^^^^^^
+besiktningsapp-backend  |   File "/usr/local/lib/python3.11/site-packages/pydantic/_internal/_repr.py", line 55, in __repr_str__
+besiktningsapp-backend  |     return join_str.join(repr(v) if a is None else f'{a}={v!r}' for a, v in self.__repr_args__())
+besiktningsapp-backend  |            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+besiktningsapp-backend  |   File "/usr/local/lib/python3.11/site-packages/pydantic/_internal/_repr.py", line 55, in <genexpr>
+besiktningsapp-backend  |     return join_str.join(repr(v) if a is None else f'{a}={v!r}' for a, v in self.__repr_args__())
+besiktningsapp-backend  |                         ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+besiktningsapp-backend  |   File "/usr/local/lib/python3.11/site-packages/pydantic/fields.py", line 556, in __repr_args__
+besiktningsapp-backend  |     yield 'annotation', _repr.PlainRepr(_repr.display_as_type(self.annotation))
+besiktningsapp-backend  |                                         ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+besiktningsapp-backend  |   File "/usr/local/lib/python3.11/site-packages/pydantic/_internal/_repr.py", line 95, in display_as_type
+besiktningsapp-backend  |     return repr(obj)
+besiktningsapp-backend  |            ^^^^^^^^^
+besiktningsapp-backend  |   File "/usr/local/lib/python3.11/site-packages/pydantic/_internal/_repr.py", line 82, in __repr__
+besiktningsapp-backend  |     return f'{self.__repr_name__()}({self.__repr_str__(", ")})'
+besiktningsapp-backend  |                                      ^^^^^^^^^^^^^^^^^^^^^^^
+besiktningsapp-backend  |   File "/usr/local/lib/python3.11/site-packages/pydantic/_internal/_repr.py", line 55, in __repr_str__
+besiktningsapp-backend  |     return join_str.join(repr(v) if a is None else f'{a}={v!r}' for a, v in self.__repr_args__())
+besiktningsapp-backend  |            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+besiktningsapp-backend  |   File "/usr/local/lib/python3.11/site-packages/pydantic/_internal/_repr.py", line 55, in <genexpr>
+besiktningsapp-backend  |     return join_str.join(repr(v) if a is None else f'{a}={v!r}' for a, v in self.__repr_args__())
+besiktningsapp-backend  |                         ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+besiktningsapp-backend  |   File "/usr/local/lib/python3.11/site-packages/pydantic/fields.py", line 556, in __repr_args__
+besiktningsapp-backend  |     yield 'annotation', _repr.PlainRepr(_repr.display_as_type(self.annotation))
+besiktningsapp-backend  |                                         ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+besiktningsapp-backend  |   File "/usr/local/lib/python3.11/site-packages/pydantic/_internal/_repr.py", line 95, in display_as_type
+besiktningsapp-backend  |     return repr(obj)
+besiktningsapp-backend  |            ^^^^^^^^^
+besiktningsapp-backend  |   File "/usr/local/lib/python3.11/site-packages/pydantic/_internal/_repr.py", line 82, in __repr__
+besiktningsapp-backend  |     return f'{self.__repr_name__()}({self.__repr_str__(", ")})'
+besiktningsapp-backend  |                                      ^^^^^^^^^^^^^^^^^^^^^^^
+besiktningsapp-backend  |   File "/usr/local/lib/python3.11/site-packages/pydantic/_internal/_repr.py", line 55, in __repr_str__
+besiktningsapp-backend  |     return join_str.join(repr(v) if a is None else f'{a}={v!r}' for a, v in self.__repr_args__())
+besiktningsapp-backend  |            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+besiktningsapp-backend  |   File "/usr/local/lib/python3.11/site-packages/pydantic/_internal/_repr.py", line 55, in <genexpr>
+besiktningsapp-backend  |     return join_str.join(repr(v) if a is None else f'{a}={v!r}' for a, v in self.__repr_args__())
+besiktningsapp-backend  |                         ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+besiktningsapp-backend  |   File "/usr/local/lib/python3.11/site-packages/pydantic/fields.py", line 556, in __repr_args__
+besiktningsapp-backend  |     yield 'annotation', _repr.PlainRepr(_repr.display_as_type(self.annotation))
+besiktningsapp-backend  |                                         ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+besiktningsapp-backend  |   File "/usr/local/lib/python3.11/site-packages/pydantic/_internal/_repr.py", line 95, in display_as_type
+besiktningsapp-backend  |     return repr(obj)
+besiktningsapp-backend  |            ^^^^^^^^^
+besiktningsapp-backend  |   File "/usr/local/lib/python3.11/site-packages/pydantic/_internal/_repr.py", line 82, in __repr__
+besiktningsapp-backend  |     return f'{self.__repr_name__()}({self.__repr_str__(", ")})'
+besiktningsapp-backend  |                                      ^^^^^^^^^^^^^^^^^^^^^^^
+besiktningsapp-backend  |   File "/usr/local/lib/python3.11/site-packages/pydantic/_internal/_repr.py", line 55, in __repr_str__
+besiktningsapp-backend  |     return join_str.join(repr(v) if a is None else f'{a}={v!r}' for a, v in self.__repr_args__())
+besiktningsapp-backend  |            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+besiktningsapp-backend  |   File "/usr/local/lib/python3.11/site-packages/pydantic/_internal/_repr.py", line 55, in <genexpr>
+besiktningsapp-backend  |     return join_str.join(repr(v) if a is None else f'{a}={v!r}' for a, v in self.__repr_args__())
+besiktningsapp-backend  |                         ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+besiktningsapp-backend  |   File "/usr/local/lib/python3.11/site-packages/pydantic/fields.py", line 556, in __repr_args__
+besiktningsapp-backend  |     yield 'annotation', _repr.PlainRepr(_repr.display_as_type(self.annotation))
+besiktningsapp-backend  |                                         ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+besiktningsapp-backend  |   File "/usr/local/lib/python3.11/site-packages/pydantic/_internal/_repr.py", line 95, in display_as_type
+besiktningsapp-backend  |     return repr(obj)
+besiktningsapp-backend  |            ^^^^^^^^^
+besiktningsapp-backend  |   File "/usr/local/lib/python3.11/site-packages/pydantic/_internal/_repr.py", line 82, in __repr__
+besiktningsapp-backend  |     return f'{self.__repr_name__()}({self.__repr_str__(", ")})'
+besiktningsapp-backend  |                                      ^^^^^^^^^^^^^^^^^^^^^^^
+besiktningsapp-backend  |   File "/usr/local/lib/python3.11/site-packages/pydantic/_internal/_repr.py", line 55, in __repr_str__
+besiktningsapp-backend  |     return join_str.join(repr(v) if a is None else f'{a}={v!r}' for a, v in self.__repr_args__())
+besiktningsapp-backend  |            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+besiktningsapp-backend  |   File "/usr/local/lib/python3.11/site-packages/pydantic/_internal/_repr.py", line 55, in <genexpr>
+besiktningsapp-backend  |     return join_str.join(repr(v) if a is None else f'{a}={v!r}' for a, v in self.__repr_args__())
+besiktningsapp-backend  |                         ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+besiktningsapp-backend  |   File "/usr/local/lib/python3.11/site-packages/pydantic/fields.py", line 556, in __repr_args__
+besiktningsapp-backend  |     yield 'annotation', _repr.PlainRepr(_repr.display_as_type(self.annotation))
+besiktningsapp-backend  |                                         ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+besiktningsapp-backend  |   File "/usr/local/lib/python3.11/site-packages/pydantic/_internal/_repr.py", line 95, in display_as_type
+besiktningsapp-backend  |     return repr(obj)
+besiktningsapp-backend  |            ^^^^^^^^^
+besiktningsapp-backend  |   File "/usr/local/lib/python3.11/site-packages/pydantic/_internal/_repr.py", line 82, in __repr__
+besiktningsapp-backend  |     return f'{self.__repr_name__()}({self.__repr_str__(", ")})'
+besiktningsapp-backend  |                                      ^^^^^^^^^^^^^^^^^^^^^^^
+besiktningsapp-backend  |   File "/usr/local/lib/python3.11/site-packages/pydantic/_internal/_repr.py", line 55, in __repr_str__
+besiktningsapp-backend  |     return join_str.join(repr(v) if a is None else f'{a}={v!r}' for a, v in self.__repr_args__())
+besiktningsapp-backend  |            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+besiktningsapp-backend  |   File "/usr/local/lib/python3.11/site-packages/pydantic/_internal/_repr.py", line 55, in <genexpr>
+besiktningsapp-backend  |     return join_str.join(repr(v) if a is None else f'{a}={v!r}' for a, v in self.__repr_args__())
+besiktningsapp-backend  |                         ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+besiktningsapp-backend  |   File "/usr/local/lib/python3.11/site-packages/pydantic/fields.py", line 556, in __repr_args__
+besiktningsapp-backend  |     yield 'annotation', _repr.PlainRepr(_repr.display_as_type(self.annotation))
+besiktningsapp-backend  |                                         ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+besiktningsapp-backend  |   File "/usr/local/lib/python3.11/site-packages/pydantic/_internal/_repr.py", line 95, in display_as_type
+besiktningsapp-backend  |     return repr(obj)
+besiktningsapp-backend  |            ^^^^^^^^^
+besiktningsapp-backend  |   File "/usr/local/lib/python3.11/site-packages/pydantic/_internal/_repr.py", line 82, in __repr__
+besiktningsapp-backend  |     return f'{self.__repr_name__()}({self.__repr_str__(", ")})'
+besiktningsapp-backend  |                                      ^^^^^^^^^^^^^^^^^^^^^^^
+besiktningsapp-backend  |   File "/usr/local/lib/python3.11/site-packages/pydantic/_internal/_repr.py", line 55, in __repr_str__
+besiktningsapp-backend  |     return join_str.join(repr(v) if a is None else f'{a}={v!r}' for a, v in self.__repr_args__())
+besiktningsapp-backend  |            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+besiktningsapp-backend  |   File "/usr/local/lib/python3.11/site-packages/pydantic/_internal/_repr.py", line 55, in <genexpr>
+besiktningsapp-backend  |     return join_str.join(repr(v) if a is None else f'{a}={v!r}' for a, v in self.__repr_args__())
+besiktningsapp-backend  |                         ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+besiktningsapp-backend  |   File "/usr/local/lib/python3.11/site-packages/pydantic/fields.py", line 556, in __repr_args__
+besiktningsapp-backend  |     yield 'annotation', _repr.PlainRepr(_repr.display_as_type(self.annotation))
+besiktningsapp-backend  |                                         ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+besiktningsapp-backend  |   File "/usr/local/lib/python3.11/site-packages/pydantic/_internal/_repr.py", line 95, in display_as_type
+besiktningsapp-backend  |     return repr(obj)
+besiktningsapp-backend  |            ^^^^^^^^^
+besiktningsapp-backend  |   File "/usr/local/lib/python3.11/site-packages/pydantic/_internal/_repr.py", line 82, in __repr__
+besiktningsapp-backend  |     return f'{self.__repr_name__()}({self.__repr_str__(", ")})'
+besiktningsapp-backend  |                                      ^^^^^^^^^^^^^^^^^^^^^^^
+besiktningsapp-backend  |   File "/usr/local/lib/python3.11/site-packages/pydantic/_internal/_repr.py", line 55, in __repr_str__
+besiktningsapp-backend  |     return join_str.join(repr(v) if a is None else f'{a}={v!r}' for a, v in self.__repr_args__())
+besiktningsapp-backend  |            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+besiktningsapp-backend  |   File "/usr/local/lib/python3.11/site-packages/pydantic/_internal/_repr.py", line 55, in <genexpr>
+besiktningsapp-backend  |     return join_str.join(repr(v) if a is None else f'{a}={v!r}' for a, v in self.__repr_args__())
+besiktningsapp-backend  |                         ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+besiktningsapp-backend  |   File "/usr/local/lib/python3.11/site-packages/pydantic/fields.py", line 556, in __repr_args__
+besiktningsapp-backend  |     yield 'annotation', _repr.PlainRepr(_repr.display_as_type(self.annotation))
+besiktningsapp-backend  |                                         ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+besiktningsapp-backend  |   File "/usr/local/lib/python3.11/site-packages/pydantic/_internal/_repr.py", line 95, in display_as_type
+besiktningsapp-backend  |     return repr(obj)
+besiktningsapp-backend  |            ^^^^^^^^^
+besiktningsapp-backend  |   File "/usr/local/lib/python3.11/site-packages/pydantic/_internal/_repr.py", line 82, in __repr__
+besiktningsapp-backend  |     return f'{self.__repr_name__()}({self.__repr_str__(", ")})'
+besiktningsapp-backend  |                                      ^^^^^^^^^^^^^^^^^^^^^^^
+besiktningsapp-backend  |   File "/usr/local/lib/python3.11/site-packages/pydantic/_internal/_repr.py", line 55, in __repr_str__
+besiktningsapp-backend  |     return join_str.join(repr(v) if a is None else f'{a}={v!r}' for a, v in self.__repr_args__())
+besiktningsapp-backend  |            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+besiktningsapp-backend  |   File "/usr/local/lib/python3.11/site-packages/pydantic/_internal/_repr.py", line 55, in <genexpr>
+besiktningsapp-backend  |     return join_str.join(repr(v) if a is None else f'{a}={v!r}' for a, v in self.__repr_args__())
+besiktningsapp-backend  |                         ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+besiktningsapp-backend  |   File "/usr/local/lib/python3.11/site-packages/pydantic/fields.py", line 556, in __repr_args__
+besiktningsapp-backend  |     yield 'annotation', _repr.PlainRepr(_repr.display_as_type(self.annotation))
+besiktningsapp-backend  |                                         ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+besiktningsapp-backend  |   File "/usr/local/lib/python3.11/site-packages/pydantic/_internal/_repr.py", line 95, in display_as_type
+besiktningsapp-backend  |     return repr(obj)
+besiktningsapp-backend  |            ^^^^^^^^^
+besiktningsapp-backend  |   File "/usr/local/lib/python3.11/site-packages/pydantic/_internal/_repr.py", line 82, in __repr__
+besiktningsapp-backend  |     return f'{self.__repr_name__()}({self.__repr_str__(", ")})'
+besiktningsapp-backend  |                                      ^^^^^^^^^^^^^^^^^^^^^^^
+besiktningsapp-backend  |   File "/usr/local/lib/python3.11/site-packages/pydantic/_internal/_repr.py", line 55, in __repr_str__
+besiktningsapp-backend  |     return join_str.join(repr(v) if a is None else f'{a}={v!r}' for a, v in self.__repr_args__())
+besiktningsapp-backend  |            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+besiktningsapp-backend  |   File "/usr/local/lib/python3.11/site-packages/pydantic/_internal/_repr.py", line 55, in <genexpr>
+besiktningsapp-backend  |     return join_str.join(repr(v) if a is None else f'{a}={v!r}' for a, v in self.__repr_args__())
+besiktningsapp-backend  |                         ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+besiktningsapp-backend  |   File "/usr/local/lib/python3.11/site-packages/pydantic/fields.py", line 556, in __repr_args__
+besiktningsapp-backend  |     yield 'annotation', _repr.PlainRepr(_repr.display_as_type(self.annotation))
+besiktningsapp-backend  |                                         ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+besiktningsapp-backend  |   File "/usr/local/lib/python3.11/site-packages/pydantic/_internal/_repr.py", line 95, in display_as_type
+besiktningsapp-backend  |     return repr(obj)
+besiktningsapp-backend  |            ^^^^^^^^^
+besiktningsapp-backend  |   File "/usr/local/lib/python3.11/site-packages/pydantic/_internal/_repr.py", line 82, in __repr__
+besiktningsapp-backend  |     return f'{self.__repr_name__()}({self.__repr_str__(", ")})'
+besiktningsapp-backend  |                                      ^^^^^^^^^^^^^^^^^^^^^^^
+besiktningsapp-backend  |   File "/usr/local/lib/python3.11/site-packages/pydantic/_internal/_repr.py", line 55, in __repr_str__
+besiktningsapp-backend  |     return join_str.join(repr(v) if a is None else f'{a}={v!r}' for a, v in self.__repr_args__())
+besiktningsapp-backend  |            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+besiktningsapp-backend  |   File "/usr/local/lib/python3.11/site-packages/pydantic/_internal/_repr.py", line 55, in <genexpr>
+besiktningsapp-backend  |     return join_str.join(repr(v) if a is None else f'{a}={v!r}' for a, v in self.__repr_args__())
+besiktningsapp-backend  |                         ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+besiktningsapp-backend  |   File "/usr/local/lib/python3.11/site-packages/pydantic/fields.py", line 556, in __repr_args__
+besiktningsapp-backend  |     yield 'annotation', _repr.PlainRepr(_repr.display_as_type(self.annotation))
+besiktningsapp-backend  |                                         ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+besiktningsapp-backend  |   File "/usr/local/lib/python3.11/site-packages/pydantic/_internal/_repr.py", line 95, in display_as_type
+besiktningsapp-backend  |     return repr(obj)
+besiktningsapp-backend  |            ^^^^^^^^^
+besiktningsapp-backend  |   File "/usr/local/lib/python3.11/site-packages/pydantic/_internal/_repr.py", line 82, in __repr__
+besiktningsapp-backend  |     return f'{self.__repr_name__()}({self.__repr_str__(", ")})'
+besiktningsapp-backend  |                                      ^^^^^^^^^^^^^^^^^^^^^^^
+besiktningsapp-backend  |   File "/usr/local/lib/python3.11/site-packages/pydantic/_internal/_repr.py", line 55, in __repr_str__
+besiktningsapp-backend  |     return join_str.join(repr(v) if a is None else f'{a}={v!r}' for a, v in self.__repr_args__())
+besiktningsapp-backend  |            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+besiktningsapp-backend  |   File "/usr/local/lib/python3.11/site-packages/pydantic/_internal/_repr.py", line 55, in <genexpr>
+besiktningsapp-backend  |     return join_str.join(repr(v) if a is None else f'{a}={v!r}' for a, v in self.__repr_args__())
+besiktningsapp-backend  |                         ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+besiktningsapp-backend  |   File "/usr/local/lib/python3.11/site-packages/pydantic/fields.py", line 556, in __repr_args__
+besiktningsapp-backend  |     yield 'annotation', _repr.PlainRepr(_repr.display_as_type(self.annotation))
+besiktningsapp-backend  |                                         ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+besiktningsapp-backend  |   File "/usr/local/lib/python3.11/site-packages/pydantic/_internal/_repr.py", line 95, in display_as_type
+besiktningsapp-backend  |     return repr(obj)
+besiktningsapp-backend  |            ^^^^^^^^^
+besiktningsapp-backend  |   File "/usr/local/lib/python3.11/site-packages/pydantic/_internal/_repr.py", line 82, in __repr__
+besiktningsapp-backend  |     return f'{self.__repr_name__()}({self.__repr_str__(", ")})'
+besiktningsapp-backend  |                                      ^^^^^^^^^^^^^^^^^^^^^^^
+besiktningsapp-backend  |   File "/usr/local/lib/python3.11/site-packages/pydantic/_internal/_repr.py", line 55, in __repr_str__
+besiktningsapp-backend  |     return join_str.join(repr(v) if a is None else f'{a}={v!r}' for a, v in self.__repr_args__())
+besiktningsapp-backend  |            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+besiktningsapp-backend  |   File "/usr/local/lib/python3.11/site-packages/pydantic/_internal/_repr.py", line 55, in <genexpr>
+besiktningsapp-backend  |     return join_str.join(repr(v) if a is None else f'{a}={v!r}' for a, v in self.__repr_args__())
+besiktningsapp-backend  |                         ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+besiktningsapp-backend  |   File "/usr/local/lib/python3.11/site-packages/pydantic/fields.py", line 556, in __repr_args__
+besiktningsapp-backend  |     yield 'annotation', _repr.PlainRepr(_repr.display_as_type(self.annotation))
+besiktningsapp-backend  |                                         ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+besiktningsapp-backend  |   File "/usr/local/lib/python3.11/site-packages/pydantic/_internal/_repr.py", line 95, in display_as_type
+besiktningsapp-backend  |     return repr(obj)
+besiktningsapp-backend  |            ^^^^^^^^^
+besiktningsapp-backend  |   File "/usr/local/lib/python3.11/site-packages/pydantic/_internal/_repr.py", line 82, in __repr__
+besiktningsapp-backend  |     return f'{self.__repr_name__()}({self.__repr_str__(", ")})'
+besiktningsapp-backend  |                                      ^^^^^^^^^^^^^^^^^^^^^^^
+besiktningsapp-backend  |   File "/usr/local/lib/python3.11/site-packages/pydantic/_internal/_repr.py", line 55, in __repr_str__
+besiktningsapp-backend  |     return join_str.join(repr(v) if a is None else f'{a}={v!r}' for a, v in self.__repr_args__())
+besiktningsapp-backend  |            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+besiktningsapp-backend  |   File "/usr/local/lib/python3.11/site-packages/pydantic/_internal/_repr.py", line 55, in <genexpr>
+besiktningsapp-backend  |     return join_str.join(repr(v) if a is None else f'{a}={v!r}' for a, v in self.__repr_args__())
+besiktningsapp-backend  |                         ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+besiktningsapp-backend  |   File "/usr/local/lib/python3.11/site-packages/pydantic/fields.py", line 556, in __repr_args__
+besiktningsapp-backend  |     yield 'annotation', _repr.PlainRepr(_repr.display_as_type(self.annotation))
+besiktningsapp-backend  |                                         ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+besiktningsapp-backend  |   File "/usr/local/lib/python3.11/site-packages/pydantic/_internal/_repr.py", line 95, in display_as_type
+besiktningsapp-backend  |     return repr(obj)
+besiktningsapp-backend  |            ^^^^^^^^^
+besiktningsapp-backend  |   File "/usr/local/lib/python3.11/site-packages/pydantic/_internal/_repr.py", line 82, in __repr__
+besiktningsapp-backend  |     return f'{self.__repr_name__()}({self.__repr_str__(", ")})'
+besiktningsapp-backend  |                                      ^^^^^^^^^^^^^^^^^^^^^^^
+besiktningsapp-backend  |   File "/usr/local/lib/python3.11/site-packages/pydantic/_internal/_repr.py", line 55, in __repr_str__
+besiktningsapp-backend  |     return join_str.join(repr(v) if a is None else f'{a}={v!r}' for a, v in self.__repr_args__())
+besiktningsapp-backend  |            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+besiktningsapp-backend  |   File "/usr/local/lib/python3.11/site-packages/pydantic/_internal/_repr.py", line 55, in <genexpr>
+besiktningsapp-backend  |     return join_str.join(repr(v) if a is None else f'{a}={v!r}' for a, v in self.__repr_args__())
+besiktningsapp-backend  |                         ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+besiktningsapp-backend  |   File "/usr/local/lib/python3.11/site-packages/pydantic/fields.py", line 556, in __repr_args__
+besiktningsapp-backend  |     yield 'annotation', _repr.PlainRepr(_repr.display_as_type(self.annotation))
+besiktningsapp-backend  |                                         ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+besiktningsapp-backend  |   File "/usr/local/lib/python3.11/site-packages/pydantic/_internal/_repr.py", line 95, in display_as_type
+besiktningsapp-backend  |     return repr(obj)
+besiktningsapp-backend  |            ^^^^^^^^^
+besiktningsapp-backend  |   File "/usr/local/lib/python3.11/site-packages/pydantic/_internal/_repr.py", line 82, in __repr__
+besiktningsapp-backend  |     return f'{self.__repr_name__()}({self.__repr_str__(", ")})'
+besiktningsapp-backend  |                                      ^^^^^^^^^^^^^^^^^^^^^^^
+besiktningsapp-backend  |   File "/usr/local/lib/python3.11/site-packages/pydantic/_internal/_repr.py", line 55, in __repr_str__
+besiktningsapp-backend  |     return join_str.join(repr(v) if a is None else f'{a}={v!r}' for a, v in self.__repr_args__())
+besiktningsapp-backend  |            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+besiktningsapp-backend  |   File "/usr/local/lib/python3.11/site-packages/pydantic/_internal/_repr.py", line 55, in <genexpr>
+besiktningsapp-backend  |     return join_str.join(repr(v) if a is None else f'{a}={v!r}' for a, v in self.__repr_args__())
+besiktningsapp-backend  |                         ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+besiktningsapp-backend  |   File "/usr/local/lib/python3.11/site-packages/pydantic/fields.py", line 556, in __repr_args__
+besiktningsapp-backend  |     yield 'annotation', _repr.PlainRepr(_repr.display_as_type(self.annotation))
+besiktningsapp-backend  |                                         ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+besiktningsapp-backend  |   File "/usr/local/lib/python3.11/site-packages/pydantic/_internal/_repr.py", line 95, in display_as_type
+besiktningsapp-backend  |     return repr(obj)
+besiktningsapp-backend  |            ^^^^^^^^^
+besiktningsapp-backend  |   File "/usr/local/lib/python3.11/site-packages/pydantic/_internal/_repr.py", line 82, in __repr__
+besiktningsapp-backend  |     return f'{self.__repr_name__()}({self.__repr_str__(", ")})'
+besiktningsapp-backend  |                                      ^^^^^^^^^^^^^^^^^^^^^^^
+besiktningsapp-backend  |   File "/usr/local/lib/python3.11/site-packages/pydantic/_internal/_repr.py", line 55, in __repr_str__
+besiktningsapp-backend  |     return join_str.join(repr(v) if a is None else f'{a}={v!r}' for a, v in self.__repr_args__())
+besiktningsapp-backend  |            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+besiktningsapp-backend  |   File "/usr/local/lib/python3.11/site-packages/pydantic/_internal/_repr.py", line 55, in <genexpr>
+besiktningsapp-backend  |     return join_str.join(repr(v) if a is None else f'{a}={v!r}' for a, v in self.__repr_args__())
+besiktningsapp-backend  |                         ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+besiktningsapp-backend  |   File "/usr/local/lib/python3.11/site-packages/pydantic/fields.py", line 556, in __repr_args__
+besiktningsapp-backend  |     yield 'annotation', _repr.PlainRepr(_repr.display_as_type(self.annotation))
+besiktningsapp-backend  |                                         ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+besiktningsapp-backend  |   File "/usr/local/lib/python3.11/site-packages/pydantic/_internal/_repr.py", line 95, in display_as_type
+besiktningsapp-backend  |     return repr(obj)
+besiktningsapp-backend  |            ^^^^^^^^^
+besiktningsapp-backend  |   File "/usr/local/lib/python3.11/site-packages/pydantic/_internal/_repr.py", line 82, in __repr__
+besiktningsapp-backend  |     return f'{self.__repr_name__()}({self.__repr_str__(", ")})'
+besiktningsapp-backend  |                                      ^^^^^^^^^^^^^^^^^^^^^^^
+besiktningsapp-backend  |   File "/usr/local/lib/python3.11/site-packages/pydantic/_internal/_repr.py", line 55, in __repr_str__
+besiktningsapp-backend  |     return join_str.join(repr(v) if a is None else f'{a}={v!r}' for a, v in self.__repr_args__())
+besiktningsapp-backend  |            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+besiktningsapp-backend  |   File "/usr/local/lib/python3.11/site-packages/pydantic/_internal/_repr.py", line 55, in <genexpr>
+besiktningsapp-backend  |     return join_str.join(repr(v) if a is None else f'{a}={v!r}' for a, v in self.__repr_args__())
+besiktningsapp-backend  |                         ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+besiktningsapp-backend  |   File "/usr/local/lib/python3.11/site-packages/pydantic/fields.py", line 556, in __repr_args__
+besiktningsapp-backend  |     yield 'annotation', _repr.PlainRepr(_repr.display_as_type(self.annotation))
+besiktningsapp-backend  |                                         ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+besiktningsapp-backend  |   File "/usr/local/lib/python3.11/site-packages/pydantic/_internal/_repr.py", line 95, in display_as_type
+besiktningsapp-backend  |     return repr(obj)
+besiktningsapp-backend  |            ^^^^^^^^^
+besiktningsapp-backend  |   File "/usr/local/lib/python3.11/site-packages/pydantic/_internal/_repr.py", line 82, in __repr__
+besiktningsapp-backend  |     return f'{self.__repr_name__()}({self.__repr_str__(", ")})'
+besiktningsapp-backend  |                                      ^^^^^^^^^^^^^^^^^^^^^^^
+besiktningsapp-backend  |   File "/usr/local/lib/python3.11/site-packages/pydantic/_internal/_repr.py", line 55, in __repr_str__
+besiktningsapp-backend  |     return join_str.join(repr(v) if a is None else f'{a}={v!r}' for a, v in self.__repr_args__())
+besiktningsapp-backend  |            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+besiktningsapp-backend  |   File "/usr/local/lib/python3.11/site-packages/pydantic/_internal/_repr.py", line 55, in <genexpr>
+besiktningsapp-backend  |     return join_str.join(repr(v) if a is None else f'{a}={v!r}' for a, v in self.__repr_args__())
+besiktningsapp-backend  |                         ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+besiktningsapp-backend  |   File "/usr/local/lib/python3.11/site-packages/pydantic/fields.py", line 556, in __repr_args__
+besiktningsapp-backend  |     yield 'annotation', _repr.PlainRepr(_repr.display_as_type(self.annotation))
+besiktningsapp-backend  |                                         ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+besiktningsapp-backend  |   File "/usr/local/lib/python3.11/site-packages/pydantic/_internal/_repr.py", line 95, in display_as_type
+besiktningsapp-backend  |     return repr(obj)
+besiktningsapp-backend  |            ^^^^^^^^^
+besiktningsapp-backend  |   File "/usr/local/lib/python3.11/site-packages/pydantic/_internal/_repr.py", line 82, in __repr__
+besiktningsapp-backend  |     return f'{self.__repr_name__()}({self.__repr_str__(", ")})'
+besiktningsapp-backend  |                                      ^^^^^^^^^^^^^^^^^^^^^^^
+besiktningsapp-backend  |   File "/usr/local/lib/python3.11/site-packages/pydantic/_internal/_repr.py", line 55, in __repr_str__
+besiktningsapp-backend  |     return join_str.join(repr(v) if a is None else f'{a}={v!r}' for a, v in self.__repr_args__())
+besiktningsapp-backend  |            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+besiktningsapp-backend  |   File "/usr/local/lib/python3.11/site-packages/pydantic/_internal/_repr.py", line 55, in <genexpr>
+besiktningsapp-backend  |     return join_str.join(repr(v) if a is None else f'{a}={v!r}' for a, v in self.__repr_args__())
+besiktningsapp-backend  |                         ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+besiktningsapp-backend  |   File "/usr/local/lib/python3.11/site-packages/pydantic/fields.py", line 556, in __repr_args__
+besiktningsapp-backend  |     yield 'annotation', _repr.PlainRepr(_repr.display_as_type(self.annotation))
+besiktningsapp-backend  |                                         ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+besiktningsapp-backend  |   File "/usr/local/lib/python3.11/site-packages/pydantic/_internal/_repr.py", line 95, in display_as_type
+besiktningsapp-backend  |     return repr(obj)
+besiktningsapp-backend  |            ^^^^^^^^^
+besiktningsapp-backend  |   File "/usr/local/lib/python3.11/site-packages/pydantic/_internal/_repr.py", line 82, in __repr__
+besiktningsapp-backend  |     return f'{self.__repr_name__()}({self.__repr_str__(", ")})'
+besiktningsapp-backend  |                                      ^^^^^^^^^^^^^^^^^^^^^^^
+besiktningsapp-backend  |   File "/usr/local/lib/python3.11/site-packages/pydantic/_internal/_repr.py", line 55, in __repr_str__
+besiktningsapp-backend  |     return join_str.join(repr(v) if a is None else f'{a}={v!r}' for a, v in self.__repr_args__())
+besiktningsapp-backend  |            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+besiktningsapp-backend  |   File "/usr/local/lib/python3.11/site-packages/pydantic/_internal/_repr.py", line 55, in <genexpr>
+besiktningsapp-backend  |     return join_str.join(repr(v) if a is None else f'{a}={v!r}' for a, v in self.__repr_args__())
+besiktningsapp-backend  |                         ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+besiktningsapp-backend  |   File "/usr/local/lib/python3.11/site-packages/pydantic/fields.py", line 556, in __repr_args__
+besiktningsapp-backend  |     yield 'annotation', _repr.PlainRepr(_repr.display_as_type(self.annotation))
+besiktningsapp-backend  |                                         ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+besiktningsapp-backend  |   File "/usr/local/lib/python3.11/site-packages/pydantic/_internal/_repr.py", line 95, in display_as_type
+besiktningsapp-backend  |     return repr(obj)
+besiktningsapp-backend  |            ^^^^^^^^^
+besiktningsapp-backend  |   File "/usr/local/lib/python3.11/site-packages/pydantic/_internal/_repr.py", line 82, in __repr__
+besiktningsapp-backend  |     return f'{self.__repr_name__()}({self.__repr_str__(", ")})'
+besiktningsapp-backend  |                                      ^^^^^^^^^^^^^^^^^^^^^^^
+besiktningsapp-backend  |   File "/usr/local/lib/python3.11/site-packages/pydantic/_internal/_repr.py", line 55, in __repr_str__
+besiktningsapp-backend  |     return join_str.join(repr(v) if a is None else f'{a}={v!r}' for a, v in self.__repr_args__())
+besiktningsapp-backend  |            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+besiktningsapp-backend  |   File "/usr/local/lib/python3.11/site-packages/pydantic/_internal/_repr.py", line 55, in <genexpr>
+besiktningsapp-backend  |     return join_str.join(repr(v) if a is None else f'{a}={v!r}' for a, v in self.__repr_args__())
+besiktningsapp-backend  |                         ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+besiktningsapp-backend  |   File "/usr/local/lib/python3.11/site-packages/pydantic/fields.py", line 556, in __repr_args__
+besiktningsapp-backend  |     yield 'annotation', _repr.PlainRepr(_repr.display_as_type(self.annotation))
+besiktningsapp-backend  |                                         ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+besiktningsapp-backend  |   File "/usr/local/lib/python3.11/site-packages/pydantic/_internal/_repr.py", line 95, in display_as_type
+besiktningsapp-backend  |     return repr(obj)
+besiktningsapp-backend  |            ^^^^^^^^^
+besiktningsapp-backend  |   File "/usr/local/lib/python3.11/site-packages/pydantic/_internal/_repr.py", line 82, in __repr__
+besiktningsapp-backend  |     return f'{self.__repr_name__()}({self.__repr_str__(", ")})'
+besiktningsapp-backend  |                                      ^^^^^^^^^^^^^^^^^^^^^^^
+besiktningsapp-backend  |   File "/usr/local/lib/python3.11/site-packages/pydantic/_internal/_repr.py", line 55, in __repr_str__
+besiktningsapp-backend  |     return join_str.join(repr(v) if a is None else f'{a}={v!r}' for a, v in self.__repr_args__())
+besiktningsapp-backend  |            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+besiktningsapp-backend  |   File "/usr/local/lib/python3.11/site-packages/pydantic/_internal/_repr.py", line 55, in <genexpr>
+besiktningsapp-backend  |     return join_str.join(repr(v) if a is None else f'{a}={v!r}' for a, v in self.__repr_args__())
+besiktningsapp-backend  |                         ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+besiktningsapp-backend  |   File "/usr/local/lib/python3.11/site-packages/pydantic/fields.py", line 556, in __repr_args__
+besiktningsapp-backend  |     yield 'annotation', _repr.PlainRepr(_repr.display_as_type(self.annotation))
+besiktningsapp-backend  |                                         ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+besiktningsapp-backend  |   File "/usr/local/lib/python3.11/site-packages/pydantic/_internal/_repr.py", line 95, in display_as_type
+besiktningsapp-backend  |     return repr(obj)
+besiktningsapp-backend  |            ^^^^^^^^^
+besiktningsapp-backend  |   File "/usr/local/lib/python3.11/site-packages/pydantic/_internal/_repr.py", line 82, in __repr__
+besiktningsapp-backend  |     return f'{self.__repr_name__()}({self.__repr_str__(", ")})'
+besiktningsapp-backend  |                                      ^^^^^^^^^^^^^^^^^^^^^^^
+besiktningsapp-backend  |   File "/usr/local/lib/python3.11/site-packages/pydantic/_internal/_repr.py", line 55, in __repr_str__
+besiktningsapp-backend  |     return join_str.join(repr(v) if a is None else f'{a}={v!r}' for a, v in self.__repr_args__())
+besiktningsapp-backend  |            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+besiktningsapp-backend  |   File "/usr/local/lib/python3.11/site-packages/pydantic/_internal/_repr.py", line 55, in <genexpr>
+besiktningsapp-backend  |     return join_str.join(repr(v) if a is None else f'{a}={v!r}' for a, v in self.__repr_args__())
+besiktningsapp-backend  |                         ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+besiktningsapp-backend  |   File "/usr/local/lib/python3.11/site-packages/pydantic/fields.py", line 556, in __repr_args__
+besiktningsapp-backend  |     yield 'annotation', _repr.PlainRepr(_repr.display_as_type(self.annotation))
+besiktningsapp-backend  |                                         ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+besiktningsapp-backend  |   File "/usr/local/lib/python3.11/site-packages/pydantic/_internal/_repr.py", line 95, in display_as_type
+besiktningsapp-backend  |     return repr(obj)
+besiktningsapp-backend  |            ^^^^^^^^^
+besiktningsapp-backend  |   File "/usr/local/lib/python3.11/site-packages/pydantic/_internal/_repr.py", line 82, in __repr__
+besiktningsapp-backend  |     return f'{self.__repr_name__()}({self.__repr_str__(", ")})'
+besiktningsapp-backend  |                                      ^^^^^^^^^^^^^^^^^^^^^^^
+besiktningsapp-backend  |   File "/usr/local/lib/python3.11/site-packages/pydantic/_internal/_repr.py", line 55, in __repr_str__
+besiktningsapp-backend  |     return join_str.join(repr(v) if a is None else f'{a}={v!r}' for a, v in self.__repr_args__())
+besiktningsapp-backend  |            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+besiktningsapp-backend  |   File "/usr/local/lib/python3.11/site-packages/pydantic/_internal/_repr.py", line 55, in <genexpr>
+besiktningsapp-backend  |     return join_str.join(repr(v) if a is None else f'{a}={v!r}' for a, v in self.__repr_args__())
+besiktningsapp-backend  |                         ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+besiktningsapp-backend  |   File "/usr/local/lib/python3.11/site-packages/pydantic/fields.py", line 556, in __repr_args__
+besiktningsapp-backend  |     yield 'annotation', _repr.PlainRepr(_repr.display_as_type(self.annotation))
+besiktningsapp-backend  |                                         ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+besiktningsapp-backend  |   File "/usr/local/lib/python3.11/site-packages/pydantic/_internal/_repr.py", line 95, in display_as_type
+besiktningsapp-backend  |     return repr(obj)
+besiktningsapp-backend  |            ^^^^^^^^^
+besiktningsapp-backend  |   File "/usr/local/lib/python3.11/site-packages/pydantic/_internal/_repr.py", line 82, in __repr__
+besiktningsapp-backend  |     return f'{self.__repr_name__()}({self.__repr_str__(", ")})'
+besiktningsapp-backend  |                                      ^^^^^^^^^^^^^^^^^^^^^^^
+besiktningsapp-backend  |   File "/usr/local/lib/python3.11/site-packages/pydantic/_internal/_repr.py", line 55, in __repr_str__
+besiktningsapp-backend  |     return join_str.join(repr(v) if a is None else f'{a}={v!r}' for a, v in self.__repr_args__())
+besiktningsapp-backend  |            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+besiktningsapp-backend  |   File "/usr/local/lib/python3.11/site-packages/pydantic/_internal/_repr.py", line 55, in <genexpr>
+besiktningsapp-backend  |     return join_str.join(repr(v) if a is None else f'{a}={v!r}' for a, v in self.__repr_args__())
+besiktningsapp-backend  |                         ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+besiktningsapp-backend  |   File "/usr/local/lib/python3.11/site-packages/pydantic/fields.py", line 556, in __repr_args__
+besiktningsapp-backend  |     yield 'annotation', _repr.PlainRepr(_repr.display_as_type(self.annotation))
+besiktningsapp-backend  |                                         ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+besiktningsapp-backend  |   File "/usr/local/lib/python3.11/site-packages/pydantic/_internal/_repr.py", line 95, in display_as_type
+besiktningsapp-backend  |     return repr(obj)
+besiktningsapp-backend  |            ^^^^^^^^^
+besiktningsapp-backend  |   File "/usr/local/lib/python3.11/site-packages/pydantic/_internal/_repr.py", line 82, in __repr__
+besiktningsapp-backend  |     return f'{self.__repr_name__()}({self.__repr_str__(", ")})'
+besiktningsapp-backend  |                                      ^^^^^^^^^^^^^^^^^^^^^^^
+besiktningsapp-backend  |   File "/usr/local/lib/python3.11/site-packages/pydantic/_internal/_repr.py", line 55, in __repr_str__
+besiktningsapp-backend  |     return join_str.join(repr(v) if a is None else f'{a}={v!r}' for a, v in self.__repr_args__())
+besiktningsapp-backend  |            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+besiktningsapp-backend  |   File "/usr/local/lib/python3.11/site-packages/pydantic/_internal/_repr.py", line 55, in <genexpr>
+besiktningsapp-backend  |     return join_str.join(repr(v) if a is None else f'{a}={v!r}' for a, v in self.__repr_args__())
+besiktningsapp-backend  |                         ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+besiktningsapp-backend  |   File "/usr/local/lib/python3.11/site-packages/pydantic/fields.py", line 556, in __repr_args__
+besiktningsapp-backend  |     yield 'annotation', _repr.PlainRepr(_repr.display_as_type(self.annotation))
+besiktningsapp-backend  |                                         ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+besiktningsapp-backend  |   File "/usr/local/lib/python3.11/site-packages/pydantic/_internal/_repr.py", line 95, in display_as_type
+besiktningsapp-backend  |     return repr(obj)
+besiktningsapp-backend  |            ^^^^^^^^^
+besiktningsapp-backend  |   File "/usr/local/lib/python3.11/site-packages/pydantic/_internal/_repr.py", line 82, in __repr__
+besiktningsapp-backend  |     return f'{self.__repr_name__()}({self.__repr_str__(", ")})'
+besiktningsapp-backend  |                                      ^^^^^^^^^^^^^^^^^^^^^^^
+besiktningsapp-backend  |   File "/usr/local/lib/python3.11/site-packages/pydantic/_internal/_repr.py", line 55, in __repr_str__
+besiktningsapp-backend  |     return join_str.join(repr(v) if a is None else f'{a}={v!r}' for a, v in self.__repr_args__())
+besiktningsapp-backend  |            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+besiktningsapp-backend  |   File "/usr/local/lib/python3.11/site-packages/pydantic/_internal/_repr.py", line 55, in <genexpr>
+besiktningsapp-backend  |     return join_str.join(repr(v) if a is None else f'{a}={v!r}' for a, v in self.__repr_args__())
+besiktningsapp-backend  |                         ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+besiktningsapp-backend  |   File "/usr/local/lib/python3.11/site-packages/pydantic/fields.py", line 556, in __repr_args__
+besiktningsapp-backend  |     yield 'annotation', _repr.PlainRepr(_repr.display_as_type(self.annotation))
+besiktningsapp-backend  |                                         ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+besiktningsapp-backend  |   File "/usr/local/lib/python3.11/site-packages/pydantic/_internal/_repr.py", line 95, in display_as_type
+besiktningsapp-backend  |     return repr(obj)
+besiktningsapp-backend  |            ^^^^^^^^^
+besiktningsapp-backend  |   File "/usr/local/lib/python3.11/site-packages/pydantic/_internal/_repr.py", line 82, in __repr__
+besiktningsapp-backend  |     return f'{self.__repr_name__()}({self.__repr_str__(", ")})'
+besiktningsapp-backend  |                                      ^^^^^^^^^^^^^^^^^^^^^^^
+besiktningsapp-backend  |   File "/usr/local/lib/python3.11/site-packages/pydantic/_internal/_repr.py", line 55, in __repr_str__
+besiktningsapp-backend  |     return join_str.join(repr(v) if a is None else f'{a}={v!r}' for a, v in self.__repr_args__())
+besiktningsapp-backend  |            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+besiktningsapp-backend  |   File "/usr/local/lib/python3.11/site-packages/pydantic/_internal/_repr.py", line 55, in <genexpr>
+besiktningsapp-backend  |     return join_str.join(repr(v) if a is None else f'{a}={v!r}' for a, v in self.__repr_args__())
+besiktningsapp-backend  |                         ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+besiktningsapp-backend  |   File "/usr/local/lib/python3.11/site-packages/pydantic/fields.py", line 556, in __repr_args__
+besiktningsapp-backend  |     yield 'annotation', _repr.PlainRepr(_repr.display_as_type(self.annotation))
+besiktningsapp-backend  |                                         ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+besiktningsapp-backend  |   File "/usr/local/lib/python3.11/site-packages/pydantic/_internal/_repr.py", line 95, in display_as_type
+besiktningsapp-backend  |     return repr(obj)
+besiktningsapp-backend  |            ^^^^^^^^^
+besiktningsapp-backend  |   File "/usr/local/lib/python3.11/site-packages/pydantic/_internal/_repr.py", line 82, in __repr__
+besiktningsapp-backend  |     return f'{self.__repr_name__()}({self.__repr_str__(", ")})'
+besiktningsapp-backend  |                                      ^^^^^^^^^^^^^^^^^^^^^^^
+besiktningsapp-backend  |   File "/usr/local/lib/python3.11/site-packages/pydantic/_internal/_repr.py", line 55, in __repr_str__
+besiktningsapp-backend  |     return join_str.join(repr(v) if a is None else f'{a}={v!r}' for a, v in self.__repr_args__())
+besiktningsapp-backend  |            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+besiktningsapp-backend  |   File "/usr/local/lib/python3.11/site-packages/pydantic/_internal/_repr.py", line 55, in <genexpr>
+besiktningsapp-backend  |     return join_str.join(repr(v) if a is None else f'{a}={v!r}' for a, v in self.__repr_args__())
+besiktningsapp-backend  |                         ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+besiktningsapp-backend  |   File "/usr/local/lib/python3.11/site-packages/pydantic/fields.py", line 556, in __repr_args__
+besiktningsapp-backend  |     yield 'annotation', _repr.PlainRepr(_repr.display_as_type(self.annotation))
+besiktningsapp-backend  |                                         ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+besiktningsapp-backend  |   File "/usr/local/lib/python3.11/site-packages/pydantic/_internal/_repr.py", line 95, in display_as_type
+besiktningsapp-backend  |     return repr(obj)
+besiktningsapp-backend  |            ^^^^^^^^^
+besiktningsapp-backend  |   File "/usr/local/lib/python3.11/site-packages/pydantic/_internal/_repr.py", line 82, in __repr__
+besiktningsapp-backend  |     return f'{self.__repr_name__()}({self.__repr_str__(", ")})'
+besiktningsapp-backend  |                                      ^^^^^^^^^^^^^^^^^^^^^^^
+besiktningsapp-backend  |   File "/usr/local/lib/python3.11/site-packages/pydantic/_internal/_repr.py", line 55, in __repr_str__
+besiktningsapp-backend  |     return join_str.join(repr(v) if a is None else f'{a}={v!r}' for a, v in self.__repr_args__())
+besiktningsapp-backend  |            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+besiktningsapp-backend  |   File "/usr/local/lib/python3.11/site-packages/pydantic/_internal/_repr.py", line 55, in <genexpr>
+besiktningsapp-backend  |     return join_str.join(repr(v) if a is None else f'{a}={v!r}' for a, v in self.__repr_args__())
+besiktningsapp-backend  |                         ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+besiktningsapp-backend  |   File "/usr/local/lib/python3.11/site-packages/pydantic/fields.py", line 556, in __repr_args__
+besiktningsapp-backend  |     yield 'annotation', _repr.PlainRepr(_repr.display_as_type(self.annotation))
+besiktningsapp-backend  |                                         ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+besiktningsapp-backend  |   File "/usr/local/lib/python3.11/site-packages/pydantic/_internal/_repr.py", line 95, in display_as_type
+besiktningsapp-backend  |     return repr(obj)
+besiktningsapp-backend  |            ^^^^^^^^^
+besiktningsapp-backend  |   File "/usr/local/lib/python3.11/site-packages/pydantic/_internal/_repr.py", line 82, in __repr__
+besiktningsapp-backend  |     return f'{self.__repr_name__()}({self.__repr_str__(", ")})'
+besiktningsapp-backend  |                                      ^^^^^^^^^^^^^^^^^^^^^^^
+besiktningsapp-backend  |   File "/usr/local/lib/python3.11/site-packages/pydantic/_internal/_repr.py", line 55, in __repr_str__
+besiktningsapp-backend  |     return join_str.join(repr(v) if a is None else f'{a}={v!r}' for a, v in self.__repr_args__())
+besiktningsapp-backend  |            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+besiktningsapp-backend  |   File "/usr/local/lib/python3.11/site-packages/pydantic/_internal/_repr.py", line 55, in <genexpr>
+besiktningsapp-backend  |     return join_str.join(repr(v) if a is None else f'{a}={v!r}' for a, v in self.__repr_args__())
+besiktningsapp-backend  |                         ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+besiktningsapp-backend  |   File "/usr/local/lib/python3.11/site-packages/pydantic/fields.py", line 556, in __repr_args__
+besiktningsapp-backend  |     yield 'annotation', _repr.PlainRepr(_repr.display_as_type(self.annotation))
+besiktningsapp-backend  |                                         ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+besiktningsapp-backend  |   File "/usr/local/lib/python3.11/site-packages/pydantic/_internal/_repr.py", line 95, in display_as_type
+besiktningsapp-backend  |     return repr(obj)
+besiktningsapp-backend  |            ^^^^^^^^^
+besiktningsapp-backend  |   File "/usr/local/lib/python3.11/site-packages/pydantic/_internal/_repr.py", line 82, in __repr__
+besiktningsapp-backend  |     return f'{self.__repr_name__()}({self.__repr_str__(", ")})'
+besiktningsapp-backend  |                                      ^^^^^^^^^^^^^^^^^^^^^^^
+besiktningsapp-backend  |   File "/usr/local/lib/python3.11/site-packages/pydantic/_internal/_repr.py", line 55, in __repr_str__
+besiktningsapp-backend  |     return join_str.join(repr(v) if a is None else f'{a}={v!r}' for a, v in self.__repr_args__())
+besiktningsapp-backend  |            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+besiktningsapp-backend  |   File "/usr/local/lib/python3.11/site-packages/pydantic/_internal/_repr.py", line 55, in <genexpr>
+besiktningsapp-backend  |     return join_str.join(repr(v) if a is None else f'{a}={v!r}' for a, v in self.__repr_args__())
+besiktningsapp-backend  |                         ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+besiktningsapp-backend  |   File "/usr/local/lib/python3.11/site-packages/pydantic/fields.py", line 556, in __repr_args__
+besiktningsapp-backend  |     yield 'annotation', _repr.PlainRepr(_repr.display_as_type(self.annotation))
+besiktningsapp-backend  |                                         ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+besiktningsapp-backend  |   File "/usr/local/lib/python3.11/site-packages/pydantic/_internal/_repr.py", line 95, in display_as_type
+besiktningsapp-backend  |     return repr(obj)
+besiktningsapp-backend  |            ^^^^^^^^^
+besiktningsapp-backend  |   File "/usr/local/lib/python3.11/site-packages/pydantic/_internal/_repr.py", line 82, in __repr__
+besiktningsapp-backend  |     return f'{self.__repr_name__()}({self.__repr_str__(", ")})'
+besiktningsapp-backend  |                                      ^^^^^^^^^^^^^^^^^^^^^^^
+besiktningsapp-backend  |   File "/usr/local/lib/python3.11/site-packages/pydantic/_internal/_repr.py", line 55, in __repr_str__
+besiktningsapp-backend  |     return join_str.join(repr(v) if a is None else f'{a}={v!r}' for a, v in self.__repr_args__())
+besiktningsapp-backend  |            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+besiktningsapp-backend  |   File "/usr/local/lib/python3.11/site-packages/pydantic/_internal/_repr.py", line 55, in <genexpr>
+besiktningsapp-backend  |     return join_str.join(repr(v) if a is None else f'{a}={v!r}' for a, v in self.__repr_args__())
+besiktningsapp-backend  |                         ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+besiktningsapp-backend  |   File "/usr/local/lib/python3.11/site-packages/pydantic/fields.py", line 556, in __repr_args__
+besiktningsapp-backend  |     yield 'annotation', _repr.PlainRepr(_repr.display_as_type(self.annotation))
+besiktningsapp-backend  |                                         ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+besiktningsapp-backend  |   File "/usr/local/lib/python3.11/site-packages/pydantic/_internal/_repr.py", line 95, in display_as_type
+besiktningsapp-backend  |     return repr(obj)
+besiktningsapp-backend  |            ^^^^^^^^^
+besiktningsapp-backend  |   File "/usr/local/lib/python3.11/site-packages/pydantic/_internal/_repr.py", line 82, in __repr__
+besiktningsapp-backend  |     return f'{self.__repr_name__()}({self.__repr_str__(", ")})'
+besiktningsapp-backend  |                                      ^^^^^^^^^^^^^^^^^^^^^^^
+besiktningsapp-backend  |   File "/usr/local/lib/python3.11/site-packages/pydantic/_internal/_repr.py", line 55, in __repr_str__
+besiktningsapp-backend  |     return join_str.join(repr(v) if a is None else f'{a}={v!r}' for a, v in self.__repr_args__())
+besiktningsapp-backend  |            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+besiktningsapp-backend  |   File "/usr/local/lib/python3.11/site-packages/pydantic/_internal/_repr.py", line 55, in <genexpr>
+besiktningsapp-backend  |     return join_str.join(repr(v) if a is None else f'{a}={v!r}' for a, v in self.__repr_args__())
+besiktningsapp-backend  |                         ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+besiktningsapp-backend  |   File "/usr/local/lib/python3.11/site-packages/pydantic/fields.py", line 556, in __repr_args__
+besiktningsapp-backend  |     yield 'annotation', _repr.PlainRepr(_repr.display_as_type(self.annotation))
+besiktningsapp-backend  |                                         ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+besiktningsapp-backend  |   File "/usr/local/lib/python3.11/site-packages/pydantic/_internal/_repr.py", line 95, in display_as_type
+besiktningsapp-backend  |     return repr(obj)
+besiktningsapp-backend  |            ^^^^^^^^^
+besiktningsapp-backend  |   File "/usr/local/lib/python3.11/site-packages/pydantic/_internal/_repr.py", line 82, in __repr__
+besiktningsapp-backend  |     return f'{self.__repr_name__()}({self.__repr_str__(", ")})'
+besiktningsapp-backend  |                                      ^^^^^^^^^^^^^^^^^^^^^^^
+besiktningsapp-backend  |   File "/usr/local/lib/python3.11/site-packages/pydantic/_internal/_repr.py", line 55, in __repr_str__
+besiktningsapp-backend  |     return join_str.join(repr(v) if a is None else f'{a}={v!r}' for a, v in self.__repr_args__())
+besiktningsapp-backend  |            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+besiktningsapp-backend  |   File "/usr/local/lib/python3.11/site-packages/pydantic/_internal/_repr.py", line 55, in <genexpr>
+besiktningsapp-backend  |     return join_str.join(repr(v) if a is None else f'{a}={v!r}' for a, v in self.__repr_args__())
+besiktningsapp-backend  |                         ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+besiktningsapp-backend  |   File "/usr/local/lib/python3.11/site-packages/pydantic/fields.py", line 556, in __repr_args__
+besiktningsapp-backend  |     yield 'annotation', _repr.PlainRepr(_repr.display_as_type(self.annotation))
+besiktningsapp-backend  |                                         ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+besiktningsapp-backend  |   File "/usr/local/lib/python3.11/site-packages/pydantic/_internal/_repr.py", line 95, in display_as_type
+besiktningsapp-backend  |     return repr(obj)
+besiktningsapp-backend  |            ^^^^^^^^^
+besiktningsapp-backend  |   File "/usr/local/lib/python3.11/site-packages/pydantic/_internal/_repr.py", line 82, in __repr__
+besiktningsapp-backend  |     return f'{self.__repr_name__()}({self.__repr_str__(", ")})'
+besiktningsapp-backend  |                                      ^^^^^^^^^^^^^^^^^^^^^^^
+besiktningsapp-backend  |   File "/usr/local/lib/python3.11/site-packages/pydantic/_internal/_repr.py", line 55, in __repr_str__
+besiktningsapp-backend  |     return join_str.join(repr(v) if a is None else f'{a}={v!r}' for a, v in self.__repr_args__())
+besiktningsapp-backend  |            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+besiktningsapp-backend  |   File "/usr/local/lib/python3.11/site-packages/pydantic/_internal/_repr.py", line 55, in <genexpr>
+besiktningsapp-backend  |     return join_str.join(repr(v) if a is None else f'{a}={v!r}' for a, v in self.__repr_args__())
+besiktningsapp-backend  |                         ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+besiktningsapp-backend  |   File "/usr/local/lib/python3.11/site-packages/pydantic/fields.py", line 556, in __repr_args__
+besiktningsapp-backend  |     yield 'annotation', _repr.PlainRepr(_repr.display_as_type(self.annotation))
+besiktningsapp-backend  |                                         ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+besiktningsapp-backend  |   File "/usr/local/lib/python3.11/site-packages/pydantic/_internal/_repr.py", line 95, in display_as_type
+besiktningsapp-backend  |     return repr(obj)
+besiktningsapp-backend  |            ^^^^^^^^^
+besiktningsapp-backend  |   File "/usr/local/lib/python3.11/site-packages/pydantic/_internal/_repr.py", line 82, in __repr__
+besiktningsapp-backend  |     return f'{self.__repr_name__()}({self.__repr_str__(", ")})'
+besiktningsapp-backend  |                                      ^^^^^^^^^^^^^^^^^^^^^^^
+besiktningsapp-backend  |   File "/usr/local/lib/python3.11/site-packages/pydantic/_internal/_repr.py", line 55, in __repr_str__
+besiktningsapp-backend  |     return join_str.join(repr(v) if a is None else f'{a}={v!r}' for a, v in self.__repr_args__())
+besiktningsapp-backend  |            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+besiktningsapp-backend  |   File "/usr/local/lib/python3.11/site-packages/pydantic/_internal/_repr.py", line 55, in <genexpr>
+besiktningsapp-backend  |     return join_str.join(repr(v) if a is None else f'{a}={v!r}' for a, v in self.__repr_args__())
+besiktningsapp-backend  |                         ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+besiktningsapp-backend  |   File "/usr/local/lib/python3.11/site-packages/pydantic/fields.py", line 556, in __repr_args__
+besiktningsapp-backend  |     yield 'annotation', _repr.PlainRepr(_repr.display_as_type(self.annotation))
+besiktningsapp-backend  |                                         ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+besiktningsapp-backend  |   File "/usr/local/lib/python3.11/site-packages/pydantic/_internal/_repr.py", line 95, in display_as_type
+besiktningsapp-backend  |     return repr(obj)
+besiktningsapp-backend  |            ^^^^^^^^^
+besiktningsapp-backend  |   File "/usr/local/lib/python3.11/site-packages/pydantic/_internal/_repr.py", line 82, in __repr__
+besiktningsapp-backend  |     return f'{self.__repr_name__()}({self.__repr_str__(", ")})'
+besiktningsapp-backend  |                                      ^^^^^^^^^^^^^^^^^^^^^^^
+besiktningsapp-backend  |   File "/usr/local/lib/python3.11/site-packages/pydantic/_internal/_repr.py", line 55, in __repr_str__
+besiktningsapp-backend  |     return join_str.join(repr(v) if a is None else f'{a}={v!r}' for a, v in self.__repr_args__())
+besiktningsapp-backend  |            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+besiktningsapp-backend  |   File "/usr/local/lib/python3.11/site-packages/pydantic/_internal/_repr.py", line 55, in <genexpr>
+besiktningsapp-backend  |     return join_str.join(repr(v) if a is None else f'{a}={v!r}' for a, v in self.__repr_args__())
+besiktningsapp-backend  |                         ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+besiktningsapp-backend  |   File "/usr/local/lib/python3.11/site-packages/pydantic/fields.py", line 556, in __repr_args__
+besiktningsapp-backend  |     yield 'annotation', _repr.PlainRepr(_repr.display_as_type(self.annotation))
+besiktningsapp-backend  |                                         ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+besiktningsapp-backend  |   File "/usr/local/lib/python3.11/site-packages/pydantic/_internal/_repr.py", line 95, in display_as_type
+besiktningsapp-backend  |     return repr(obj)
+besiktningsapp-backend  |            ^^^^^^^^^
+besiktningsapp-backend  |   File "/usr/local/lib/python3.11/site-packages/pydantic/_internal/_repr.py", line 82, in __repr__
+besiktningsapp-backend  |     return f'{self.__repr_name__()}({self.__repr_str__(", ")})'
+besiktningsapp-backend  |                                      ^^^^^^^^^^^^^^^^^^^^^^^
+besiktningsapp-backend  |   File "/usr/local/lib/python3.11/site-packages/pydantic/_internal/_repr.py", line 55, in __repr_str__
+besiktningsapp-backend  |     return join_str.join(repr(v) if a is None else f'{a}={v!r}' for a, v in self.__repr_args__())
+besiktningsapp-backend  |            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+besiktningsapp-backend  |   File "/usr/local/lib/python3.11/site-packages/pydantic/_internal/_repr.py", line 55, in <genexpr>
+besiktningsapp-backend  |     return join_str.join(repr(v) if a is None else f'{a}={v!r}' for a, v in self.__repr_args__())
+besiktningsapp-backend  |                         ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+besiktningsapp-backend  |   File "/usr/local/lib/python3.11/site-packages/pydantic/fields.py", line 556, in __repr_args__
+besiktningsapp-backend  |     yield 'annotation', _repr.PlainRepr(_repr.display_as_type(self.annotation))
+besiktningsapp-backend  |                                         ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+besiktningsapp-backend  |   File "/usr/local/lib/python3.11/site-packages/pydantic/_internal/_repr.py", line 95, in display_as_type
+besiktningsapp-backend  |     return repr(obj)
+besiktningsapp-backend  |            ^^^^^^^^^
+besiktningsapp-backend  |   File "/usr/local/lib/python3.11/site-packages/pydantic/_internal/_repr.py", line 82, in __repr__
+besiktningsapp-backend  |     return f'{self.__repr_name__()}({self.__repr_str__(", ")})'
+besiktningsapp-backend  |                                      ^^^^^^^^^^^^^^^^^^^^^^^
+besiktningsapp-backend  |   File "/usr/local/lib/python3.11/site-packages/pydantic/_internal/_repr.py", line 55, in __repr_str__
+besiktningsapp-backend  |     return join_str.join(repr(v) if a is None else f'{a}={v!r}' for a, v in self.__repr_args__())
+besiktningsapp-backend  |            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+besiktningsapp-backend  |   File "/usr/local/lib/python3.11/site-packages/pydantic/_internal/_repr.py", line 55, in <genexpr>
+besiktningsapp-backend  |     return join_str.join(repr(v) if a is None else f'{a}={v!r}' for a, v in self.__repr_args__())
+besiktningsapp-backend  |                         ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+besiktningsapp-backend  |   File "/usr/local/lib/python3.11/site-packages/pydantic/fields.py", line 556, in __repr_args__
+besiktningsapp-backend  |     yield 'annotation', _repr.PlainRepr(_repr.display_as_type(self.annotation))
+besiktningsapp-backend  |                                         ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+besiktningsapp-backend  |   File "/usr/local/lib/python3.11/site-packages/pydantic/_internal/_repr.py", line 95, in display_as_type
+besiktningsapp-backend  |     return repr(obj)
+besiktningsapp-backend  |            ^^^^^^^^^
+besiktningsapp-backend  |   File "/usr/local/lib/python3.11/site-packages/pydantic/_internal/_repr.py", line 82, in __repr__
+besiktningsapp-backend  |     return f'{self.__repr_name__()}({self.__repr_str__(", ")})'
+besiktningsapp-backend  |                                      ^^^^^^^^^^^^^^^^^^^^^^^
+besiktningsapp-backend  |   File "/usr/local/lib/python3.11/site-packages/pydantic/_internal/_repr.py", line 55, in __repr_str__
+besiktningsapp-backend  |     return join_str.join(repr(v) if a is None else f'{a}={v!r}' for a, v in self.__repr_args__())
+besiktningsapp-backend  |            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+besiktningsapp-backend  |   File "/usr/local/lib/python3.11/site-packages/pydantic/_internal/_repr.py", line 55, in <genexpr>
+besiktningsapp-backend  |     return join_str.join(repr(v) if a is None else f'{a}={v!r}' for a, v in self.__repr_args__())
+besiktningsapp-backend  |                         ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+besiktningsapp-backend  |   File "/usr/local/lib/python3.11/site-packages/pydantic/fields.py", line 556, in __repr_args__
+besiktningsapp-backend  |     yield 'annotation', _repr.PlainRepr(_repr.display_as_type(self.annotation))
+besiktningsapp-backend  |                                         ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+besiktningsapp-backend  |   File "/usr/local/lib/python3.11/site-packages/pydantic/_internal/_repr.py", line 95, in display_as_type
+besiktningsapp-backend  |     return repr(obj)
+besiktningsapp-backend  |            ^^^^^^^^^
+besiktningsapp-backend  |   File "/usr/local/lib/python3.11/site-packages/pydantic/_internal/_repr.py", line 82, in __repr__
+besiktningsapp-backend  |     return f'{self.__repr_name__()}({self.__repr_str__(", ")})'
+besiktningsapp-backend  |                                      ^^^^^^^^^^^^^^^^^^^^^^^
+besiktningsapp-backend  |   File "/usr/local/lib/python3.11/site-packages/pydantic/_internal/_repr.py", line 55, in __repr_str__
+besiktningsapp-backend  |     return join_str.join(repr(v) if a is None else f'{a}={v!r}' for a, v in self.__repr_args__())
+besiktningsapp-backend  |            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+besiktningsapp-backend  |   File "/usr/local/lib/python3.11/site-packages/pydantic/_internal/_repr.py", line 55, in <genexpr>
+besiktningsapp-backend  |     return join_str.join(repr(v) if a is None else f'{a}={v!r}' for a, v in self.__repr_args__())
+besiktningsapp-backend  |                         ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+besiktningsapp-backend  |   File "/usr/local/lib/python3.11/site-packages/pydantic/fields.py", line 556, in __repr_args__
+besiktningsapp-backend  |     yield 'annotation', _repr.PlainRepr(_repr.display_as_type(self.annotation))
+besiktningsapp-backend  |                                         ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+besiktningsapp-backend  |   File "/usr/local/lib/python3.11/site-packages/pydantic/_internal/_repr.py", line 95, in display_as_type
+besiktningsapp-backend  |     return repr(obj)
+besiktningsapp-backend  |            ^^^^^^^^^
+besiktningsapp-backend  |   File "/usr/local/lib/python3.11/site-packages/pydantic/_internal/_repr.py", line 82, in __repr__
+besiktningsapp-backend  |     return f'{self.__repr_name__()}({self.__repr_str__(", ")})'
+besiktningsapp-backend  |                                      ^^^^^^^^^^^^^^^^^^^^^^^
+besiktningsapp-backend  |   File "/usr/local/lib/python3.11/site-packages/pydantic/_internal/_repr.py", line 55, in __repr_str__
+besiktningsapp-backend  |     return join_str.join(repr(v) if a is None else f'{a}={v!r}' for a, v in self.__repr_args__())
+besiktningsapp-backend  |            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+besiktningsapp-backend  |   File "/usr/local/lib/python3.11/site-packages/pydantic/_internal/_repr.py", line 55, in <genexpr>
+besiktningsapp-backend  |     return join_str.join(repr(v) if a is None else f'{a}={v!r}' for a, v in self.__repr_args__())
+besiktningsapp-backend  |                         ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+besiktningsapp-backend  |   File "/usr/local/lib/python3.11/site-packages/pydantic/fields.py", line 556, in __repr_args__
+besiktningsapp-backend  |     yield 'annotation', _repr.PlainRepr(_repr.display_as_type(self.annotation))
+besiktningsapp-backend  |                                         ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+besiktningsapp-backend  |   File "/usr/local/lib/python3.11/site-packages/pydantic/_internal/_repr.py", line 95, in display_as_type
+besiktningsapp-backend  |     return repr(obj)
+besiktningsapp-backend  |            ^^^^^^^^^
+besiktningsapp-backend  |   File "/usr/local/lib/python3.11/site-packages/pydantic/_internal/_repr.py", line 82, in __repr__
+besiktningsapp-backend  |     return f'{self.__repr_name__()}({self.__repr_str__(", ")})'
+besiktningsapp-backend  |                                      ^^^^^^^^^^^^^^^^^^^^^^^
+besiktningsapp-backend  |   File "/usr/local/lib/python3.11/site-packages/pydantic/_internal/_repr.py", line 55, in __repr_str__
+besiktningsapp-backend  |     return join_str.join(repr(v) if a is None else f'{a}={v!r}' for a, v in self.__repr_args__())
+besiktningsapp-backend  |            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+besiktningsapp-backend  |   File "/usr/local/lib/python3.11/site-packages/pydantic/_internal/_repr.py", line 55, in <genexpr>
+besiktningsapp-backend  |     return join_str.join(repr(v) if a is None else f'{a}={v!r}' for a, v in self.__repr_args__())
+besiktningsapp-backend  |                         ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+besiktningsapp-backend  |   File "/usr/local/lib/python3.11/site-packages/pydantic/fields.py", line 556, in __repr_args__
+besiktningsapp-backend  |     yield 'annotation', _repr.PlainRepr(_repr.display_as_type(self.annotation))
+besiktningsapp-backend  |                                         ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+besiktningsapp-backend  |   File "/usr/local/lib/python3.11/site-packages/pydantic/_internal/_repr.py", line 95, in display_as_type
+besiktningsapp-backend  |     return repr(obj)
+besiktningsapp-backend  |            ^^^^^^^^^
+besiktningsapp-backend  |   File "/usr/local/lib/python3.11/site-packages/pydantic/_internal/_repr.py", line 82, in __repr__
+besiktningsapp-backend  |     return f'{self.__repr_name__()}({self.__repr_str__(", ")})'
+besiktningsapp-backend  |                                      ^^^^^^^^^^^^^^^^^^^^^^^
+besiktningsapp-backend  |   File "/usr/local/lib/python3.11/site-packages/pydantic/_internal/_repr.py", line 55, in __repr_str__
+besiktningsapp-backend  |     return join_str.join(repr(v) if a is None else f'{a}={v!r}' for a, v in self.__repr_args__())
+besiktningsapp-backend  |            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+besiktningsapp-backend  |   File "/usr/local/lib/python3.11/site-packages/pydantic/_internal/_repr.py", line 55, in <genexpr>
+besiktningsapp-backend  |     return join_str.join(repr(v) if a is None else f'{a}={v!r}' for a, v in self.__repr_args__())
+besiktningsapp-backend  |                         ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+besiktningsapp-backend  |   File "/usr/local/lib/python3.11/site-packages/pydantic/fields.py", line 556, in __repr_args__
+besiktningsapp-backend  |     yield 'annotation', _repr.PlainRepr(_repr.display_as_type(self.annotation))
+besiktningsapp-backend  |                                         ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+besiktningsapp-backend  |   File "/usr/local/lib/python3.11/site-packages/pydantic/_internal/_repr.py", line 95, in display_as_type
+besiktningsapp-backend  |     return repr(obj)
+besiktningsapp-backend  |            ^^^^^^^^^
+besiktningsapp-backend  |   File "/usr/local/lib/python3.11/site-packages/pydantic/_internal/_repr.py", line 82, in __repr__
+besiktningsapp-backend  |     return f'{self.__repr_name__()}({self.__repr_str__(", ")})'
+besiktningsapp-backend  |                                      ^^^^^^^^^^^^^^^^^^^^^^^
+besiktningsapp-backend  |   File "/usr/local/lib/python3.11/site-packages/pydantic/_internal/_repr.py", line 55, in __repr_str__
+besiktningsapp-backend  |     return join_str.join(repr(v) if a is None else f'{a}={v!r}' for a, v in self.__repr_args__())
+besiktningsapp-backend  |            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+besiktningsapp-backend  |   File "/usr/local/lib/python3.11/site-packages/pydantic/_internal/_repr.py", line 55, in <genexpr>
+besiktningsapp-backend  |     return join_str.join(repr(v) if a is None else f'{a}={v!r}' for a, v in self.__repr_args__())
+besiktningsapp-backend  |                         ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+besiktningsapp-backend  |   File "/usr/local/lib/python3.11/site-packages/pydantic/fields.py", line 556, in __repr_args__
+besiktningsapp-backend  |     yield 'annotation', _repr.PlainRepr(_repr.display_as_type(self.annotation))
+besiktningsapp-backend  |                                         ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+besiktningsapp-backend  |   File "/usr/local/lib/python3.11/site-packages/pydantic/_internal/_repr.py", line 95, in display_as_type
+besiktningsapp-backend  |     return repr(obj)
+besiktningsapp-backend  |            ^^^^^^^^^
+besiktningsapp-backend  |   File "/usr/local/lib/python3.11/site-packages/pydantic/_internal/_repr.py", line 82, in __repr__
+besiktningsapp-backend  |     return f'{self.__repr_name__()}({self.__repr_str__(", ")})'
+besiktningsapp-backend  |                                      ^^^^^^^^^^^^^^^^^^^^^^^
+besiktningsapp-backend  |   File "/usr/local/lib/python3.11/site-packages/pydantic/_internal/_repr.py", line 55, in __repr_str__
+besiktningsapp-backend  |     return join_str.join(repr(v) if a is None else f'{a}={v!r}' for a, v in self.__repr_args__())
+besiktningsapp-backend  |            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+besiktningsapp-backend  |   File "/usr/local/lib/python3.11/site-packages/pydantic/_internal/_repr.py", line 55, in <genexpr>
+besiktningsapp-backend  |     return join_str.join(repr(v) if a is None else f'{a}={v!r}' for a, v in self.__repr_args__())
+besiktningsapp-backend  |                         ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+besiktningsapp-backend  |   File "/usr/local/lib/python3.11/site-packages/pydantic/fields.py", line 556, in __repr_args__
+besiktningsapp-backend  |     yield 'annotation', _repr.PlainRepr(_repr.display_as_type(self.annotation))
+besiktningsapp-backend  |                                         ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+besiktningsapp-backend  |   File "/usr/local/lib/python3.11/site-packages/pydantic/_internal/_repr.py", line 95, in display_as_type
+besiktningsapp-backend  |     return repr(obj)
+besiktningsapp-backend  |            ^^^^^^^^^
+besiktningsapp-backend  |   File "/usr/local/lib/python3.11/site-packages/pydantic/_internal/_repr.py", line 82, in __repr__
+besiktningsapp-backend  |     return f'{self.__repr_name__()}({self.__repr_str__(", ")})'
+besiktningsapp-backend  |                                      ^^^^^^^^^^^^^^^^^^^^^^^
+besiktningsapp-backend  |   File "/usr/local/lib/python3.11/site-packages/pydantic/_internal/_repr.py", line 55, in __repr_str__
+besiktningsapp-backend  |     return join_str.join(repr(v) if a is None else f'{a}={v!r}' for a, v in self.__repr_args__())
+besiktningsapp-backend  |            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+besiktningsapp-backend  |   File "/usr/local/lib/python3.11/site-packages/pydantic/_internal/_repr.py", line 55, in <genexpr>
+besiktningsapp-backend  |     return join_str.join(repr(v) if a is None else f'{a}={v!r}' for a, v in self.__repr_args__())
+besiktningsapp-backend  |                         ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+besiktningsapp-backend  |   File "/usr/local/lib/python3.11/site-packages/pydantic/fields.py", line 556, in __repr_args__
+besiktningsapp-backend  |     yield 'annotation', _repr.PlainRepr(_repr.display_as_type(self.annotation))
+besiktningsapp-backend  |                                         ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+besiktningsapp-backend  |   File "/usr/local/lib/python3.11/site-packages/pydantic/_internal/_repr.py", line 95, in display_as_type
+besiktningsapp-backend  |     return repr(obj)
+besiktningsapp-backend  |            ^^^^^^^^^
+besiktningsapp-backend  |   File "/usr/local/lib/python3.11/site-packages/pydantic/_internal/_repr.py", line 82, in __repr__
+besiktningsapp-backend  |     return f'{self.__repr_name__()}({self.__repr_str__(", ")})'
+besiktningsapp-backend  |                                      ^^^^^^^^^^^^^^^^^^^^^^^
+besiktningsapp-backend  |   File "/usr/local/lib/python3.11/site-packages/pydantic/_internal/_repr.py", line 55, in __repr_str__
+besiktningsapp-backend  |     return join_str.join(repr(v) if a is None else f'{a}={v!r}' for a, v in self.__repr_args__())
+besiktningsapp-backend  |            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+besiktningsapp-backend  |   File "/usr/local/lib/python3.11/site-packages/pydantic/_internal/_repr.py", line 55, in <genexpr>
+besiktningsapp-backend  |     return join_str.join(repr(v) if a is None else f'{a}={v!r}' for a, v in self.__repr_args__())
+besiktningsapp-backend  |                         ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+besiktningsapp-backend  |   File "/usr/local/lib/python3.11/site-packages/pydantic/fields.py", line 556, in __repr_args__
+besiktningsapp-backend  |     yield 'annotation', _repr.PlainRepr(_repr.display_as_type(self.annotation))
+besiktningsapp-backend  |                                         ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+besiktningsapp-backend  |   File "/usr/local/lib/python3.11/site-packages/pydantic/_internal/_repr.py", line 95, in display_as_type
+besiktningsapp-backend  |     return repr(obj)
+besiktningsapp-backend  |            ^^^^^^^^^
+besiktningsapp-backend  |   File "/usr/local/lib/python3.11/site-packages/pydantic/_internal/_repr.py", line 82, in __repr__
+besiktningsapp-backend  |     return f'{self.__repr_name__()}({self.__repr_str__(", ")})'
+besiktningsapp-backend  |                                      ^^^^^^^^^^^^^^^^^^^^^^^
+besiktningsapp-backend  |   File "/usr/local/lib/python3.11/site-packages/pydantic/_internal/_repr.py", line 55, in __repr_str__
+besiktningsapp-backend  |     return join_str.join(repr(v) if a is None else f'{a}={v!r}' for a, v in self.__repr_args__())
+besiktningsapp-backend  |            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+besiktningsapp-backend  |   File "/usr/local/lib/python3.11/site-packages/pydantic/_internal/_repr.py", line 55, in <genexpr>
+besiktningsapp-backend  |     return join_str.join(repr(v) if a is None else f'{a}={v!r}' for a, v in self.__repr_args__())
+besiktningsapp-backend  |                         ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+besiktningsapp-backend  |   File "/usr/local/lib/python3.11/site-packages/pydantic/fields.py", line 556, in __repr_args__
+besiktningsapp-backend  |     yield 'annotation', _repr.PlainRepr(_repr.display_as_type(self.annotation))
+besiktningsapp-backend  |                                         ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+besiktningsapp-backend  |   File "/usr/local/lib/python3.11/site-packages/pydantic/_internal/_repr.py", line 95, in display_as_type
+besiktningsapp-backend  |     return repr(obj)
+besiktningsapp-backend  |            ^^^^^^^^^
+besiktningsapp-backend  |   File "/usr/local/lib/python3.11/site-packages/pydantic/_internal/_repr.py", line 82, in __repr__
+besiktningsapp-backend  |     return f'{self.__repr_name__()}({self.__repr_str__(", ")})'
+besiktningsapp-backend  |                                      ^^^^^^^^^^^^^^^^^^^^^^^
+besiktningsapp-backend  |   File "/usr/local/lib/python3.11/site-packages/pydantic/_internal/_repr.py", line 55, in __repr_str__
+besiktningsapp-backend  |     return join_str.join(repr(v) if a is None else f'{a}={v!r}' for a, v in self.__repr_args__())
+besiktningsapp-backend  |            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+besiktningsapp-backend  |   File "/usr/local/lib/python3.11/site-packages/pydantic/_internal/_repr.py", line 55, in <genexpr>
+besiktningsapp-backend  |     return join_str.join(repr(v) if a is None else f'{a}={v!r}' for a, v in self.__repr_args__())
+besiktningsapp-backend  |                         ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+besiktningsapp-backend  |   File "/usr/local/lib/python3.11/site-packages/pydantic/fields.py", line 556, in __repr_args__
+besiktningsapp-backend  |     yield 'annotation', _repr.PlainRepr(_repr.display_as_type(self.annotation))
+besiktningsapp-backend  |                                         ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+besiktningsapp-backend  |   File "/usr/local/lib/python3.11/site-packages/pydantic/_internal/_repr.py", line 95, in display_as_type
+besiktningsapp-backend  |     return repr(obj)
+besiktningsapp-backend  |            ^^^^^^^^^
+besiktningsapp-backend  |   File "/usr/local/lib/python3.11/site-packages/pydantic/_internal/_repr.py", line 82, in __repr__
+besiktningsapp-backend  |     return f'{self.__repr_name__()}({self.__repr_str__(", ")})'
+besiktningsapp-backend  |                                      ^^^^^^^^^^^^^^^^^^^^^^^
+besiktningsapp-backend  |   File "/usr/local/lib/python3.11/site-packages/pydantic/_internal/_repr.py", line 55, in __repr_str__
+besiktningsapp-backend  |     return join_str.join(repr(v) if a is None else f'{a}={v!r}' for a, v in self.__repr_args__())
+besiktningsapp-backend  |            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+besiktningsapp-backend  |   File "/usr/local/lib/python3.11/site-packages/pydantic/_internal/_repr.py", line 55, in <genexpr>
+besiktningsapp-backend  |     return join_str.join(repr(v) if a is None else f'{a}={v!r}' for a, v in self.__repr_args__())
+besiktningsapp-backend  |                         ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+besiktningsapp-backend  |   File "/usr/local/lib/python3.11/site-packages/pydantic/fields.py", line 556, in __repr_args__
+besiktningsapp-backend  |     yield 'annotation', _repr.PlainRepr(_repr.display_as_type(self.annotation))
+besiktningsapp-backend  |                                         ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+besiktningsapp-backend  |   File "/usr/local/lib/python3.11/site-packages/pydantic/_internal/_repr.py", line 95, in display_as_type
+besiktningsapp-backend  |     return repr(obj)
+besiktningsapp-backend  |            ^^^^^^^^^
+besiktningsapp-backend  |   File "/usr/local/lib/python3.11/site-packages/pydantic/_internal/_repr.py", line 82, in __repr__
+besiktningsapp-backend  |     return f'{self.__repr_name__()}({self.__repr_str__(", ")})'
+besiktningsapp-backend  |                                      ^^^^^^^^^^^^^^^^^^^^^^^
+besiktningsapp-backend  |   File "/usr/local/lib/python3.11/site-packages/pydantic/_internal/_repr.py", line 55, in __repr_str__
+besiktningsapp-backend  |     return join_str.join(repr(v) if a is None else f'{a}={v!r}' for a, v in self.__repr_args__())
+besiktningsapp-backend  |            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+besiktningsapp-backend  |   File "/usr/local/lib/python3.11/site-packages/pydantic/_internal/_repr.py", line 55, in <genexpr>
+besiktningsapp-backend  |     return join_str.join(repr(v) if a is None else f'{a}={v!r}' for a, v in self.__repr_args__())
+besiktningsapp-backend  |                         ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+besiktningsapp-backend  |   File "/usr/local/lib/python3.11/site-packages/pydantic/fields.py", line 556, in __repr_args__
+besiktningsapp-backend  |     yield 'annotation', _repr.PlainRepr(_repr.display_as_type(self.annotation))
+besiktningsapp-backend  |                                         ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+besiktningsapp-backend  |   File "/usr/local/lib/python3.11/site-packages/pydantic/_internal/_repr.py", line 95, in display_as_type
+besiktningsapp-backend  |     return repr(obj)
+besiktningsapp-backend  |            ^^^^^^^^^
+besiktningsapp-backend  |   File "/usr/local/lib/python3.11/site-packages/pydantic/_internal/_repr.py", line 82, in __repr__
+besiktningsapp-backend  |     return f'{self.__repr_name__()}({self.__repr_str__(", ")})'
+besiktningsapp-backend  |                                      ^^^^^^^^^^^^^^^^^^^^^^^
+besiktningsapp-backend  |   File "/usr/local/lib/python3.11/site-packages/pydantic/_internal/_repr.py", line 55, in __repr_str__
+besiktningsapp-backend  |     return join_str.join(repr(v) if a is None else f'{a}={v!r}' for a, v in self.__repr_args__())
+besiktningsapp-backend  |            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+besiktningsapp-backend  |   File "/usr/local/lib/python3.11/site-packages/pydantic/_internal/_repr.py", line 55, in <genexpr>
+besiktningsapp-backend  |     return join_str.join(repr(v) if a is None else f'{a}={v!r}' for a, v in self.__repr_args__())
+besiktningsapp-backend  |                         ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+besiktningsapp-backend  |   File "/usr/local/lib/python3.11/site-packages/pydantic/fields.py", line 556, in __repr_args__
+besiktningsapp-backend  |     yield 'annotation', _repr.PlainRepr(_repr.display_as_type(self.annotation))
+besiktningsapp-backend  |                                         ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+besiktningsapp-backend  |   File "/usr/local/lib/python3.11/site-packages/pydantic/_internal/_repr.py", line 95, in display_as_type
+besiktningsapp-backend  |     return repr(obj)
+besiktningsapp-backend  |            ^^^^^^^^^
+besiktningsapp-backend  |   File "/usr/local/lib/python3.11/site-packages/pydantic/_internal/_repr.py", line 82, in __repr__
+besiktningsapp-backend  |     return f'{self.__repr_name__()}({self.__repr_str__(", ")})'
+besiktningsapp-backend  |                                      ^^^^^^^^^^^^^^^^^^^^^^^
+besiktningsapp-backend  |   File "/usr/local/lib/python3.11/site-packages/pydantic/_internal/_repr.py", line 55, in __repr_str__
+besiktningsapp-backend  |     return join_str.join(repr(v) if a is None else f'{a}={v!r}' for a, v in self.__repr_args__())
+besiktningsapp-backend  |            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+besiktningsapp-backend  |   File "/usr/local/lib/python3.11/site-packages/pydantic/_internal/_repr.py", line 55, in <genexpr>
+besiktningsapp-backend  |     return join_str.join(repr(v) if a is None else f'{a}={v!r}' for a, v in self.__repr_args__())
+besiktningsapp-backend  |                         ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+besiktningsapp-backend  |   File "/usr/local/lib/python3.11/site-packages/pydantic/fields.py", line 556, in __repr_args__
+besiktningsapp-backend  |     yield 'annotation', _repr.PlainRepr(_repr.display_as_type(self.annotation))
+besiktningsapp-backend  |                                         ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+besiktningsapp-backend  |   File "/usr/local/lib/python3.11/site-packages/pydantic/_internal/_repr.py", line 95, in display_as_type
+besiktningsapp-backend  |     return repr(obj)
+besiktningsapp-backend  |            ^^^^^^^^^
+besiktningsapp-backend  |   File "/usr/local/lib/python3.11/site-packages/pydantic/_internal/_repr.py", line 82, in __repr__
+besiktningsapp-backend  |     return f'{self.__repr_name__()}({self.__repr_str__(", ")})'
+besiktningsapp-backend  |                                      ^^^^^^^^^^^^^^^^^^^^^^^
+besiktningsapp-backend  |   File "/usr/local/lib/python3.11/site-packages/pydantic/_internal/_repr.py", line 55, in __repr_str__
+besiktningsapp-backend  |     return join_str.join(repr(v) if a is None else f'{a}={v!r}' for a, v in self.__repr_args__())
+besiktningsapp-backend  |            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+besiktningsapp-backend  |   File "/usr/local/lib/python3.11/site-packages/pydantic/_internal/_repr.py", line 55, in <genexpr>
+besiktningsapp-backend  |     return join_str.join(repr(v) if a is None else f'{a}={v!r}' for a, v in self.__repr_args__())
+besiktningsapp-backend  |                         ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+besiktningsapp-backend  |   File "/usr/local/lib/python3.11/site-packages/pydantic/fields.py", line 556, in __repr_args__
+besiktningsapp-backend  |     yield 'annotation', _repr.PlainRepr(_repr.display_as_type(self.annotation))
+besiktningsapp-backend  |                                         ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+besiktningsapp-backend  |   File "/usr/local/lib/python3.11/site-packages/pydantic/_internal/_repr.py", line 95, in display_as_type
+besiktningsapp-backend  |     return repr(obj)
+besiktningsapp-backend  |            ^^^^^^^^^
+besiktningsapp-backend  |   File "/usr/local/lib/python3.11/site-packages/pydantic/_internal/_repr.py", line 82, in __repr__
+besiktningsapp-backend  |     return f'{self.__repr_name__()}({self.__repr_str__(", ")})'
+besiktningsapp-backend  |                                      ^^^^^^^^^^^^^^^^^^^^^^^
+besiktningsapp-backend  |   File "/usr/local/lib/python3.11/site-packages/pydantic/_internal/_repr.py", line 55, in __repr_str__
+besiktningsapp-backend  |     return join_str.join(repr(v) if a is None else f'{a}={v!r}' for a, v in self.__repr_args__())
+besiktningsapp-backend  |            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+besiktningsapp-backend  |   File "/usr/local/lib/python3.11/site-packages/pydantic/_internal/_repr.py", line 55, in <genexpr>
+besiktningsapp-backend  |     return join_str.join(repr(v) if a is None else f'{a}={v!r}' for a, v in self.__repr_args__())
+besiktningsapp-backend  |                         ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+besiktningsapp-backend  |   File "/usr/local/lib/python3.11/site-packages/pydantic/fields.py", line 556, in __repr_args__
+besiktningsapp-backend  |     yield 'annotation', _repr.PlainRepr(_repr.display_as_type(self.annotation))
+besiktningsapp-backend  |                                         ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+besiktningsapp-backend  |   File "/usr/local/lib/python3.11/site-packages/pydantic/_internal/_repr.py", line 95, in display_as_type
+besiktningsapp-backend  |     return repr(obj)
+besiktningsapp-backend  |            ^^^^^^^^^
+besiktningsapp-backend  |   File "/usr/local/lib/python3.11/site-packages/pydantic/_internal/_repr.py", line 82, in __repr__
+besiktningsapp-backend  |     return f'{self.__repr_name__()}({self.__repr_str__(", ")})'
+besiktningsapp-backend  |                                      ^^^^^^^^^^^^^^^^^^^^^^^
+besiktningsapp-backend  |   File "/usr/local/lib/python3.11/site-packages/pydantic/_internal/_repr.py", line 55, in __repr_str__
+besiktningsapp-backend  |     return join_str.join(repr(v) if a is None else f'{a}={v!r}' for a, v in self.__repr_args__())
+besiktningsapp-backend  |            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+besiktningsapp-backend  |   File "/usr/local/lib/python3.11/site-packages/pydantic/_internal/_repr.py", line 55, in <genexpr>
+besiktningsapp-backend  |     return join_str.join(repr(v) if a is None else f'{a}={v!r}' for a, v in self.__repr_args__())
+besiktningsapp-backend  |                         ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+besiktningsapp-backend  |   File "/usr/local/lib/python3.11/site-packages/pydantic/fields.py", line 556, in __repr_args__
+besiktningsapp-backend  |     yield 'annotation', _repr.PlainRepr(_repr.display_as_type(self.annotation))
+besiktningsapp-backend  |                                         ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+besiktningsapp-backend  |   File "/usr/local/lib/python3.11/site-packages/pydantic/_internal/_repr.py", line 95, in display_as_type
+besiktningsapp-backend  |     return repr(obj)
+besiktningsapp-backend  |            ^^^^^^^^^
+besiktningsapp-backend  |   File "/usr/local/lib/python3.11/site-packages/pydantic/_internal/_repr.py", line 82, in __repr__
+besiktningsapp-backend  |     return f'{self.__repr_name__()}({self.__repr_str__(", ")})'
+besiktningsapp-backend  |                                      ^^^^^^^^^^^^^^^^^^^^^^^
+besiktningsapp-backend  |   File "/usr/local/lib/python3.11/site-packages/pydantic/_internal/_repr.py", line 55, in __repr_str__
+besiktningsapp-backend  |     return join_str.join(repr(v) if a is None else f'{a}={v!r}' for a, v in self.__repr_args__())
+besiktningsapp-backend  |            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+besiktningsapp-backend  |   File "/usr/local/lib/python3.11/site-packages/pydantic/_internal/_repr.py", line 55, in <genexpr>
+besiktningsapp-backend  |     return join_str.join(repr(v) if a is None else f'{a}={v!r}' for a, v in self.__repr_args__())
+besiktningsapp-backend  |                         ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+besiktningsapp-backend  |   File "/usr/local/lib/python3.11/site-packages/pydantic/fields.py", line 556, in __repr_args__
+besiktningsapp-backend  |     yield 'annotation', _repr.PlainRepr(_repr.display_as_type(self.annotation))
+besiktningsapp-backend  |                                         ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+besiktningsapp-backend  |   File "/usr/local/lib/python3.11/site-packages/pydantic/_internal/_repr.py", line 95, in display_as_type
+besiktningsapp-backend  |     return repr(obj)
+besiktningsapp-backend  |            ^^^^^^^^^
+besiktningsapp-backend  |   File "/usr/local/lib/python3.11/site-packages/pydantic/_internal/_repr.py", line 82, in __repr__
+besiktningsapp-backend  |     return f'{self.__repr_name__()}({self.__repr_str__(", ")})'
+besiktningsapp-backend  |                                      ^^^^^^^^^^^^^^^^^^^^^^^
+besiktningsapp-backend  |   File "/usr/local/lib/python3.11/site-packages/pydantic/_internal/_repr.py", line 55, in __repr_str__
+besiktningsapp-backend  |     return join_str.join(repr(v) if a is None else f'{a}={v!r}' for a, v in self.__repr_args__())
+besiktningsapp-backend  |            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+besiktningsapp-backend  |   File "/usr/local/lib/python3.11/site-packages/pydantic/_internal/_repr.py", line 55, in <genexpr>
+besiktningsapp-backend  |     return join_str.join(repr(v) if a is None else f'{a}={v!r}' for a, v in self.__repr_args__())
+besiktningsapp-backend  |                         ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+besiktningsapp-backend  |   File "/usr/local/lib/python3.11/site-packages/pydantic/fields.py", line 556, in __repr_args__
+besiktningsapp-backend  |     yield 'annotation', _repr.PlainRepr(_repr.display_as_type(self.annotation))
+besiktningsapp-backend  |                                         ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+besiktningsapp-backend  |   File "/usr/local/lib/python3.11/site-packages/pydantic/_internal/_repr.py", line 95, in display_as_type
+besiktningsapp-backend  |     return repr(obj)
+besiktningsapp-backend  |            ^^^^^^^^^
+besiktningsapp-backend  |   File "/usr/local/lib/python3.11/site-packages/pydantic/_internal/_repr.py", line 82, in __repr__
+besiktningsapp-backend  |     return f'{self.__repr_name__()}({self.__repr_str__(", ")})'
+besiktningsapp-backend  |                                      ^^^^^^^^^^^^^^^^^^^^^^^
+besiktningsapp-backend  |   File "/usr/local/lib/python3.11/site-packages/pydantic/_internal/_repr.py", line 55, in __repr_str__
+besiktningsapp-backend  |     return join_str.join(repr(v) if a is None else f'{a}={v!r}' for a, v in self.__repr_args__())
+besiktningsapp-backend  |            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+besiktningsapp-backend  |   File "/usr/local/lib/python3.11/site-packages/pydantic/_internal/_repr.py", line 55, in <genexpr>
+besiktningsapp-backend  |     return join_str.join(repr(v) if a is None else f'{a}={v!r}' for a, v in self.__repr_args__())
+besiktningsapp-backend  |                         ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+besiktningsapp-backend  |   File "/usr/local/lib/python3.11/site-packages/pydantic/fields.py", line 556, in __repr_args__
+besiktningsapp-backend  |     yield 'annotation', _repr.PlainRepr(_repr.display_as_type(self.annotation))
+besiktningsapp-backend  |                                         ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+besiktningsapp-backend  |   File "/usr/local/lib/python3.11/site-packages/pydantic/_internal/_repr.py", line 95, in display_as_type
+besiktningsapp-backend  |     return repr(obj)
+besiktningsapp-backend  |            ^^^^^^^^^
+besiktningsapp-backend  |   File "/usr/local/lib/python3.11/site-packages/pydantic/_internal/_repr.py", line 82, in __repr__
+besiktningsapp-backend  |     return f'{self.__repr_name__()}({self.__repr_str__(", ")})'
+besiktningsapp-backend  |                                      ^^^^^^^^^^^^^^^^^^^^^^^
+besiktningsapp-backend  |   File "/usr/local/lib/python3.11/site-packages/pydantic/_internal/_repr.py", line 55, in __repr_str__
+besiktningsapp-backend  |     return join_str.join(repr(v) if a is None else f'{a}={v!r}' for a, v in self.__repr_args__())
+besiktningsapp-backend  |            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+besiktningsapp-backend  |   File "/usr/local/lib/python3.11/site-packages/pydantic/_internal/_repr.py", line 55, in <genexpr>
+besiktningsapp-backend  |     return join_str.join(repr(v) if a is None else f'{a}={v!r}' for a, v in self.__repr_args__())
+besiktningsapp-backend  |                         ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+besiktningsapp-backend  |   File "/usr/local/lib/python3.11/site-packages/pydantic/fields.py", line 556, in __repr_args__
+besiktningsapp-backend  |     yield 'annotation', _repr.PlainRepr(_repr.display_as_type(self.annotation))
+besiktningsapp-backend  |                                         ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+besiktningsapp-backend  |   File "/usr/local/lib/python3.11/site-packages/pydantic/_internal/_repr.py", line 95, in display_as_type
+besiktningsapp-backend  |     return repr(obj)
+besiktningsapp-backend  |            ^^^^^^^^^
+besiktningsapp-backend  |   File "/usr/local/lib/python3.11/site-packages/pydantic/_internal/_repr.py", line 82, in __repr__
+besiktningsapp-backend  |     return f'{self.__repr_name__()}({self.__repr_str__(", ")})'
+besiktningsapp-backend  |                                      ^^^^^^^^^^^^^^^^^^^^^^^
+besiktningsapp-backend  |   File "/usr/local/lib/python3.11/site-packages/pydantic/_internal/_repr.py", line 55, in __repr_str__
+besiktningsapp-backend  |     return join_str.join(repr(v) if a is None else f'{a}={v!r}' for a, v in self.__repr_args__())
+besiktningsapp-backend  |            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+besiktningsapp-backend  |   File "/usr/local/lib/python3.11/site-packages/pydantic/_internal/_repr.py", line 55, in <genexpr>
+besiktningsapp-backend  |     return join_str.join(repr(v) if a is None else f'{a}={v!r}' for a, v in self.__repr_args__())
+besiktningsapp-backend  |                         ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+besiktningsapp-backend  |   File "/usr/local/lib/python3.11/site-packages/pydantic/fields.py", line 556, in __repr_args__
+besiktningsapp-backend  |     yield 'annotation', _repr.PlainRepr(_repr.display_as_type(self.annotation))
+besiktningsapp-backend  |                                         ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+besiktningsapp-backend  |   File "/usr/local/lib/python3.11/site-packages/pydantic/_internal/_repr.py", line 95, in display_as_type
+besiktningsapp-backend  |     return repr(obj)
+besiktningsapp-backend  |            ^^^^^^^^^
+besiktningsapp-backend  |   File "/usr/local/lib/python3.11/site-packages/pydantic/_internal/_repr.py", line 82, in __repr__
+besiktningsapp-backend  |     return f'{self.__repr_name__()}({self.__repr_str__(", ")})'
+besiktningsapp-backend  |                                      ^^^^^^^^^^^^^^^^^^^^^^^
+besiktningsapp-backend  |   File "/usr/local/lib/python3.11/site-packages/pydantic/_internal/_repr.py", line 55, in __repr_str__
+besiktningsapp-backend  |     return join_str.join(repr(v) if a is None else f'{a}={v!r}' for a, v in self.__repr_args__())
+besiktningsapp-backend  |            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+besiktningsapp-backend  |   File "/usr/local/lib/python3.11/site-packages/pydantic/_internal/_repr.py", line 55, in <genexpr>
+besiktningsapp-backend  |     return join_str.join(repr(v) if a is None else f'{a}={v!r}' for a, v in self.__repr_args__())
+besiktningsapp-backend  |                         ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+besiktningsapp-backend  |   File "/usr/local/lib/python3.11/site-packages/pydantic/fields.py", line 556, in __repr_args__
+besiktningsapp-backend  |     yield 'annotation', _repr.PlainRepr(_repr.display_as_type(self.annotation))
+besiktningsapp-backend  |                                         ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+besiktningsapp-backend  |   File "/usr/local/lib/python3.11/site-packages/pydantic/_internal/_repr.py", line 95, in display_as_type
+besiktningsapp-backend  |     return repr(obj)
+besiktningsapp-backend  |            ^^^^^^^^^
+besiktningsapp-backend  |   File "/usr/local/lib/python3.11/site-packages/pydantic/_internal/_repr.py", line 82, in __repr__
+besiktningsapp-backend  |     return f'{self.__repr_name__()}({self.__repr_str__(", ")})'
+besiktningsapp-backend  |                                      ^^^^^^^^^^^^^^^^^^^^^^^
+besiktningsapp-backend  |   File "/usr/local/lib/python3.11/site-packages/pydantic/_internal/_repr.py", line 55, in __repr_str__
+besiktningsapp-backend  |     return join_str.join(repr(v) if a is None else f'{a}={v!r}' for a, v in self.__repr_args__())
+besiktningsapp-backend  |            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+besiktningsapp-backend  |   File "/usr/local/lib/python3.11/site-packages/pydantic/_internal/_repr.py", line 55, in <genexpr>
+besiktningsapp-backend  |     return join_str.join(repr(v) if a is None else f'{a}={v!r}' for a, v in self.__repr_args__())
+besiktningsapp-backend  |                         ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+besiktningsapp-backend  |   File "/usr/local/lib/python3.11/site-packages/pydantic/fields.py", line 556, in __repr_args__
+besiktningsapp-backend  |     yield 'annotation', _repr.PlainRepr(_repr.display_as_type(self.annotation))
+besiktningsapp-backend  |                                         ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+besiktningsapp-backend  |   File "/usr/local/lib/python3.11/site-packages/pydantic/_internal/_repr.py", line 95, in display_as_type
+besiktningsapp-backend  |     return repr(obj)
+besiktningsapp-backend  |            ^^^^^^^^^
+besiktningsapp-backend  |   File "/usr/local/lib/python3.11/site-packages/pydantic/_internal/_repr.py", line 82, in __repr__
+besiktningsapp-backend  |     return f'{self.__repr_name__()}({self.__repr_str__(", ")})'
+besiktningsapp-backend  |                                      ^^^^^^^^^^^^^^^^^^^^^^^
+besiktningsapp-backend  |   File "/usr/local/lib/python3.11/site-packages/pydantic/_internal/_repr.py", line 55, in __repr_str__
+besiktningsapp-backend  |     return join_str.join(repr(v) if a is None else f'{a}={v!r}' for a, v in self.__repr_args__())
+besiktningsapp-backend  |            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+besiktningsapp-backend  |   File "/usr/local/lib/python3.11/site-packages/pydantic/_internal/_repr.py", line 55, in <genexpr>
+besiktningsapp-backend  |     return join_str.join(repr(v) if a is None else f'{a}={v!r}' for a, v in self.__repr_args__())
+besiktningsapp-backend  |                         ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+besiktningsapp-backend  |   File "/usr/local/lib/python3.11/site-packages/pydantic/fields.py", line 556, in __repr_args__
+besiktningsapp-backend  |     yield 'annotation', _repr.PlainRepr(_repr.display_as_type(self.annotation))
+besiktningsapp-backend  |                                         ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+besiktningsapp-backend  |   File "/usr/local/lib/python3.11/site-packages/pydantic/_internal/_repr.py", line 95, in display_as_type
+besiktningsapp-backend  |     return repr(obj)
+besiktningsapp-backend  |            ^^^^^^^^^
+besiktningsapp-backend  |   File "/usr/local/lib/python3.11/site-packages/pydantic/_internal/_repr.py", line 82, in __repr__
+besiktningsapp-backend  |     return f'{self.__repr_name__()}({self.__repr_str__(", ")})'
+besiktningsapp-backend  |                                      ^^^^^^^^^^^^^^^^^^^^^^^
+besiktningsapp-backend  |   File "/usr/local/lib/python3.11/site-packages/pydantic/_internal/_repr.py", line 55, in __repr_str__
+besiktningsapp-backend  |     return join_str.join(repr(v) if a is None else f'{a}={v!r}' for a, v in self.__repr_args__())
+besiktningsapp-backend  |            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+besiktningsapp-backend  |   File "/usr/local/lib/python3.11/site-packages/pydantic/_internal/_repr.py", line 55, in <genexpr>
+besiktningsapp-backend  |     return join_str.join(repr(v) if a is None else f'{a}={v!r}' for a, v in self.__repr_args__())
+besiktningsapp-backend  |                         ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+besiktningsapp-backend  |   File "/usr/local/lib/python3.11/site-packages/pydantic/fields.py", line 556, in __repr_args__
+besiktningsapp-backend  |     yield 'annotation', _repr.PlainRepr(_repr.display_as_type(self.annotation))
+besiktningsapp-backend  |                                         ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+besiktningsapp-backend  |   File "/usr/local/lib/python3.11/site-packages/pydantic/_internal/_repr.py", line 95, in display_as_type
+besiktningsapp-backend  |     return repr(obj)
+besiktningsapp-backend  |            ^^^^^^^^^
+besiktningsapp-backend  |   File "/usr/local/lib/python3.11/site-packages/pydantic/_internal/_repr.py", line 82, in __repr__
+besiktningsapp-backend  |     return f'{self.__repr_name__()}({self.__repr_str__(", ")})'
+besiktningsapp-backend  |                                      ^^^^^^^^^^^^^^^^^^^^^^^
+besiktningsapp-backend  |   File "/usr/local/lib/python3.11/site-packages/pydantic/_internal/_repr.py", line 55, in __repr_str__
+besiktningsapp-backend  |     return join_str.join(repr(v) if a is None else f'{a}={v!r}' for a, v in self.__repr_args__())
+besiktningsapp-backend  |            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+besiktningsapp-backend  |   File "/usr/local/lib/python3.11/site-packages/pydantic/_internal/_repr.py", line 55, in <genexpr>
+besiktningsapp-backend  |     return join_str.join(repr(v) if a is None else f'{a}={v!r}' for a, v in self.__repr_args__())
+besiktningsapp-backend  |                         ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+besiktningsapp-backend  |   File "/usr/local/lib/python3.11/site-packages/pydantic/fields.py", line 556, in __repr_args__
+besiktningsapp-backend  |     yield 'annotation', _repr.PlainRepr(_repr.display_as_type(self.annotation))
+besiktningsapp-backend  |                                         ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+besiktningsapp-backend  |   File "/usr/local/lib/python3.11/site-packages/pydantic/_internal/_repr.py", line 95, in display_as_type
+besiktningsapp-backend  |     return repr(obj)
+besiktningsapp-backend  |            ^^^^^^^^^
+besiktningsapp-backend  |   File "/usr/local/lib/python3.11/site-packages/pydantic/_internal/_repr.py", line 82, in __repr__
+besiktningsapp-backend  |     return f'{self.__repr_name__()}({self.__repr_str__(", ")})'
+besiktningsapp-backend  |                                      ^^^^^^^^^^^^^^^^^^^^^^^
+besiktningsapp-backend  |   File "/usr/local/lib/python3.11/site-packages/pydantic/_internal/_repr.py", line 55, in __repr_str__
+besiktningsapp-backend  |     return join_str.join(repr(v) if a is None else f'{a}={v!r}' for a, v in self.__repr_args__())
+besiktningsapp-backend  |            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+besiktningsapp-backend  |   File "/usr/local/lib/python3.11/site-packages/pydantic/_internal/_repr.py", line 55, in <genexpr>
+besiktningsapp-backend  |     return join_str.join(repr(v) if a is None else f'{a}={v!r}' for a, v in self.__repr_args__())
+besiktningsapp-backend  |                         ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+besiktningsapp-backend  |   File "/usr/local/lib/python3.11/site-packages/pydantic/fields.py", line 556, in __repr_args__
+besiktningsapp-backend  |     yield 'annotation', _repr.PlainRepr(_repr.display_as_type(self.annotation))
+besiktningsapp-backend  |                                         ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+besiktningsapp-backend  |   File "/usr/local/lib/python3.11/site-packages/pydantic/_internal/_repr.py", line 95, in display_as_type
+besiktningsapp-backend  |     return repr(obj)
+besiktningsapp-backend  |            ^^^^^^^^^
+besiktningsapp-backend  |   File "/usr/local/lib/python3.11/site-packages/pydantic/_internal/_repr.py", line 82, in __repr__
+besiktningsapp-backend  |     return f'{self.__repr_name__()}({self.__repr_str__(", ")})'
+besiktningsapp-backend  |                                      ^^^^^^^^^^^^^^^^^^^^^^^
+besiktningsapp-backend  |   File "/usr/local/lib/python3.11/site-packages/pydantic/_internal/_repr.py", line 55, in __repr_str__
+besiktningsapp-backend  |     return join_str.join(repr(v) if a is None else f'{a}={v!r}' for a, v in self.__repr_args__())
+besiktningsapp-backend  |            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+besiktningsapp-backend  |   File "/usr/local/lib/python3.11/site-packages/pydantic/_internal/_repr.py", line 55, in <genexpr>
+besiktningsapp-backend  |     return join_str.join(repr(v) if a is None else f'{a}={v!r}' for a, v in self.__repr_args__())
+besiktningsapp-backend  |                         ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+besiktningsapp-backend  |   File "/usr/local/lib/python3.11/site-packages/pydantic/fields.py", line 556, in __repr_args__
+besiktningsapp-backend  |     yield 'annotation', _repr.PlainRepr(_repr.display_as_type(self.annotation))
+besiktningsapp-backend  |                                         ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+besiktningsapp-backend  |   File "/usr/local/lib/python3.11/site-packages/pydantic/_internal/_repr.py", line 95, in display_as_type
+besiktningsapp-backend  |     return repr(obj)
+besiktningsapp-backend  |            ^^^^^^^^^
+besiktningsapp-backend  |   File "/usr/local/lib/python3.11/site-packages/pydantic/_internal/_repr.py", line 82, in __repr__
+besiktningsapp-backend  |     return f'{self.__repr_name__()}({self.__repr_str__(", ")})'
+besiktningsapp-backend  |                                      ^^^^^^^^^^^^^^^^^^^^^^^
+besiktningsapp-backend  |   File "/usr/local/lib/python3.11/site-packages/pydantic/_internal/_repr.py", line 55, in __repr_str__
+besiktningsapp-backend  |     return join_str.join(repr(v) if a is None else f'{a}={v!r}' for a, v in self.__repr_args__())
+besiktningsapp-backend  |            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+besiktningsapp-backend  |   File "/usr/local/lib/python3.11/site-packages/pydantic/_internal/_repr.py", line 55, in <genexpr>
+besiktningsapp-backend  |     return join_str.join(repr(v) if a is None else f'{a}={v!r}' for a, v in self.__repr_args__())
+besiktningsapp-backend  |                         ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+besiktningsapp-backend  |   File "/usr/local/lib/python3.11/site-packages/pydantic/fields.py", line 556, in __repr_args__
+besiktningsapp-backend  |     yield 'annotation', _repr.PlainRepr(_repr.display_as_type(self.annotation))
+besiktningsapp-backend  |                                         ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+besiktningsapp-backend  |   File "/usr/local/lib/python3.11/site-packages/pydantic/_internal/_repr.py", line 95, in display_as_type
+besiktningsapp-backend  |     return repr(obj)
+besiktningsapp-backend  |            ^^^^^^^^^
+besiktningsapp-backend  |   File "/usr/local/lib/python3.11/site-packages/pydantic/_internal/_repr.py", line 82, in __repr__
+besiktningsapp-backend  |     return f'{self.__repr_name__()}({self.__repr_str__(", ")})'
+besiktningsapp-backend  |                                      ^^^^^^^^^^^^^^^^^^^^^^^
+besiktningsapp-backend  |   File "/usr/local/lib/python3.11/site-packages/pydantic/_internal/_repr.py", line 55, in __repr_str__
+besiktningsapp-backend  |     return join_str.join(repr(v) if a is None else f'{a}={v!r}' for a, v in self.__repr_args__())
+besiktningsapp-backend  |            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+besiktningsapp-backend  |   File "/usr/local/lib/python3.11/site-packages/pydantic/_internal/_repr.py", line 55, in <genexpr>
+besiktningsapp-backend  |     return join_str.join(repr(v) if a is None else f'{a}={v!r}' for a, v in self.__repr_args__())
+besiktningsapp-backend  |                         ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+besiktningsapp-backend  |   File "/usr/local/lib/python3.11/site-packages/pydantic/fields.py", line 556, in __repr_args__
+besiktningsapp-backend  |     yield 'annotation', _repr.PlainRepr(_repr.display_as_type(self.annotation))
+besiktningsapp-backend  |                                         ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+besiktningsapp-backend  |   File "/usr/local/lib/python3.11/site-packages/pydantic/_internal/_repr.py", line 95, in display_as_type
+besiktningsapp-backend  |     return repr(obj)
+besiktningsapp-backend  |            ^^^^^^^^^
+besiktningsapp-backend  |   File "/usr/local/lib/python3.11/site-packages/pydantic/_internal/_repr.py", line 82, in __repr__
+besiktningsapp-backend  |     return f'{self.__repr_name__()}({self.__repr_str__(", ")})'
+besiktningsapp-backend  |                                      ^^^^^^^^^^^^^^^^^^^^^^^
+besiktningsapp-backend  |   File "/usr/local/lib/python3.11/site-packages/pydantic/_internal/_repr.py", line 55, in __repr_str__
+besiktningsapp-backend  |     return join_str.join(repr(v) if a is None else f'{a}={v!r}' for a, v in self.__repr_args__())
+besiktningsapp-backend  |            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+besiktningsapp-backend  |   File "/usr/local/lib/python3.11/site-packages/pydantic/_internal/_repr.py", line 55, in <genexpr>
+besiktningsapp-backend  |     return join_str.join(repr(v) if a is None else f'{a}={v!r}' for a, v in self.__repr_args__())
+besiktningsapp-backend  |                         ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+besiktningsapp-backend  |   File "/usr/local/lib/python3.11/site-packages/pydantic/fields.py", line 556, in __repr_args__
+besiktningsapp-backend  |     yield 'annotation', _repr.PlainRepr(_repr.display_as_type(self.annotation))
+besiktningsapp-backend  |                                         ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+besiktningsapp-backend  |   File "/usr/local/lib/python3.11/site-packages/pydantic/_internal/_repr.py", line 95, in display_as_type
+besiktningsapp-backend  |     return repr(obj)
+besiktningsapp-backend  |            ^^^^^^^^^
+besiktningsapp-backend  |   File "/usr/local/lib/python3.11/site-packages/pydantic/_internal/_repr.py", line 82, in __repr__
+besiktningsapp-backend  |     return f'{self.__repr_name__()}({self.__repr_str__(", ")})'
+besiktningsapp-backend  |                                      ^^^^^^^^^^^^^^^^^^^^^^^
+besiktningsapp-backend  |   File "/usr/local/lib/python3.11/site-packages/pydantic/_internal/_repr.py", line 55, in __repr_str__
+besiktningsapp-backend  |     return join_str.join(repr(v) if a is None else f'{a}={v!r}' for a, v in self.__repr_args__())
+besiktningsapp-backend  |            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+besiktningsapp-backend  |   File "/usr/local/lib/python3.11/site-packages/pydantic/_internal/_repr.py", line 55, in <genexpr>
+besiktningsapp-backend  |     return join_str.join(repr(v) if a is None else f'{a}={v!r}' for a, v in self.__repr_args__())
+besiktningsapp-backend  |                         ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+besiktningsapp-backend  |   File "/usr/local/lib/python3.11/site-packages/pydantic/fields.py", line 556, in __repr_args__
+besiktningsapp-backend  |     yield 'annotation', _repr.PlainRepr(_repr.display_as_type(self.annotation))
+besiktningsapp-backend  |                                         ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+besiktningsapp-backend  |   File "/usr/local/lib/python3.11/site-packages/pydantic/_internal/_repr.py", line 95, in display_as_type
+besiktningsapp-backend  |     return repr(obj)
+besiktningsapp-backend  |            ^^^^^^^^^
+besiktningsapp-backend  |   File "/usr/local/lib/python3.11/site-packages/pydantic/_internal/_repr.py", line 82, in __repr__
+besiktningsapp-backend  |     return f'{self.__repr_name__()}({self.__repr_str__(", ")})'
+besiktningsapp-backend  |                                      ^^^^^^^^^^^^^^^^^^^^^^^
+besiktningsapp-backend  |   File "/usr/local/lib/python3.11/site-packages/pydantic/_internal/_repr.py", line 55, in __repr_str__
+besiktningsapp-backend  |     return join_str.join(repr(v) if a is None else f'{a}={v!r}' for a, v in self.__repr_args__())
+besiktningsapp-backend  |            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+besiktningsapp-backend  |   File "/usr/local/lib/python3.11/site-packages/pydantic/_internal/_repr.py", line 55, in <genexpr>
+besiktningsapp-backend  |     return join_str.join(repr(v) if a is None else f'{a}={v!r}' for a, v in self.__repr_args__())
+besiktningsapp-backend  |                         ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+besiktningsapp-backend  |   File "/usr/local/lib/python3.11/site-packages/pydantic/fields.py", line 556, in __repr_args__
+besiktningsapp-backend  |     yield 'annotation', _repr.PlainRepr(_repr.display_as_type(self.annotation))
+besiktningsapp-backend  |                                         ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+besiktningsapp-backend  |   File "/usr/local/lib/python3.11/site-packages/pydantic/_internal/_repr.py", line 95, in display_as_type
+besiktningsapp-backend  |     return repr(obj)
+besiktningsapp-backend  |            ^^^^^^^^^
+besiktningsapp-backend  |   File "/usr/local/lib/python3.11/site-packages/pydantic/_internal/_repr.py", line 82, in __repr__
+besiktningsapp-backend  |     return f'{self.__repr_name__()}({self.__repr_str__(", ")})'
+besiktningsapp-backend  |                                      ^^^^^^^^^^^^^^^^^^^^^^^
+besiktningsapp-backend  |   File "/usr/local/lib/python3.11/site-packages/pydantic/_internal/_repr.py", line 55, in __repr_str__
+besiktningsapp-backend  |     return join_str.join(repr(v) if a is None else f'{a}={v!r}' for a, v in self.__repr_args__())
+besiktningsapp-backend  |            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+besiktningsapp-backend  |   File "/usr/local/lib/python3.11/site-packages/pydantic/_internal/_repr.py", line 55, in <genexpr>
+besiktningsapp-backend  |     return join_str.join(repr(v) if a is None else f'{a}={v!r}' for a, v in self.__repr_args__())
+besiktningsapp-backend  |                         ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+besiktningsapp-backend  |   File "/usr/local/lib/python3.11/site-packages/pydantic/fields.py", line 556, in __repr_args__
+besiktningsapp-backend  |     yield 'annotation', _repr.PlainRepr(_repr.display_as_type(self.annotation))
+besiktningsapp-backend  |                                         ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+besiktningsapp-backend  |   File "/usr/local/lib/python3.11/site-packages/pydantic/_internal/_repr.py", line 95, in display_as_type
+besiktningsapp-backend  |     return repr(obj)
+besiktningsapp-backend  |            ^^^^^^^^^
+besiktningsapp-backend  |   File "/usr/local/lib/python3.11/site-packages/pydantic/_internal/_repr.py", line 82, in __repr__
+besiktningsapp-backend  |     return f'{self.__repr_name__()}({self.__repr_str__(", ")})'
+besiktningsapp-backend  |                                      ^^^^^^^^^^^^^^^^^^^^^^^
+besiktningsapp-backend  |   File "/usr/local/lib/python3.11/site-packages/pydantic/_internal/_repr.py", line 55, in __repr_str__
+besiktningsapp-backend  |     return join_str.join(repr(v) if a is None else f'{a}={v!r}' for a, v in self.__repr_args__())
+besiktningsapp-backend  |            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+besiktningsapp-backend  |   File "/usr/local/lib/python3.11/site-packages/pydantic/_internal/_repr.py", line 55, in <genexpr>
+besiktningsapp-backend  |     return join_str.join(repr(v) if a is None else f'{a}={v!r}' for a, v in self.__repr_args__())
+besiktningsapp-backend  |                         ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+besiktningsapp-backend  |   File "/usr/local/lib/python3.11/site-packages/pydantic/fields.py", line 556, in __repr_args__
+besiktningsapp-backend  |     yield 'annotation', _repr.PlainRepr(_repr.display_as_type(self.annotation))
+besiktningsapp-backend  |                                         ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+besiktningsapp-backend  |   File "/usr/local/lib/python3.11/site-packages/pydantic/_internal/_repr.py", line 95, in display_as_type
+besiktningsapp-backend  |     return repr(obj)
+besiktningsapp-backend  |            ^^^^^^^^^
+besiktningsapp-backend  |   File "/usr/local/lib/python3.11/site-packages/pydantic/_internal/_repr.py", line 82, in __repr__
+besiktningsapp-backend  |     return f'{self.__repr_name__()}({self.__repr_str__(", ")})'
+besiktningsapp-backend  |                                      ^^^^^^^^^^^^^^^^^^^^^^^
+besiktningsapp-backend  |   File "/usr/local/lib/python3.11/site-packages/pydantic/_internal/_repr.py", line 55, in __repr_str__
+besiktningsapp-backend  |     return join_str.join(repr(v) if a is None else f'{a}={v!r}' for a, v in self.__repr_args__())
+besiktningsapp-backend  |            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+besiktningsapp-backend  |   File "/usr/local/lib/python3.11/site-packages/pydantic/_internal/_repr.py", line 55, in <genexpr>
+besiktningsapp-backend  |     return join_str.join(repr(v) if a is None else f'{a}={v!r}' for a, v in self.__repr_args__())
+besiktningsapp-backend  |                         ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+besiktningsapp-backend  |   File "/usr/local/lib/python3.11/site-packages/pydantic/fields.py", line 556, in __repr_args__
+besiktningsapp-backend  |     yield 'annotation', _repr.PlainRepr(_repr.display_as_type(self.annotation))
+besiktningsapp-backend  |                                         ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+besiktningsapp-backend  |   File "/usr/local/lib/python3.11/site-packages/pydantic/_internal/_repr.py", line 95, in display_as_type
+besiktningsapp-backend  |     return repr(obj)
+besiktningsapp-backend  |            ^^^^^^^^^
+besiktningsapp-backend  |   File "/usr/local/lib/python3.11/site-packages/pydantic/_internal/_repr.py", line 82, in __repr__
+besiktningsapp-backend  |     return f'{self.__repr_name__()}({self.__repr_str__(", ")})'
+besiktningsapp-backend  |                                      ^^^^^^^^^^^^^^^^^^^^^^^
+besiktningsapp-backend  |   File "/usr/local/lib/python3.11/site-packages/pydantic/_internal/_repr.py", line 55, in __repr_str__
+besiktningsapp-backend  |     return join_str.join(repr(v) if a is None else f'{a}={v!r}' for a, v in self.__repr_args__())
+besiktningsapp-backend  |            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+besiktningsapp-backend  |   File "/usr/local/lib/python3.11/site-packages/pydantic/_internal/_repr.py", line 55, in <genexpr>
+besiktningsapp-backend  |     return join_str.join(repr(v) if a is None else f'{a}={v!r}' for a, v in self.__repr_args__())
+besiktningsapp-backend  |                         ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+besiktningsapp-backend  |   File "/usr/local/lib/python3.11/site-packages/pydantic/fields.py", line 556, in __repr_args__
+besiktningsapp-backend  |     yield 'annotation', _repr.PlainRepr(_repr.display_as_type(self.annotation))
+besiktningsapp-backend  |                                         ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+besiktningsapp-backend  |   File "/usr/local/lib/python3.11/site-packages/pydantic/_internal/_repr.py", line 95, in display_as_type
+besiktningsapp-backend  |     return repr(obj)
+besiktningsapp-backend  |            ^^^^^^^^^
+besiktningsapp-backend  |   File "/usr/local/lib/python3.11/site-packages/pydantic/_internal/_repr.py", line 82, in __repr__
+besiktningsapp-backend  |     return f'{self.__repr_name__()}({self.__repr_str__(", ")})'
+besiktningsapp-backend  |                                      ^^^^^^^^^^^^^^^^^^^^^^^
+besiktningsapp-backend  |   File "/usr/local/lib/python3.11/site-packages/pydantic/_internal/_repr.py", line 55, in __repr_str__
+besiktningsapp-backend  |     return join_str.join(repr(v) if a is None else f'{a}={v!r}' for a, v in self.__repr_args__())
+besiktningsapp-backend  |            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+besiktningsapp-backend  | RecursionError: maximum recursion depth exceeded
+
+

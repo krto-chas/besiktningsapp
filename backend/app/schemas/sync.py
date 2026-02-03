@@ -1,11 +1,11 @@
+from __future__ import annotations
+
 """
 =============================================================================
 BESIKTNINGSAPP BACKEND - SYNC SCHEMAS
 =============================================================================
 Pydantic schemas for offline-first sync operations.
 """
-from __future__ import annotations
-
 
 from typing import List, Optional, Dict, Any
 from datetime import datetime

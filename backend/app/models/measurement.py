@@ -1,3 +1,5 @@
+from __future__ import annotations
+
 """
 =============================================================================
 BESIKTNINGSAPP BACKEND - MEASUREMENT MODEL
@@ -6,8 +8,6 @@ Measurement model (Mätning).
 
 Stores measurements taken during inspection (flow, pressure, temp, etc.).
 """
-from __future__ import annotations
-
 
 from sqlalchemy import Column, String, Integer, Float, ForeignKey, Enum
 from sqlalchemy.orm import relationship

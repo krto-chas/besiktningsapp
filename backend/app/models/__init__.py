@@ -1,3 +1,5 @@
+from __future__ import annotations
+
 """
 =============================================================================
 BESIKTNINGSAPP BACKEND - MODELS PACKAGE
@@ -10,8 +12,6 @@ All models inherit from BaseModel which provides:
 - revision (for optimistic locking)
 - created_at, updated_at (timestamps)
 """
-from __future__ import annotations
-
 from app.models.base import BaseModel
 from app.models.user import User
 from app.models.property import Property

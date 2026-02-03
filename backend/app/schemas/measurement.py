@@ -1,11 +1,11 @@
+from __future__ import annotations
+
 """
 =============================================================================
 BESIKTNINGSAPP BACKEND - MEASUREMENT SCHEMAS
 =============================================================================
 Pydantic schemas for Measurement (Mätning) operations.
 """
-from __future__ import annotations
-
 
 from typing import List, Optional
 from pydantic import BaseModel, Field
