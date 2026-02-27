@@ -1,0 +1,39 @@
+apiVersion: kustomize.config.k8s.io/v1beta1
+kind: Kustomization
+
+# Extend the base configuration
+resources:
+  - ../../base
+  - ingress.yaml
+  - secrets.yaml   # gitignored - kopiera från secrets.yaml.example
+
+# Patch: 1 replica för lokalt (spara resurser)
+patches:
+  - patch: |-
+      - op: replace
+        path: /spec/replicas
+        value: 1
+    target:
+      kind: Deployment
+      name: backend
+  - patch: |-
+      - op: replace
+        path: /spec/replicas
+        value: 1
+    target:
+      kind: StatefulSet
+      name: postgres
+
+# Lokal image - kan pekas om till minikube's inbyggda registry
+images:
+  - name: ghcr.io/krto-chas/besiktningsapp-backend
+    newTag: latest
+
+# Lokal configmap-patch: sätt FLASK_ENV till development
+configMapGenerator:
+  - name: backend-config-local
+    behavior: merge
+    literals:
+      - FLASK_ENV=development
+      - LOG_LEVEL=DEBUG
+      - FLASK_DEBUG=true

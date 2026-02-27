@@ -1,0 +1,206 @@
+name: CD – Build, Push & Deploy
+
+on:
+  push:
+    branches: [main]
+    paths:
+      - "backend/**"
+      - "k8s/**"
+      - ".github/workflows/cd.yml"
+
+  # Möjliggör manuell trigger för hotfixes
+  workflow_dispatch:
+    inputs:
+      environment:
+        description: "Deploy target"
+        required: true
+        default: "local"
+        type: choice
+        options:
+          - local
+          - production
+
+env:
+  REGISTRY: ghcr.io
+  IMAGE_NAME: ${{ github.repository_owner }}/besiktningsapp-backend
+  PYTHON_VERSION: "3.11"
+
+jobs:
+  # ──────────────────────────────────────────────────────────────────────────
+  # Job 1: Build & push Docker image till ghcr.io
+  # ──────────────────────────────────────────────────────────────────────────
+  build-and-push:
+    name: Build & Push Image
+    runs-on: ubuntu-latest
+    outputs:
+      image-tag: ${{ steps.meta.outputs.version }}
+      image-digest: ${{ steps.build.outputs.digest }}
+
+    permissions:
+      contents: read
+      packages: write
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Set up Docker Buildx (multi-platform)
+        uses: docker/setup-buildx-action@v3
+
+      - name: Log in to GitHub Container Registry
+        uses: docker/login-action@v3
+        with:
+          registry: ${{ env.REGISTRY }}
+          username: ${{ github.actor }}
+          password: ${{ secrets.GITHUB_TOKEN }}
+
+      - name: Extract image metadata (tags, labels)
+        id: meta
+        uses: docker/metadata-action@v5
+        with:
+          images: ${{ env.REGISTRY }}/${{ env.IMAGE_NAME }}
+          tags: |
+            # sha-<kort-commit-hash> – immutable, används i K8s
+            type=sha,prefix=sha-,format=short
+            # Senaste main-builden
+            type=raw,value=latest,enable={{is_default_branch}}
+            # Semantisk versionering om du taggar: v1.2.3
+            type=semver,pattern={{version}}
+            type=semver,pattern={{major}}.{{minor}}
+
+      - name: Build & push image (linux/amd64 + linux/arm64)
+        id: build
+        uses: docker/build-push-action@v5
+        with:
+          context: ./backend
+          file: ./backend/Dockerfile.prod
+          push: true
+          platforms: linux/amd64,linux/arm64
+          tags: ${{ steps.meta.outputs.tags }}
+          labels: ${{ steps.meta.outputs.labels }}
+          cache-from: type=gha
+          cache-to: type=gha,mode=max
+          # Build args tillgängliga i Dockerfile
+          build-args: |
+            BUILD_DATE=${{ github.event.head_commit.timestamp }}
+            VCS_REF=${{ github.sha }}
+            VERSION=${{ steps.meta.outputs.version }}
+
+      - name: Output image info
+        run: |
+          echo "### Docker Image Built :whale:" >> $GITHUB_STEP_SUMMARY
+          echo "| | |" >> $GITHUB_STEP_SUMMARY
+          echo "|---|---|" >> $GITHUB_STEP_SUMMARY
+          echo "| **Image** | \`${{ env.REGISTRY }}/${{ env.IMAGE_NAME }}\` |" >> $GITHUB_STEP_SUMMARY
+          echo "| **Tag** | \`${{ steps.meta.outputs.version }}\` |" >> $GITHUB_STEP_SUMMARY
+          echo "| **Digest** | \`${{ steps.build.outputs.digest }}\` |" >> $GITHUB_STEP_SUMMARY
+
+  # ──────────────────────────────────────────────────────────────────────────
+  # Job 2: Deploy till lokal minikube (via self-hosted runner ELLER skip)
+  # Kräver: KUBECONFIG_LOCAL secret (base64-encoded kubeconfig)
+  # ──────────────────────────────────────────────────────────────────────────
+  deploy-local:
+    name: Deploy → Local (minikube)
+    runs-on: ubuntu-latest
+    needs: build-and-push
+    environment: local
+    # Kör bara om KUBECONFIG_LOCAL secret är konfigurerad
+    if: |
+      github.ref == 'refs/heads/main' &&
+      vars.ENABLE_K8S_DEPLOY == 'true'
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Set up kubectl
+        uses: azure/setup-kubectl@v4
+
+      - name: Set up kustomize
+        uses: imranismail/setup-kustomize@v2
+
+      - name: Configure kubeconfig
+        run: |
+          mkdir -p ~/.kube
+          echo "${{ secrets.KUBECONFIG_LOCAL }}" | base64 -d > ~/.kube/config
+          chmod 600 ~/.kube/config
+
+      - name: Update image tag in kustomize overlay
+        run: |
+          cd k8s/overlays/local
+          kustomize edit set image \
+            ghcr.io/krto-chas/besiktningsapp-backend=${{ env.REGISTRY }}/${{ env.IMAGE_NAME }}:${{ needs.build-and-push.outputs.image-tag }}
+
+      - name: Apply kubernetes manifests
+        run: |
+          kubectl apply -k k8s/overlays/local/ --server-side
+
+      - name: Wait for rollout
+        run: |
+          kubectl rollout status deployment/backend \
+            -n besiktningsapp \
+            --timeout=120s
+
+      - name: Verify health
+        run: |
+          # Vänta på att readiness probe ska passera
+          kubectl wait pod \
+            -l app=backend \
+            -n besiktningsapp \
+            --for=condition=Ready \
+            --timeout=90s
+
+      - name: Deployment summary
+        run: |
+          echo "### Deployment Status :rocket:" >> $GITHUB_STEP_SUMMARY
+          kubectl get pods -n besiktningsapp >> $GITHUB_STEP_SUMMARY
+
+  # ──────────────────────────────────────────────────────────────────────────
+  # Job 3: Deploy till produktion (manuell trigger eller release-tag)
+  # ──────────────────────────────────────────────────────────────────────────
+  deploy-production:
+    name: Deploy → Production
+    runs-on: ubuntu-latest
+    needs: build-and-push
+    environment: production    # Kräver manuellt godkännande i GitHub
+    if: |
+      (github.event_name == 'workflow_dispatch' && github.event.inputs.environment == 'production') ||
+      startsWith(github.ref, 'refs/tags/v')
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Set up kubectl
+        uses: azure/setup-kubectl@v4
+
+      - name: Set up kustomize
+        uses: imranismail/setup-kustomize@v2
+
+      - name: Configure kubeconfig (production)
+        run: |
+          mkdir -p ~/.kube
+          echo "${{ secrets.KUBECONFIG_PROD }}" | base64 -d > ~/.kube/config
+          chmod 600 ~/.kube/config
+
+      - name: Update image tag
+        run: |
+          cd k8s/overlays/production
+          kustomize edit set image \
+            ghcr.io/krto-chas/besiktningsapp-backend=${{ env.REGISTRY }}/${{ env.IMAGE_NAME }}:${{ needs.build-and-push.outputs.image-tag }}
+
+      - name: Apply kubernetes manifests
+        run: |
+          kubectl apply -k k8s/overlays/production/ --server-side
+
+      - name: Wait for rollout
+        run: |
+          kubectl rollout status deployment/backend \
+            -n besiktningsapp \
+            --timeout=300s
+
+      - name: Production deployment summary
+        run: |
+          echo "### Production Deployment :green_circle:" >> $GITHUB_STEP_SUMMARY
+          echo "**Image:** \`${{ env.REGISTRY }}/${{ env.IMAGE_NAME }}:${{ needs.build-and-push.outputs.image-tag }}\`" >> $GITHUB_STEP_SUMMARY
+          kubectl get pods -n besiktningsapp >> $GITHUB_STEP_SUMMARY

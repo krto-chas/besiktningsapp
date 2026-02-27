@@ -1,0 +1,240 @@
+name: CI – Lint, Security & Test
+
+on:
+  pull_request:
+    branches: [main]
+  push:
+    branches: [main]
+    paths:
+      - "backend/**"
+      - ".github/workflows/ci.yml"
+
+env:
+  PYTHON_VERSION: "3.11"
+
+jobs:
+  # ──────────────────────────────────────────────────────────────────────────
+  # Job 1: Lint & format check
+  # ──────────────────────────────────────────────────────────────────────────
+  lint:
+    name: Lint & Format
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: ${{ env.PYTHON_VERSION }}
+          cache: pip
+          cache-dependency-path: backend/requirements-dev.txt
+
+      - name: Install lint dependencies
+        run: |
+          pip install flake8 black isort
+
+      - name: Run flake8
+        run: |
+          flake8 backend/app \
+            --max-line-length=120 \
+            --extend-ignore=E203,W503 \
+            --exclude=backend/migrations
+
+      - name: Check black formatting
+        run: |
+          black --check --line-length=120 backend/app backend/tests
+
+      - name: Check import ordering (isort)
+        run: |
+          isort --check-only --profile=black backend/app backend/tests
+
+  # ──────────────────────────────────────────────────────────────────────────
+  # Job 2: Security scanning
+  # ──────────────────────────────────────────────────────────────────────────
+  security:
+    name: Security Scan
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: ${{ env.PYTHON_VERSION }}
+          cache: pip
+
+      - name: Install security tools
+        run: pip install bandit safety
+
+      - name: Run bandit (SAST)
+        run: |
+          bandit -r backend/app \
+            -x backend/app/tests \
+            --severity-level medium \
+            --confidence-level medium \
+            -f json \
+            -o bandit-report.json || true
+          # Print summary (don't fail on low-severity)
+          bandit -r backend/app \
+            -x backend/app/tests \
+            --severity-level high \
+            --confidence-level high
+
+      - name: Run safety (dependency vulnerabilities)
+        run: |
+          safety check \
+            -r backend/requirements.txt \
+            --output text
+        continue-on-error: true   # Advisory – informational only
+
+      - name: Upload bandit report
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: bandit-security-report
+          path: bandit-report.json
+
+  # ──────────────────────────────────────────────────────────────────────────
+  # Job 3: Unit tests
+  # ──────────────────────────────────────────────────────────────────────────
+  unit-tests:
+    name: Unit Tests
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: ${{ env.PYTHON_VERSION }}
+          cache: pip
+          cache-dependency-path: |
+            backend/requirements.txt
+            backend/requirements-dev.txt
+
+      - name: Install dependencies
+        run: |
+          pip install -r backend/requirements-dev.txt
+
+      - name: Run unit tests with coverage
+        env:
+          FLASK_ENV: testing
+          SECRET_KEY: test-secret-key-for-ci
+          JWT_SECRET_KEY: test-jwt-key-for-ci
+          DATABASE_URL: sqlite:///:memory:
+          STORAGE_BACKEND: local
+          STORAGE_LOCAL_PATH: /tmp/test-storage
+          REDIS_URL: redis://localhost:6379/0
+          TESTING: "true"
+        run: |
+          cd backend
+          pytest tests/unit/ \
+            -v \
+            --cov=app \
+            --cov-report=term-missing \
+            --cov-report=xml:coverage.xml \
+            --cov-fail-under=70 \
+            -p no:warnings
+
+      - name: Upload coverage report
+        uses: actions/upload-artifact@v4
+        with:
+          name: unit-test-coverage
+          path: backend/coverage.xml
+
+  # ──────────────────────────────────────────────────────────────────────────
+  # Job 4: Integration tests (med riktig PostgreSQL)
+  # ──────────────────────────────────────────────────────────────────────────
+  integration-tests:
+    name: Integration Tests
+    runs-on: ubuntu-latest
+
+    services:
+      postgres:
+        image: postgres:15-alpine
+        env:
+          POSTGRES_DB: besiktningsapp_test
+          POSTGRES_USER: besiktning
+          POSTGRES_PASSWORD: ${{ secrets.POSTGRES_PASSWORD || 'testpass123' }}
+        ports:
+          - 5432:5432
+        options: >-
+          --health-cmd pg_isready
+          --health-interval 10s
+          --health-timeout 5s
+          --health-retries 5
+
+      redis:
+        image: redis:7-alpine
+        ports:
+          - 6379:6379
+        options: >-
+          --health-cmd "redis-cli ping"
+          --health-interval 10s
+          --health-timeout 5s
+          --health-retries 5
+
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: ${{ env.PYTHON_VERSION }}
+          cache: pip
+          cache-dependency-path: |
+            backend/requirements.txt
+            backend/requirements-dev.txt
+
+      - name: Install dependencies
+        run: |
+          pip install -r backend/requirements-dev.txt
+
+      - name: Run database migrations
+        env:
+          DATABASE_URL: postgresql://besiktning:${{ secrets.POSTGRES_PASSWORD || 'testpass123' }}@localhost:5432/besiktningsapp_test
+          FLASK_ENV: testing
+          SECRET_KEY: test-secret-key-for-ci
+          JWT_SECRET_KEY: test-jwt-key-for-ci
+        run: |
+          cd backend
+          flask db upgrade
+
+      - name: Run integration tests
+        env:
+          FLASK_ENV: testing
+          SECRET_KEY: test-secret-key-for-ci
+          JWT_SECRET_KEY: test-jwt-key-for-ci
+          DATABASE_URL: postgresql://besiktning:${{ secrets.POSTGRES_PASSWORD || 'testpass123' }}@localhost:5432/besiktningsapp_test
+          STORAGE_BACKEND: local
+          STORAGE_LOCAL_PATH: /tmp/test-storage
+          REDIS_URL: redis://localhost:6379/1
+          TESTING: "true"
+        run: |
+          cd backend
+          pytest tests/integration/ \
+            -v \
+            --tb=short \
+            -p no:warnings
+
+  # ──────────────────────────────────────────────────────────────────────────
+  # Job 5: Docker build validation
+  # ──────────────────────────────────────────────────────────────────────────
+  docker-build:
+    name: Docker Build Check
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Set up Docker Buildx
+        uses: docker/setup-buildx-action@v3
+
+      - name: Build Docker image (no push)
+        uses: docker/build-push-action@v5
+        with:
+          context: ./backend
+          file: ./backend/Dockerfile.prod
+          push: false
+          cache-from: type=gha
+          cache-to: type=gha,mode=max
+          tags: besiktningsapp-backend:ci-check

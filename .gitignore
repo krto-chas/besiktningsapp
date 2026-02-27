@@ -1,0 +1,107 @@
+# =============================================================================
+# BESIKTNINGSAPP - .gitignore
+# =============================================================================
+
+# ─── Python ─────────────────────────────────────────────────────────────────
+__pycache__/
+*.py[cod]
+*$py.class
+*.so
+.Python
+build/
+develop-eggs/
+dist/
+downloads/
+eggs/
+.eggs/
+lib/
+lib64/
+parts/
+sdist/
+var/
+wheels/
+*.egg-info/
+.installed.cfg
+*.egg
+MANIFEST
+
+# Virtual environments
+.venv/
+venv/
+ENV/
+env/
+env.bak/
+venv.bak/
+
+# ─── Environment & Secrets ───────────────────────────────────────────────────
+.env
+.env.*
+!.env.example
+!env.example
+
+# ─── Kubernetes Secrets (ALDRIG committa) ────────────────────────────────────
+k8s/overlays/*/secrets.yaml
+
+# ─── Testing & Coverage ──────────────────────────────────────────────────────
+.pytest_cache/
+.coverage
+coverage.xml
+htmlcov/
+.tox/
+.nox/
+*.cover
+*.py,cover
+.hypothesis/
+
+# ─── Type checking ───────────────────────────────────────────────────────────
+.mypy_cache/
+.dmypy.json
+dmypy.json
+
+# ─── IDEs ────────────────────────────────────────────────────────────────────
+.idea/
+.vscode/
+*.swp
+*.swo
+*~
+.DS_Store
+Thumbs.db
+
+# ─── Logs ────────────────────────────────────────────────────────────────────
+*.log
+logs/
+backend/logs/
+
+# ─── Local storage (filer som sparas lokalt under dev) ───────────────────────
+backend/storage/
+backend/uploads/
+
+# ─── Docker ──────────────────────────────────────────────────────────────────
+.docker/
+
+# ─── Node / Mobile ───────────────────────────────────────────────────────────
+node_modules/
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+.expo/
+.expo-shared/
+*.apk
+*.ipa
+ios/Pods/
+android/.gradle/
+android/app/build/
+
+# ─── Backup/temp-filer (ska inte finnas men för säkerhets skull) ──────────────
+*.backup
+*.broken
+*.bak
+*.tmp
+
+# ─── Docs / generated ────────────────────────────────────────────────────────
+docs/_build/
+docs/openapi.yaml
+
+# ─── Database ────────────────────────────────────────────────────────────────
+*.db
+*.sqlite3

@@ -329,7 +329,71 @@ version: ## Show version information
 	@cd mobile && npm --version
 
 # =============================================================================
-# DEPLOYMENT
+# KUBERNETES (minikube/kind)
+# =============================================================================
+
+K8S_OVERLAY ?= local
+
+.PHONY: k8s-local-up
+k8s-local-up: ## Starta minikube och deploya lokal overlay
+	@echo "Starting minikube..."
+	minikube start --driver=docker --memory=4096 --cpus=2
+	@echo "Enabling nginx ingress..."
+	minikube addons enable ingress
+	@echo "Creating secrets from example (if not already done)..."
+	@if [ ! -f k8s/overlays/local/secrets.yaml ]; then \
+		cp k8s/overlays/local/secrets.yaml.example k8s/overlays/local/secrets.yaml; \
+		echo "⚠  Redigera k8s/overlays/local/secrets.yaml med riktiga värden!"; \
+	fi
+	@echo "Applying k8s manifests..."
+	kubectl apply -k k8s/overlays/local/
+	@echo "Waiting for rollout..."
+	kubectl rollout status deployment/backend -n besiktningsapp --timeout=120s
+	@echo "✓ Local k8s deployment done!"
+	@echo "Add to /etc/hosts:  $$(minikube ip)  besiktningsapp.local minio.local"
+
+.PHONY: k8s-local-down
+k8s-local-down: ## Ta bort lokal k8s-deployment
+	kubectl delete -k k8s/overlays/local/ --ignore-not-found
+	@echo "✓ Local k8s resources removed"
+
+.PHONY: k8s-status
+k8s-status: ## Visa status för alla k8s-resurser
+	@echo "=== Pods ==="
+	kubectl get pods -n besiktningsapp
+	@echo "\n=== Services ==="
+	kubectl get services -n besiktningsapp
+	@echo "\n=== Ingress ==="
+	kubectl get ingress -n besiktningsapp
+	@echo "\n=== PVCs ==="
+	kubectl get pvc -n besiktningsapp
+
+.PHONY: k8s-logs
+k8s-logs: ## Visa backend-loggar i k8s
+	kubectl logs -n besiktningsapp -l app=backend --tail=100 -f
+
+.PHONY: k8s-shell
+k8s-shell: ## Öppna shell i backend-pod
+	kubectl exec -n besiktningsapp -it \
+		$$(kubectl get pod -n besiktningsapp -l app=backend -o jsonpath='{.items[0].metadata.name}') \
+		-- /bin/bash
+
+.PHONY: k8s-apply
+k8s-apply: ## Applicera overlay (K8S_OVERLAY=local|production)
+	kubectl apply -k k8s/overlays/$(K8S_OVERLAY)/ --server-side
+
+.PHONY: k8s-diff
+k8s-diff: ## Visa diff mot befintlig k8s-konfiguration
+	kubectl diff -k k8s/overlays/$(K8S_OVERLAY)/ || true
+
+.PHONY: k8s-db-migrate
+k8s-db-migrate: ## Kör Alembic-migrationer i k8s
+	kubectl exec -n besiktningsapp -it \
+		$$(kubectl get pod -n besiktningsapp -l app=backend -o jsonpath='{.items[0].metadata.name}') \
+		-- flask db upgrade
+
+# =============================================================================
+# DEPLOYMENT (scripts)
 # =============================================================================
 
 .PHONY: deploy-dev

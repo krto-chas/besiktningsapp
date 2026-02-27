@@ -23,6 +23,7 @@ from app.models.measurement import Measurement
 from app.models.pdf_version import PDFVersion
 from app.models.sync_log import SyncLog
 from app.models.standard_defect import StandardDefect
+from app.models.change_log import ChangeLog
 
 __all__ = [
     "BaseModel",
@@ -36,4 +37,5 @@ __all__ = [
     "PDFVersion",
     "SyncLog",
     "StandardDefect",
+    "ChangeLog",
 ]

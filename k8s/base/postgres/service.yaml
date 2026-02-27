@@ -1,0 +1,36 @@
+apiVersion: v1
+kind: Service
+metadata:
+  name: postgres
+  namespace: besiktningsapp
+  labels:
+    app.kubernetes.io/name: postgres
+    app.kubernetes.io/part-of: besiktningsapp
+spec:
+  type: ClusterIP
+  selector:
+    app: postgres
+  ports:
+    - name: postgres
+      port: 5432
+      targetPort: 5432
+      protocol: TCP
+---
+# Headless service required for StatefulSet DNS
+apiVersion: v1
+kind: Service
+metadata:
+  name: postgres-headless
+  namespace: besiktningsapp
+  labels:
+    app.kubernetes.io/name: postgres
+    app.kubernetes.io/part-of: besiktningsapp
+spec:
+  type: ClusterIP
+  clusterIP: None
+  selector:
+    app: postgres
+  ports:
+    - name: postgres
+      port: 5432
+      targetPort: 5432

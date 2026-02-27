@@ -1,0 +1,17 @@
+apiVersion: v1
+kind: Service
+metadata:
+  name: backend
+  namespace: besiktningsapp
+  labels:
+    app.kubernetes.io/name: backend
+    app.kubernetes.io/part-of: besiktningsapp
+spec:
+  type: ClusterIP
+  selector:
+    app: backend
+  ports:
+    - name: http
+      port: 80
+      targetPort: 5000
+      protocol: TCP
