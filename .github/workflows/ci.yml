@@ -121,7 +121,7 @@ jobs:
           FLASK_ENV: testing
           SECRET_KEY: test-secret-key-for-ci
           JWT_SECRET_KEY: test-jwt-key-for-ci
-          DATABASE_URL: sqlite:///:memory:
+          DATABASE_URL: "sqlite:///:memory:"
           STORAGE_BACKEND: local
           STORAGE_LOCAL_PATH: /tmp/test-storage
           REDIS_URL: redis://localhost:6379/0
