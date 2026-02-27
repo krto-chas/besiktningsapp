@@ -85,6 +85,12 @@ class Property(BaseModel):
         nullable=True,
         comment="Number of commercial premises/lokaler",
     )
+
+    construction_year = Column(
+        Integer,
+        nullable=True,
+        comment="Year when building was constructed",
+    )
     
     # Additional Information
     notes = Column(

@@ -1,5 +1,4 @@
 from __future__ import annotations
-
 """
 =============================================================================
 BESIKTNINGSAPP BACKEND - BASE MODEL
@@ -11,13 +10,14 @@ Provides:
 - Client ID (UUID from mobile client for offline-first sync)
 - Revision (for optimistic locking and conflict detection)
 - Timestamps (created_at, updated_at)
+- Soft delete (deleted_at)
+- Created by tracking (created_by_id)
 """
-
 from datetime import datetime
 from typing import Any, Dict
 from uuid import UUID
 
-from sqlalchemy import Column, Integer, String, DateTime, event
+from sqlalchemy import Column, Integer, String, DateTime, ForeignKey, event
 from sqlalchemy.dialects.postgresql import UUID as PGUUID
 from sqlalchemy.ext.declarative import declared_attr
 
@@ -34,6 +34,8 @@ class BaseModel(db.Model):
         revision: Version number (increments on each update, for conflict detection)
         created_at: Timestamp when entity was created
         updated_at: Timestamp when entity was last updated
+        deleted_at: Timestamp when entity was soft-deleted (NULL if not deleted)
+        created_by_id: User ID who created this entity
     """
     
     __abstract__ = True
@@ -79,84 +81,50 @@ class BaseModel(db.Model):
         comment="Timestamp when entity was last updated (UTC)",
     )
     
-    @declared_attr
-    def __tablename__(cls) -> str:
-        """
-        Generate table name from class name.
-        Converts CamelCase to snake_case.
-        """
-        import re
-        name = re.sub('(.)([A-Z][a-z]+)', r'\1_\2', cls.__name__)
-        return re.sub('([a-z0-9])([A-Z])', r'\1_\2', name).lower()
+    # Soft delete
+    deleted_at = Column(
+        DateTime,
+        nullable=True,
+        comment="Timestamp when entity was soft-deleted (UTC)",
+    )
     
-    def to_dict(self, include_relationships: bool = False) -> Dict[str, Any]:
-        """
-        Convert model instance to dictionary.
-        
-        Args:
-            include_relationships: Whether to include relationship data
-            
-        Returns:
-            Dictionary representation of the model
-        """
-        result = {}
-        
-        # Add columns
+    # User tracking (optional - only for entities that should track creator)
+    # Subclasses can override this
+    @declared_attr
+    def created_by_id(cls):
+        """Foreign key to user who created this entity."""
+        # Only add if the table needs it
+        if hasattr(cls, '__track_creator__') and cls.__track_creator__:
+            return Column(
+                Integer,
+                ForeignKey('users.id'),
+                nullable=True,
+                comment="User who created this entity",
+            )
+        return None
+    
+    def to_dict(self) -> Dict[str, Any]:
+        """Convert model instance to dictionary."""
+        data = {}
         for column in self.__table__.columns:
             value = getattr(self, column.name)
-            
-            # Convert UUID to string
+            # Handle UUID serialization
             if isinstance(value, UUID):
                 value = str(value)
-            # Convert datetime to ISO format
+            # Handle datetime serialization
             elif isinstance(value, datetime):
                 value = value.isoformat()
-            
-            result[column.name] = value
-        
-        # Optionally add relationships
-        if include_relationships:
-            for relationship in self.__mapper__.relationships:
-                value = getattr(self, relationship.key)
-                if value is not None:
-                    if isinstance(value, list):
-                        result[relationship.key] = [
-                            item.to_dict() if hasattr(item, 'to_dict') else str(item)
-                            for item in value
-                        ]
-                    else:
-                        result[relationship.key] = (
-                            value.to_dict() if hasattr(value, 'to_dict') else str(value)
-                        )
-        
-        return result
-    
-    def increment_revision(self) -> None:
-        """Increment the revision number."""
-        self.revision += 1
+            data[column.name] = value
+        return data
     
     def __repr__(self) -> str:
-        """String representation of the model."""
-        return f"<{self.__class__.__name__}(id={self.id}, revision={self.revision})>"
+        """String representation."""
+        return f"<{self.__class__.__name__}(id={self.id})>"
 
 
-# =============================================================================
-# EVENT LISTENERS
-# =============================================================================
-
-@event.listens_for(BaseModel, 'before_update', propagate=True)
-def before_update_listener(mapper, connection, target):
-    """
-    Automatically increment revision on update.
-    
-    This ensures that every update increments the revision number,
-    which is critical for conflict detection in offline-first sync.
-    """
-    target.increment_revision()
-
-
-@event.listens_for(BaseModel, 'before_insert', propagate=True)
-def before_insert_listener(mapper, connection, target):
+# Event listener to set initial values
+@event.listens_for(BaseModel, "before_insert", propagate=True)
+def set_initial_values(mapper, connection, target):
     """
     Set initial values on insert.
     
@@ -164,9 +132,7 @@ def before_insert_listener(mapper, connection, target):
     """
     if target.revision is None:
         target.revision = 1
-    
     if target.created_at is None:
         target.created_at = datetime.utcnow()
-    
     if target.updated_at is None:
         target.updated_at = datetime.utcnow()
