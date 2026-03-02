@@ -21,7 +21,7 @@ from io import BytesIO
 from weasyprint import HTML, CSS
 from jinja2 import Environment, FileSystemLoader, select_autoescape
 
-from app.models import PDFVersion, Inspection, Property, Apartment, Defect, Image
+from app.models import PDFVersion, Inspection, Property, Apartment, Defect, Image, Measurement
 from app.extensions import db
 from app.utils.errors import ValidationError, NotFoundError
 from app.config import Config
@@ -87,10 +87,13 @@ class PDFService:
 
         try:
             # Gather data for PDF
-            data = PDFService._gather_inspection_data(
-                inspection,
-                include_photos=include_photos
-            )
+            if template == 'ovk':
+                data = PDFService._gather_ovk_data(inspection, include_photos=include_photos)
+            else:
+                data = PDFService._gather_inspection_data(
+                    inspection,
+                    include_photos=include_photos
+                )
 
             # Generate HTML from template
             html_content = PDFService._render_template(template, data)
@@ -432,6 +435,172 @@ class PDFService:
         }
 
         return data
+
+    # OVK position prefixes – maps position code prefix to checklist section
+    _OVK_POSITIONS = {
+        '1.1', '1.2', '1.3', '1.4', '1.5',
+        '2.1', '2.2', '2.3', '2.4', '2.5', '2.6', '2.7', '2.8', '2.9', '2.10',
+        '3.1', '3.2', '3.3', '3.4', '3.5', '3.6', '3.7', '3.8', '3.9', '3.10',
+        '4.1', '4.2', '4.3', '4.4', '4.5', '4.6',
+    }
+
+    @staticmethod
+    def _gather_ovk_data(
+        inspection: Inspection,
+        include_photos: bool = True,
+    ) -> Dict[str, Any]:
+        """
+        Gather data for the OVK template (A/B/L/Intyg blanketter).
+
+        Returns a dict consumed by ovk.html.
+        """
+        property_obj = inspection.property
+        inspector = inspection.inspector
+
+        # ── Property ─────────────────────────────────────────────────────────
+        property_data = {
+            'designation':      property_obj.designation,
+            'property_name':    getattr(property_obj, 'property_name', None),
+            'address':          property_obj.address,
+            'postal_code':      property_obj.postal_code,
+            'city':             property_obj.city,
+            'owner':            property_obj.owner,
+            'manager':          getattr(property_obj, 'manager', None),
+            'num_apartments':   property_obj.num_apartments,
+            'num_locals':       getattr(property_obj, 'num_locals', None),
+            'bra_m2':           getattr(property_obj, 'bra_m2', None),
+            'construction_year': property_obj.construction_year,
+            'activity':         getattr(property_obj, 'activity', None),
+        }
+
+        # ── Inspector ─────────────────────────────────────────────────────────
+        inspector_data: Dict[str, Any] = {'name': 'N/A', 'email': 'N/A'}
+        if inspector:
+            inspector_data = {
+                'name':                    inspector.name,
+                'email':                   inspector.email,
+                'company_name':            inspector.company_name,
+                'phone':                   inspector.phone,
+                'certification_org':       inspector.certification_org,
+                'certification_number':    inspector.certification_number,
+                'certification_valid_until': inspector.certification_valid_until,
+                'competence':              inspector.competence,
+            }
+
+        # ── Inspection (OVK fields) ────────────────────────────────────────
+        energy_measures: List[int] = []
+        if inspection.energy_saving_measures:
+            try:
+                energy_measures = [
+                    int(x.strip())
+                    for x in inspection.energy_saving_measures.split(',')
+                    if x.strip().isdigit()
+                ]
+            except (ValueError, AttributeError):
+                pass
+
+        inspection_data = {
+            'id':                   inspection.id,
+            'date':                 inspection.date.strftime('%Y-%m-%d') if inspection.date else '–',
+            'status':               inspection.status.value if inspection.status else 'draft',
+            'notes':                inspection.notes,
+            'ovk_result':           inspection.ovk_result.value if inspection.ovk_result else None,
+            'next_inspection_date': inspection.next_inspection_date.strftime('%Y-%m-%d')
+                                    if inspection.next_inspection_date else None,
+            'reinspection_date':    inspection.reinspection_date.strftime('%Y-%m-%d')
+                                    if inspection.reinspection_date else None,
+            'system_number':        inspection.system_number,
+            'system_type':          inspection.system_type.value if inspection.system_type else None,
+            'inspection_category':  inspection.inspection_category,
+            'energy_saving_measures': energy_measures,
+            # Climate and user_comments stored in notes (no separate fields yet)
+            'climate':              None,
+            'user_comments':        None,
+            # system_components: placeholder (no dedicated model yet)
+            'system_components':    [],
+        }
+
+        # ── Defects → OVK position map ────────────────────────────────────
+        all_defects = (
+            Defect.query
+            .join(Apartment)
+            .filter(
+                Apartment.inspection_id == inspection.id,
+                Defect.deleted_at.is_(None),
+            )
+            .all()
+        )
+
+        defects_by_pos: Dict[str, List[Dict]] = {}
+        defects_other: List[Dict] = []
+
+        for defect in all_defects:
+            d_dict = {
+                'code':        defect.code,
+                'title':       defect.title,
+                'description': defect.description,
+                'remedy':      defect.remedy,
+                'severity':    defect.severity.value,
+            }
+            # Match code against OVK position (exact prefix match)
+            matched = False
+            if defect.code:
+                # code might be "2.3", "2.3.1", "3.7 Luftflöden" – try prefix
+                for pos in PDFService._OVK_POSITIONS:
+                    if defect.code.startswith(pos):
+                        defects_by_pos.setdefault(pos, []).append(d_dict)
+                        matched = True
+                        break
+            if not matched:
+                defects_other.append(d_dict)
+
+        # ── Airflow rows (L-blankett) ─────────────────────────────────────
+        flow_measurements = (
+            Measurement.query
+            .filter_by(inspection_id=inspection.id)
+            .filter(Measurement.direction.isnot(None))
+            .filter(Measurement.deleted_at.is_(None))
+            .order_by(Measurement.sort_key, Measurement.id)
+            .all()
+        )
+
+        # Group T+F by room (sort_key = room number)
+        room_map: Dict[str, Dict] = {}
+        for m in flow_measurements:
+            key = m.sort_key or str(m.id)
+            if key not in room_map:
+                room_map[key] = {
+                    'room_number': m.sort_key,
+                    'room_name':   m.room_name,
+                    'T_proj': None, 'T_value': None, 'T_method': None,
+                    'F_proj': None, 'F_value': None, 'F_method': None,
+                }
+            dir_key = m.direction.value if m.direction else None
+            if dir_key == 'T':
+                room_map[key]['T_value']  = m.value
+                room_map[key]['T_proj']   = m.projected_value
+                room_map[key]['T_method'] = m.measurement_method
+                if m.room_name:
+                    room_map[key]['room_name'] = m.room_name
+            elif dir_key == 'F':
+                room_map[key]['F_value']  = m.value
+                room_map[key]['F_proj']   = m.projected_value
+                room_map[key]['F_method'] = m.measurement_method
+                if m.room_name:
+                    room_map[key]['room_name'] = m.room_name
+
+        airflow_rows = list(room_map.values())
+
+        return {
+            'property':      property_data,
+            'inspector':     inspector_data,
+            'inspection':    inspection_data,
+            'defects_by_pos': defects_by_pos,
+            'defects_other':  defects_other,
+            'airflow_rows':   airflow_rows,
+            'generated_at':  datetime.utcnow().strftime('%Y-%m-%d %H:%M:%S'),
+            'app_version':   '1.0',
+        }
 
     @staticmethod
     def _get_room_type(rooms: List[dict], room_index: int) -> str:

@@ -11,6 +11,7 @@ Stores measurements taken during inspection (flow, pressure, temp, etc.).
 
 from sqlalchemy import Column, String, Integer, Float, ForeignKey, Enum
 from sqlalchemy.orm import relationship
+from typing import Optional
 import enum
 
 from app.models.base import BaseModel
@@ -25,6 +26,12 @@ class MeasurementType(enum.Enum):
     FUKT = "fukt"    # Fuktighet (%)
     LJUD = "ljud"    # Ljudnivå (dB)
     OKAND = "okand"  # Okänd/Other
+
+
+class AirflowDirection(enum.Enum):
+    """Airflow direction for L-blankett (luftflödesprotokoll)."""
+    T = "T"  # Tilluft (supply air)
+    F = "F"  # Frånluft (exhaust air)
 
 
 class Measurement(BaseModel):
@@ -84,9 +91,34 @@ class Measurement(BaseModel):
     sort_key = Column(
         String(60),
         nullable=True,
-        comment="Custom sort key for ordering measurements",
+        comment="Custom sort key for ordering measurements (also used as room number in L-blankett)",
     )
-    
+
+    # OVK L-blankett fields (airflow protocol)
+    direction = Column(
+        Enum(AirflowDirection),
+        nullable=True,
+        comment="Airflow direction: T (tilluft) or F (frånluft). Null for non-airflow measurements.",
+    )
+
+    projected_value = Column(
+        Float,
+        nullable=True,
+        comment="Projekterat värde (l/s or relevant unit) for L-blankett comparison",
+    )
+
+    measurement_method = Column(
+        String(20),
+        nullable=True,
+        comment="Mätmetod per SS-EN 16211:2015 (B1, ID1, ID2, ET1, ET2, ST1, ST3)",
+    )
+
+    room_name = Column(
+        String(100),
+        nullable=True,
+        comment="Rum/don benämning for L-blankett (e.g., 'Kök', 'Badrum', 'Kontor')",
+    )
+
     # Notes
     notes = Column(
         String(300),

@@ -1,0 +1,723 @@
+<!DOCTYPE html>
+<html lang="sv">
+<head>
+  <meta charset="UTF-8">
+  <title>OVK-protokoll – {{ property.designation }}</title>
+  <style>
+    /* ── Reset & base ─────────────────────────────────────────── */
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+
+    @page {
+      size: A4;
+      margin: 14mm 12mm 18mm 12mm;
+      @bottom-right {
+        content: "Sid " counter(page) " (" counter(pages) ")";
+        font-size: 8pt;
+        color: #555;
+      }
+    }
+
+    body {
+      font-family: Arial, Helvetica, sans-serif;
+      font-size: 8.5pt;
+      color: #111;
+      line-height: 1.3;
+    }
+
+    /* ── Page breaks ──────────────────────────────────────────── */
+    .page-break { page-break-after: always; }
+    .no-break   { page-break-inside: avoid; }
+
+    /* ── Generic layout ───────────────────────────────────────── */
+    .blankett { width: 100%; }
+
+    /* ── Section headers ──────────────────────────────────────── */
+    .section-title {
+      background: #2c5f8a;
+      color: #fff;
+      font-weight: bold;
+      font-size: 9pt;
+      padding: 3px 6px;
+      margin-top: 6px;
+      margin-bottom: 2px;
+    }
+    .sub-title {
+      background: #d6e4f0;
+      font-weight: bold;
+      font-size: 8.5pt;
+      padding: 2px 6px;
+      margin-top: 4px;
+      margin-bottom: 1px;
+    }
+
+    /* ── Protocol header ──────────────────────────────────────── */
+    .proto-header {
+      border: 1.5px solid #2c5f8a;
+      padding: 6px 8px;
+      margin-bottom: 6px;
+    }
+    .proto-header h1 {
+      font-size: 13pt;
+      color: #2c5f8a;
+      letter-spacing: 1px;
+    }
+    .proto-header h2 {
+      font-size: 9pt;
+      color: #444;
+      font-weight: normal;
+    }
+
+    /* ── Data tables ──────────────────────────────────────────── */
+    table.data {
+      width: 100%;
+      border-collapse: collapse;
+      margin-bottom: 4px;
+    }
+    table.data th,
+    table.data td {
+      border: 0.5px solid #aaa;
+      padding: 2px 5px;
+      vertical-align: top;
+    }
+    table.data th {
+      background: #eef3f8;
+      font-weight: bold;
+      white-space: nowrap;
+      width: 38%;
+    }
+    table.data td { width: 62%; }
+
+    /* ── Checklist (B-blankett) ───────────────────────────────── */
+    table.checklist {
+      width: 100%;
+      border-collapse: collapse;
+      margin-bottom: 3px;
+    }
+    table.checklist th {
+      background: #d6e4f0;
+      font-size: 8pt;
+      font-weight: bold;
+      border: 0.5px solid #aaa;
+      padding: 2px 4px;
+    }
+    table.checklist td {
+      border: 0.5px solid #aaa;
+      padding: 2px 4px;
+      vertical-align: top;
+      font-size: 8pt;
+    }
+    .col-pos    { width: 8%;  text-align: center; }
+    .col-name   { width: 22%; }
+    .col-anm    { width: 52%; }
+    .col-utfall { width: 18%; text-align: center; }
+
+    .utfall-ok  { color: #1a7a1a; font-weight: bold; }
+    .utfall-anm { color: #b94040; font-weight: bold; }
+    .utfall-ej  { color: #666; }
+
+    /* ── L-blankett (airflow) ─────────────────────────────────── */
+    table.lblankett {
+      width: 100%;
+      border-collapse: collapse;
+      margin-bottom: 4px;
+      font-size: 7.5pt;
+    }
+    table.lblankett th {
+      background: #d6e4f0;
+      border: 0.5px solid #aaa;
+      padding: 2px 3px;
+      text-align: center;
+      font-size: 7.5pt;
+    }
+    table.lblankett td {
+      border: 0.5px solid #aaa;
+      padding: 2px 3px;
+      vertical-align: middle;
+    }
+    table.lblankett .num { text-align: right; }
+    table.lblankett .cen { text-align: center; }
+
+    /* ── Result badge ─────────────────────────────────────────── */
+    .result-badge {
+      display: inline-block;
+      border: 2px solid #2c5f8a;
+      font-size: 22pt;
+      font-weight: bold;
+      padding: 4px 14px;
+      color: #2c5f8a;
+      letter-spacing: 2px;
+    }
+    .result-G   { border-color: #1a7a1a; color: #1a7a1a; }
+    .result-C   { border-color: #b94040; color: #b94040; }
+    .result-EG  { border-color: #b06820; color: #b06820; }
+    .result-EJ  { border-color: #666;    color: #666; }
+
+    /* ── Signature box ────────────────────────────────────────── */
+    .sig-box {
+      border-top: 1px solid #555;
+      margin-top: 18px;
+      padding-top: 2px;
+      font-size: 7.5pt;
+      color: #555;
+    }
+
+    /* ── Intyg ────────────────────────────────────────────────── */
+    .intyg-box {
+      border: 2px solid #2c5f8a;
+      padding: 10px 14px;
+      margin: 0 auto;
+      max-width: 140mm;
+    }
+    .intyg-box h1 {
+      text-align: center;
+      font-size: 14pt;
+      color: #2c5f8a;
+      margin-bottom: 6px;
+    }
+    .intyg-box .intyg-subtitle {
+      text-align: center;
+      font-size: 9pt;
+      margin-bottom: 8px;
+      color: #444;
+    }
+
+    /* ── Misc ─────────────────────────────────────────────────── */
+    .label   { font-weight: bold; }
+    .small   { font-size: 7.5pt; color: #555; }
+    .mt4     { margin-top: 4px; }
+    .mt8     { margin-top: 8px; }
+    .two-col { display: flex; gap: 6px; }
+    .two-col > * { flex: 1; }
+  </style>
+</head>
+<body>
+
+{# ═══════════════════════════════════════════════════════════════════
+   A-BLANKETT
+   ═══════════════════════════════════════════════════════════════════ #}
+
+<div class="proto-header">
+  <h1>BESIKTNINGSPROTOKOLL – OVK</h1>
+  <h2>Obligatorisk Ventilationskontroll enligt PBF kap 5, BFS 2011:16 och BFS 2012:7 med ändringar</h2>
+</div>
+
+{# ── A1: Byggnad ────────────────────────────────────────────── #}
+<div class="section-title">A1 – BYGGNAD</div>
+<table class="data">
+  <tr>
+    <th>Fastighetsbeteckning</th>
+    <td><strong>{{ property.designation }}</strong></td>
+  </tr>
+  {% if property.property_name %}
+  <tr><th>Byggnadsnamn</th><td>{{ property.property_name }}</td></tr>
+  {% endif %}
+  <tr>
+    <th>Byggnadens adress</th>
+    <td>{{ property.address }}, {{ property.postal_code }} {{ property.city }}</td>
+  </tr>
+  <tr>
+    <th>Byggnadsägare</th>
+    <td>{{ property.owner or '–' }}</td>
+  </tr>
+  {% if property.manager %}
+  <tr><th>Fastighetsansvarig/Förvaltare</th><td>{{ property.manager }}</td></tr>
+  {% endif %}
+  <tr>
+    <th>Antal lägenheter / lokaler</th>
+    <td>
+      {% if property.num_apartments %}Lgh: {{ property.num_apartments }}{% endif %}
+      {% if property.num_locals %} / Lokaler: {{ property.num_locals }}{% endif %}
+    </td>
+  </tr>
+  {% if property.bra_m2 %}
+  <tr><th>BRA (m²)</th><td>{{ property.bra_m2 }}</td></tr>
+  {% endif %}
+  {% if property.construction_year %}
+  <tr><th>Byggnadsår</th><td>{{ property.construction_year }}</td></tr>
+  {% endif %}
+  {% if property.activity %}
+  <tr><th>Verksamhet</th><td>{{ property.activity }}</td></tr>
+  {% endif %}
+</table>
+
+{# ── A2: Besiktningsutlåtande ───────────────────────────────── #}
+<div class="section-title mt8">A2 – BESIKTNINGSUTLÅTANDE</div>
+<table class="data">
+  <tr>
+    <th>Referensnummer</th>
+    <td>{{ inspection.id }}</td>
+  </tr>
+  <tr>
+    <th>Besiktningsdatum</th>
+    <td>{{ inspection.date }}</td>
+  </tr>
+  <tr>
+    <th>Systemnummer / Systemtyp</th>
+    <td>
+      {{ inspection.system_number or '1' }}
+      {% if inspection.system_type %} / {{ inspection.system_type }}{% endif %}
+    </td>
+  </tr>
+  <tr>
+    <th>Besiktningskategori</th>
+    <td>{{ inspection.inspection_category if inspection.inspection_category is not none else '–' }}</td>
+  </tr>
+  <tr>
+    <th>Uppdragstyp</th>
+    <td>
+      {% if inspection.ovk_result == 'EG' %}Egenkontroll
+      {% elif inspection.reinspection_date %}Ombesiktning
+      {% else %}Återkommande besiktning
+      {% endif %}
+    </td>
+  </tr>
+  <tr>
+    <th>Besiktningsresultat</th>
+    <td>
+      <span class="result-badge result-{{ inspection.ovk_result or 'G' }}">
+        {{ inspection.ovk_result or 'G' }}
+      </span>
+      &nbsp;
+      {% if inspection.ovk_result == 'G' %}Godkänd
+      {% elif inspection.ovk_result == 'C' %}Kompletteringsbesiktning krävs
+      {% elif inspection.ovk_result == 'EG' %}Egenkontroll
+      {% elif inspection.ovk_result == 'EJ' %}Ej besiktigad
+      {% endif %}
+    </td>
+  </tr>
+  <tr>
+    <th>Nästa ordinarie besiktning</th>
+    <td><strong>{{ inspection.next_inspection_date or '–' }}</strong></td>
+  </tr>
+  {% if inspection.reinspection_date %}
+  <tr>
+    <th>Ombesiktning senast</th>
+    <td>{{ inspection.reinspection_date }}</td>
+  </tr>
+  {% endif %}
+  <tr>
+    <th>Ingår samtliga ventilationssystem</th>
+    <td>Ja</td>
+  </tr>
+</table>
+
+{# ── A3: Besiktningsman + allmänt omdöme ────────────────────── #}
+<div class="section-title mt8">A3 – ALLMÄNT OMDÖME OCH BESIKTNINGSMAN</div>
+{% if inspection.notes %}
+<div style="border: 0.5px solid #aaa; padding: 4px 6px; margin-bottom: 4px; font-size: 8pt;">
+  <span class="label">Allmänt omdöme:</span><br>
+  {{ inspection.notes }}
+</div>
+{% endif %}
+<table class="data">
+  <tr><th>Besiktningsman</th><td>{{ inspector.name }}</td></tr>
+  {% if inspector.company_name %}
+  <tr><th>Företag</th><td>{{ inspector.company_name }}</td></tr>
+  {% endif %}
+  {% if inspector.phone %}
+  <tr><th>Telefon</th><td>{{ inspector.phone }}</td></tr>
+  {% endif %}
+  <tr><th>E-post</th><td>{{ inspector.email }}</td></tr>
+  {% if inspector.certification_org %}
+  <tr><th>Certifieringsorgan</th><td>{{ inspector.certification_org }}</td></tr>
+  {% endif %}
+  {% if inspector.certification_number %}
+  <tr><th>Cert.nummer</th><td>{{ inspector.certification_number }}</td></tr>
+  {% endif %}
+  {% if inspector.certification_valid_until %}
+  <tr><th>Cert. giltigt t.o.m.</th><td>{{ inspector.certification_valid_until }}</td></tr>
+  {% endif %}
+  {% if inspector.competence %}
+  <tr><th>Behörighet</th><td>{{ inspector.competence }}</td></tr>
+  {% endif %}
+</table>
+
+<div class="two-col mt8">
+  <div>
+    <div class="sig-box">Ort / Underskriftsdatum: {{ inspection.date }}</div>
+  </div>
+  <div>
+    <div class="sig-box">Namnteckning / Stämpel</div>
+  </div>
+</div>
+
+<p class="small mt4">
+  Protokoll finns att tillgå hos byggnadens ägare och hos kommunens byggnadsnämnd.
+</p>
+
+<div class="page-break"></div>
+
+{# ═══════════════════════════════════════════════════════════════════
+   B-BLANKETT – BESIKTNINGSPROTOKOLL PER SYSTEM
+   ═══════════════════════════════════════════════════════════════════ #}
+
+<div class="proto-header">
+  <h1>B{{ inspection.system_number or '1' }} – BESIKTNINGSPROTOKOLL</h1>
+  <h2>
+    {{ property.designation }}
+    &nbsp;|&nbsp; Systemnr: {{ inspection.system_number or '1' }}
+    {% if inspection.system_type %}&nbsp;|&nbsp; Systemtyp: {{ inspection.system_type }}{% endif %}
+    &nbsp;|&nbsp; Datum: {{ inspection.date }}
+  </h2>
+</div>
+
+{# ── B1: System / aggregat ──────────────────────────────────── #}
+<div class="section-title">B1 – FLÄKTAR OCH AGGREGAT I SYSTEMET</div>
+{% if inspection.system_components %}
+<table class="checklist">
+  <thead>
+    <tr>
+      <th style="width:30%">Systemdel / Aggregatbenämning</th>
+      <th style="width:20%">Fläkttyp</th>
+      <th style="width:15%">Inst.år</th>
+      <th style="width:35%">Anmärkning</th>
+    </tr>
+  </thead>
+  <tbody>
+    {% for comp in inspection.system_components %}
+    <tr>
+      <td>{{ comp.name }}</td>
+      <td>{{ comp.fan_type or '–' }}</td>
+      <td>{{ comp.installation_year or '–' }}</td>
+      <td>{{ comp.notes or '–' }}</td>
+    </tr>
+    {% endfor %}
+  </tbody>
+</table>
+{% else %}
+<p class="small" style="padding:3px 6px">Inga aggregat/fläktar registrerade.</p>
+{% endif %}
+
+{# ── B2: Kontrollpositioner ─────────────────────────────────── #}
+<div class="section-title mt4">B2 – KONTROLLRESULTAT (POS 1–4)</div>
+
+{# Helper macro: render one OVK section #}
+{% macro ovk_section(section_num, section_name, positions) %}
+<div class="sub-title">{{ section_num }}. {{ section_name }}</div>
+<table class="checklist no-break">
+  <thead>
+    <tr>
+      <th class="col-pos">Pos</th>
+      <th class="col-name">Benämning</th>
+      <th class="col-anm">Anmärkning / Notering</th>
+      <th class="col-utfall">Utfall</th>
+    </tr>
+  </thead>
+  <tbody>
+    {% for pos_code, pos_name in positions %}
+    {% set pos_defects = defects_by_pos[pos_code] if pos_code in defects_by_pos else [] %}
+    <tr>
+      <td class="col-pos">{{ pos_code }}</td>
+      <td class="col-name">{{ pos_name }}</td>
+      <td class="col-anm">
+        {% if pos_defects %}
+          {% for d in pos_defects %}
+          <div>{{ d.description }}{% if d.remedy %} <em>→ {{ d.remedy }}</em>{% endif %}</div>
+          {% endfor %}
+        {% else %}
+          &nbsp;
+        {% endif %}
+      </td>
+      <td class="col-utfall">
+        {% if pos_defects %}
+          <span class="utfall-anm">Anm</span>
+        {% else %}
+          <span class="utfall-ok">–</span>
+        {% endif %}
+      </td>
+    </tr>
+    {% endfor %}
+  </tbody>
+</table>
+{% endmacro %}
+
+{{ ovk_section('1', 'HANDLINGAR', [
+  ('1.1', 'Ritningar'),
+  ('1.2', 'DU-instruktioner'),
+  ('1.3', 'Föregående OVK-protokoll'),
+  ('1.4', 'Proj. värden / luftflödesprotokoll'),
+  ('1.5', 'Övrigt'),
+]) }}
+
+{{ ovk_section('2', 'FÖRORENINGAR', [
+  ('2.1', 'Uteluftskanal'),
+  ('2.2', 'Filterdel'),
+  ('2.3', 'Batterier'),
+  ('2.4', 'VVX'),
+  ('2.5', 'Fläktdel'),
+  ('2.6', 'Kanaler'),
+  ('2.7', 'Don'),
+  ('2.8', 'Rensningsmöjligheter'),
+  ('2.9', 'Fläktrum'),
+  ('2.10', 'Övrigt'),
+]) }}
+
+{{ ovk_section('3', 'FUNKTIONER', [
+  ('3.1', 'Filterdel'),
+  ('3.2', 'Batterier'),
+  ('3.3', 'VVX'),
+  ('3.4', 'Spjäll'),
+  ('3.5', 'Styr / Regler / Övervakning'),
+  ('3.6', 'Fläktar'),
+  ('3.7', 'Luftflöden'),
+  ('3.8', 'Kanaler'),
+  ('3.9', 'Don'),
+  ('3.10', 'Övrigt'),
+]) }}
+
+{{ ovk_section('4', 'UNDERHÅLL', [
+  ('4.1', 'Filter'),
+  ('4.2', 'Rensning'),
+  ('4.3', 'VVX'),
+  ('4.4', 'Batterier'),
+  ('4.5', 'Fläktar / remmar'),
+  ('4.6', 'Övrigt'),
+]) }}
+
+{# Defects without OVK position code → "Övrigt" #}
+{% if defects_other %}
+<div class="sub-title mt4">Övriga anmärkningar (ej kopplade till OVK-position)</div>
+<table class="checklist">
+  <thead>
+    <tr>
+      <th style="width:15%">Kod</th>
+      <th style="width:55%">Beskrivning</th>
+      <th style="width:30%">Åtgärd</th>
+    </tr>
+  </thead>
+  <tbody>
+    {% for d in defects_other %}
+    <tr>
+      <td>{{ d.code or '–' }}</td>
+      <td>{{ d.description }}</td>
+      <td>{{ d.remedy or '–' }}</td>
+    </tr>
+    {% endfor %}
+  </tbody>
+</table>
+{% endif %}
+
+{# ── Energibesparande åtgärder ──────────────────────────────── #}
+<div class="section-title mt4">MÖJLIGA ENERGIBESPARANDE ÅTGÄRDER</div>
+{% set esm_labels = {
+  0:  '0. Inga energibesparande åtgärder',
+  1:  '1. Veckovis loggning för kartläggning av drift',
+  2:  '2. Ändrade drifttider',
+  3:  '3. Sänkning av tilluftstemperatur',
+  4:  '4. Minskning av luftflöde (byte remskiva/frekvensstyrare)',
+  5:  '5. Minskning av luftflöde (byte fläktmotor)',
+  6:  '6. Behovsstyrning (hel- och halvfartsmotor)',
+  7:  '7. Behovsstyrning (frekvensomformare)',
+  8:  '8. Utbyte av fläktmotor för högre verkningsgrad',
+  9:  '9. Rengöring av värmeåtervinnare, aggregat och kanalsystem',
+  10: '10. Ändring av styr/regler för värmeåtervinnare',
+  11: '11. Nattventilation sommartid',
+  12: '12. Utbyte av styr- och övervakning',
+  13: '13. Komplettera isolering på kanaldelar (kyla)',
+  14: '14. Byte av don/anslutningslådor för lägre tryckfall',
+  15: '15. Ändring av vätskeflöde i vätskekopplad VÅV',
+  16: '16. Utbyte av frysskyddstillsatser i VÅV',
+  17: '17. Installation av värmeåtervinning med ventilationsvärmeväxlare',
+  18: '18. Tätning av läckande kanal- eller aggregatdelar',
+  19: '19. Tillvaratagande av kondensorvärme från kylmaskin',
+  20: '20. Utnyttjande av frånluft som tilluft till garage eller annan lokal',
+  21: '21. Installation av verkningsgradsmätare för VÅV',
+  22: '22. Installation av flödesmätare',
+  23: '23. Ändring av felaktiga inställningar',
+  24: '24. Ta bort fuktare (kombination med sänkt rumstemperatur)',
+  25: '25. Ta bort/minska fuktare',
+  26: '26. Injustera kanalsystem (proportionalitetsmetoden)',
+  27: '27. Byt elbatteri till vattenburet batteri och värmeväxlare',
+  28: '28. Anpassa luftflöden till gällande verksamhet',
+  29: '29. Se till att temperaturreglering för ventilation och kyla ej motarbetar varandra',
+  30: '30. Installera närvarogivare och VAV-spjäll',
+  31: '31. Övrig åtgärd, specificera',
+} %}
+<div style="border: 0.5px solid #aaa; padding: 3px 6px; font-size: 8pt;">
+{% if inspection.energy_saving_measures %}
+  {% for num in inspection.energy_saving_measures %}
+  <div>☑ {{ esm_labels.get(num, num|string) }}</div>
+  {% endfor %}
+{% else %}
+  <div class="utfall-ok">☑ 0. Inga energibesparande åtgärder</div>
+{% endif %}
+</div>
+
+{# ── Klimat / brukarsynpunkter ───────────────────────────────── #}
+{% if inspection.climate or inspection.user_comments %}
+<div class="section-title mt4">KLIMAT OCH BRUKARSYNPUNKTER</div>
+{% if inspection.climate %}
+<table class="data">
+  {% if inspection.climate.temperature %}<tr><th>Temperatur</th><td>{{ inspection.climate.temperature }}</td></tr>{% endif %}
+  {% if inspection.climate.odour %}<tr><th>Odör</th><td>{{ inspection.climate.odour }}</td></tr>{% endif %}
+  {% if inspection.climate.draught %}<tr><th>Drag</th><td>{{ inspection.climate.draught }}</td></tr>{% endif %}
+  {% if inspection.climate.noise %}<tr><th>Ljud</th><td>{{ inspection.climate.noise }}</td></tr>{% endif %}
+</table>
+{% endif %}
+{% if inspection.user_comments %}
+<div style="border: 0.5px solid #aaa; padding: 3px 6px; font-size: 8pt;">
+  <span class="label">Brukarsynpunkter:</span> {{ inspection.user_comments }}
+</div>
+{% endif %}
+{% endif %}
+
+{# ── Besiktningsresultat + signatur ─────────────────────────── #}
+<div class="section-title mt4">BESIKTNINGSRESULTAT</div>
+<div style="display: flex; align-items: center; gap: 14px; padding: 6px 0;">
+  <span class="result-badge result-{{ inspection.ovk_result or 'G' }}">
+    {{ inspection.ovk_result or 'G' }}
+  </span>
+  <div>
+    {% if inspection.ovk_result == 'G' %}
+      <strong>Godkänd</strong><br>
+      Nästa ordinarie besiktning: {{ inspection.next_inspection_date or '–' }}
+    {% elif inspection.ovk_result == 'C' %}
+      <strong>Kompletteringsbesiktning krävs</strong><br>
+      Ombesiktning senast: {{ inspection.reinspection_date or '–' }}
+    {% elif inspection.ovk_result == 'EG' %}
+      <strong>Egenkontroll</strong><br>
+      Datum: {{ inspection.reinspection_date or '–' }}
+    {% else %}
+      <strong>Ej besiktigad</strong>
+    {% endif %}
+  </div>
+</div>
+
+<div class="two-col mt8">
+  <div>
+    <div class="sig-box">Besiktningsman: {{ inspector.name }}<br>
+    {{ inspector.certification_org or '' }} Nr: {{ inspector.certification_number or '' }}</div>
+  </div>
+  <div>
+    <div class="sig-box">Ort / Datum: {{ inspection.date }}</div>
+  </div>
+</div>
+
+<div class="page-break"></div>
+
+{# ═══════════════════════════════════════════════════════════════════
+   L-BLANKETT – LUFTFLÖDESPROTOKOLL
+   ═══════════════════════════════════════════════════════════════════ #}
+
+{% if airflow_rows %}
+<div class="proto-header">
+  <h1>L{{ inspection.system_number or '1' }} – LUFTFLÖDESPROTOKOLL</h1>
+  <h2>
+    {{ property.designation }}
+    &nbsp;|&nbsp; Systemnr: {{ inspection.system_number or '1' }}
+    &nbsp;|&nbsp; Datum: {{ inspection.date }}
+  </h2>
+</div>
+
+<table class="lblankett">
+  <thead>
+    <tr>
+      <th rowspan="2" style="width:8%">Rum.nr</th>
+      <th rowspan="2" style="width:18%">Benämning</th>
+      <th colspan="4" style="width:37%">Tilluft (T)</th>
+      <th colspan="4" style="width:37%">Frånluft (F)</th>
+    </tr>
+    <tr>
+      <th style="width:8%">Proj (l/s)</th>
+      <th style="width:9%">Uppm (l/s)</th>
+      <th style="width:9%">% av proj</th>
+      <th style="width:11%">Mätmetod</th>
+      <th style="width:8%">Proj (l/s)</th>
+      <th style="width:9%">Uppm (l/s)</th>
+      <th style="width:9%">% av proj</th>
+      <th style="width:11%">Mätmetod</th>
+    </tr>
+  </thead>
+  <tbody>
+    {% for row in airflow_rows %}
+    <tr>
+      <td class="cen">{{ row.room_number or '–' }}</td>
+      <td>{{ row.room_name or '–' }}</td>
+      {# Tilluft #}
+      <td class="num">{{ row.T_proj or '–' }}</td>
+      <td class="num">{{ row.T_value or '–' }}</td>
+      <td class="num">
+        {% if row.T_proj and row.T_value %}
+          {{ "%.0f"|format(row.T_value / row.T_proj * 100) }}%
+        {% else %}–{% endif %}
+      </td>
+      <td class="cen">{{ row.T_method or '–' }}</td>
+      {# Frånluft #}
+      <td class="num">{{ row.F_proj or '–' }}</td>
+      <td class="num">{{ row.F_value or '–' }}</td>
+      <td class="num">
+        {% if row.F_proj and row.F_value %}
+          {{ "%.0f"|format(row.F_value / row.F_proj * 100) }}%
+        {% else %}–{% endif %}
+      </td>
+      <td class="cen">{{ row.F_method or '–' }}</td>
+    </tr>
+    {% endfor %}
+  </tbody>
+</table>
+
+<table class="data" style="width:auto">
+  <tr><th>Mättekniker</th><td>{{ inspector.name }}</td></tr>
+  <tr><th>Datum</th><td>{{ inspection.date }}</td></tr>
+  <tr><th>Flödesenhet</th><td>l/s</td></tr>
+</table>
+
+<p class="small mt4">
+  Mätmetod: ID=Kanal, ET=Frånluft, ST=Tilluft per SS-EN 16211:2015 SV
+</p>
+
+<div class="page-break"></div>
+{% endif %}
+
+{# ═══════════════════════════════════════════════════════════════════
+   INTYG
+   ═══════════════════════════════════════════════════════════════════ #}
+
+<div style="padding-top: 30mm;">
+<div class="intyg-box">
+  <h1>INTYG</h1>
+  <div class="intyg-subtitle">
+    Funktionskontroll av ventilationssystem enligt PBF kap 5,<br>
+    BFS 2011:16 (OVK) och BFS 2012:7 (OVKAR) med ändringar<br>
+    <strong>utförts på denna byggnad</strong>
+  </div>
+
+  <table class="data" style="margin-bottom:8px">
+    <tr><th>Fastighetsbeteckning</th><td><strong>{{ property.designation }}</strong></td></tr>
+    <tr><th>Adress</th><td>{{ property.address }}, {{ property.postal_code }} {{ property.city }}</td></tr>
+    <tr><th>Systemnummer</th><td>{{ inspection.system_number or '1' }}</td></tr>
+    <tr><th>Besiktningsdatum</th><td>{{ inspection.date }}</td></tr>
+    <tr>
+      <th>Besiktningsresultat</th>
+      <td>
+        <span class="result-badge result-{{ inspection.ovk_result or 'G' }}" style="font-size:14pt; padding:2px 8px;">
+          {{ inspection.ovk_result or 'G' }}
+        </span>
+      </td>
+    </tr>
+    <tr><th>Nästa ordinarie besiktning</th><td><strong>{{ inspection.next_inspection_date or '–' }}</strong></td></tr>
+  </table>
+
+  <div class="two-col">
+    <div>
+      <div class="sig-box">Besiktningsman: {{ inspector.name }}</div>
+    </div>
+    <div>
+      <div class="sig-box">
+        {% if inspector.certification_org %}{{ inspector.certification_org }}{% endif %}
+        {% if inspector.certification_number %} Nr: {{ inspector.certification_number }}{% endif %}
+      </div>
+    </div>
+  </div>
+
+  <p class="small mt4" style="text-align:center">
+    Protokoll finns att tillgå hos byggnadens ägare och hos kommunens byggnadsnämnd.
+  </p>
+  <p class="small" style="text-align:center">
+    Genererat: {{ generated_at }} &nbsp;|&nbsp; Besiktningsapp v{{ app_version or '1.0' }}
+  </p>
+</div>
+</div>
+
+</body>
+</html>
