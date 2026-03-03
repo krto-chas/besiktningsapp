@@ -1,0 +1,27 @@
+# =============================================================================
+# BESIKTNINGSAPP BACKEND - CI/CD REQUIREMENTS
+# =============================================================================
+# Minimal set for GitHub Actions. Excludes dev tools that are either
+# incompatible with Flask 3.0 (flasgger) or heavy to build (py-spy, locust).
+
+# Production requirements
+-r requirements.txt
+
+# Testing
+pytest==7.4.4
+pytest-cov==4.1.0
+pytest-flask==1.3.0
+pytest-mock==3.12.0
+pytest-xdist==3.5.0
+coverage==7.4.1
+factory-boy==3.3.0
+faker==22.5.0
+
+# Linting (used in lint job directly, not here, but kept for local parity)
+flake8==7.0.0
+black==24.1.1
+isort==5.13.2
+
+# Security scanning
+bandit==1.7.6
+safety==3.0.1
