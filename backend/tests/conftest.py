@@ -19,13 +19,13 @@ from app.models import User, Property, Inspection
 def app():
     """Create application for testing."""
     app = create_app('testing')
-    
+
     # Push application context
     ctx = app.app_context()
     ctx.push()
-    
+
     yield app
-    
+
     ctx.pop()
 
 
@@ -33,28 +33,18 @@ def app():
 def database(app):
     """Create database for testing."""
     _db.create_all()
-    
+
     yield _db
-    
+
     _db.drop_all()
 
 
 @pytest.fixture(scope='function')
 def db_session(database):
-    """Create a new database session for a test."""
-    connection = database.engine.connect()
-    transaction = connection.begin()
-    
-    session = database.create_scoped_session(
-        options={"bind": connection, "binds": {}}
-    )
-    database.session = session
-    
-    yield session
-    
-    session.close()
-    transaction.rollback()
-    connection.close()
+    """Create a new database session for a test (SQLAlchemy 2.x compatible)."""
+    yield database.session
+    database.session.rollback()
+    database.session.expunge_all()
 
 
 @pytest.fixture
@@ -115,16 +105,16 @@ def temp_storage():
 @pytest.fixture
 def sample_property(db_session):
     """Create sample property."""
-    property = Property(
+    prop = Property(
         property_type="flerbostadshus",
         designation="TEST 1:1",
         address="Testgatan 1",
         city="Stockholm",
         num_apartments=12
     )
-    db_session.add(property)
+    db_session.add(prop)
     db_session.commit()
-    return property
+    return prop
 
 
 @pytest.fixture

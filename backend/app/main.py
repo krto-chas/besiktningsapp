@@ -9,6 +9,7 @@ import logging
 import os
 from typing import Optional
 
+import click
 from flask import Flask, jsonify, request
 from werkzeug.exceptions import HTTPException
 
@@ -357,10 +358,6 @@ def setup_logging(app: Flask) -> None:
     app.logger.info(f"Starting Besiktningsapp Backend API (ENV: {app.config['ENV']})")
     app.logger.info(f"Database: {app.config.get('SQLALCHEMY_DATABASE_URI', 'N/A')[:50]}...")
     app.logger.info(f"Storage Backend: {app.config.get('STORAGE_BACKEND', 'local')}")
-
-
-# Import click for CLI commands
-import click
 
 
 # Create default app instance for CLI
