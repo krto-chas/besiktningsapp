@@ -230,16 +230,23 @@ class TestingConfig(Config):
     ENV = "testing"
     TESTING = True
 
-    # Use in-memory SQLite for tests
-    SQLALCHEMY_DATABASE_URI = os.getenv(
-        "TEST_DATABASE_URL",
-        os.getenv("DATABASE_URL", "sqlite:///:memory:")
-    )
+    # Unit tests use SQLite in-memory; integration tests supply a real DB URL.
+    _DB_URI: str = os.getenv("DATABASE_URL", "sqlite:///:memory:")
+    SQLALCHEMY_DATABASE_URI = _DB_URI
 
-    # SQLite doesn't support connection pool options – override with minimal set
-    SQLALCHEMY_ENGINE_OPTIONS = {
-        "pool_pre_ping": True,
-    }
+    # SQLite in-memory requires StaticPool so every engine checkout reuses the
+    # same underlying connection.  Without this, create_all() and db.session
+    # see different in-memory databases and all table lookups fail silently.
+    # For PostgreSQL (integration tests) use a plain pool_pre_ping config.
+    if "sqlite" in _DB_URI:
+        from sqlalchemy.pool import StaticPool as _SP
+        SQLALCHEMY_ENGINE_OPTIONS = {
+            "connect_args": {"check_same_thread": False},
+            "poolclass": _SP,
+        }
+        del _SP
+    else:
+        SQLALCHEMY_ENGINE_OPTIONS = {"pool_pre_ping": True}
 
     # Disable rate limiting in tests
     RATE_LIMIT_ENABLED = False

@@ -29,13 +29,19 @@ def app():
     ctx.pop()
 
 
-@pytest.fixture(scope='session')
+@pytest.fixture(scope='function')
 def database(app):
-    """Create database for testing."""
+    """Create database tables fresh for each test, then tear them down.
+
+    Function scope ensures committed rows in one test never bleed into the
+    next (avoids unique-constraint violations on repeated fixture data such
+    as test@example.com).
+    """
     _db.create_all()
 
     yield _db
 
+    _db.session.remove()   # close the scoped session before dropping tables
     _db.drop_all()
 
 
