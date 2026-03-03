@@ -225,17 +225,22 @@ class ProductionConfig(Config):
 
 class TestingConfig(Config):
     """Testing configuration."""
-    
+
     DEBUG = False
     ENV = "testing"
     TESTING = True
-    
+
     # Use in-memory SQLite for tests
     SQLALCHEMY_DATABASE_URI = os.getenv(
         "TEST_DATABASE_URL",
-        "sqlite:///:memory:"
+        os.getenv("DATABASE_URL", "sqlite:///:memory:")
     )
-    
+
+    # SQLite doesn't support connection pool options – override with minimal set
+    SQLALCHEMY_ENGINE_OPTIONS = {
+        "pool_pre_ping": True,
+    }
+
     # Disable rate limiting in tests
     RATE_LIMIT_ENABLED = False
     
