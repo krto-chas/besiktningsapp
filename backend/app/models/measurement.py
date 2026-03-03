@@ -60,7 +60,12 @@ class Measurement(BaseModel):
     
     # Measurement Details
     type = Column(
-        Enum(MeasurementType),
+        Enum(
+            MeasurementType,
+            name="measurementtype",
+            values_callable=lambda enum_cls: [item.value for item in enum_cls],
+            validate_strings=True,
+        ),
         nullable=False,
         index=True,
         comment="Type of measurement",

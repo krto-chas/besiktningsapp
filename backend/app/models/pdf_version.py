@@ -64,7 +64,12 @@ class PDFVersion(BaseModel):
     )
     
     status = Column(
-        Enum(PDFStatus),
+        Enum(
+            PDFStatus,
+            name="pdfstatus",
+            values_callable=lambda enum_cls: [item.value for item in enum_cls],
+            validate_strings=True,
+        ),
         nullable=False,
         default=PDFStatus.DRAFT,
         comment="Status: draft or final",

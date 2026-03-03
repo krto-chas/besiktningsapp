@@ -96,7 +96,12 @@ class Inspection(BaseModel):
     )
     
     status = Column(
-        Enum(InspectionStatus),
+        Enum(
+            InspectionStatus,
+            name="inspectionstatus",
+            values_callable=lambda enum_cls: [item.value for item in enum_cls],
+            validate_strings=True,
+        ),
         nullable=False,
         default=InspectionStatus.DRAFT,
         index=True,
