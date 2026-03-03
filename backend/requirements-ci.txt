@@ -22,6 +22,6 @@ flake8==7.0.0
 black==24.1.1
 isort==5.13.2
 
-# Security scanning
+# Security scanning (bandit and safety installed separately in CI security job;
+# safety 3.x conflicts with pydantic 2.x — do NOT add safety>=3.0 here)
 bandit==1.7.6
-safety==3.0.1
