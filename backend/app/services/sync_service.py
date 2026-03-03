@@ -48,6 +48,9 @@ _UPDATABLE: dict[str, set[str]] = {
     },
     "inspection": {
         "date", "status", "active_time_seconds", "notes",
+        "ovk_result", "next_inspection_date", "reinspection_date",
+        "system_number", "system_type", "inspection_category",
+        "energy_saving_measures",
     },
     "apartment": {
         "apartment_number", "rooms", "notes",
@@ -57,6 +60,7 @@ _UPDATABLE: dict[str, set[str]] = {
     },
     "measurement": {
         "type", "value", "unit", "apartment_number", "sort_key", "notes",
+        "direction", "projected_value", "measurement_method", "room_name",
     },
 }
 

@@ -11,7 +11,6 @@ Stores measurements taken during inspection (flow, pressure, temp, etc.).
 
 from sqlalchemy import Column, String, Integer, Float, ForeignKey, Enum
 from sqlalchemy.orm import relationship
-from typing import Optional
 import enum
 
 from app.models.base import BaseModel

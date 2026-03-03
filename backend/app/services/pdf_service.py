@@ -15,13 +15,12 @@ Includes:
 from typing import List, Optional, Tuple, Dict, Any
 from datetime import datetime
 import hashlib
-import uuid
 from io import BytesIO
 
 from weasyprint import HTML, CSS
 from jinja2 import Environment, FileSystemLoader, select_autoescape
 
-from app.models import PDFVersion, Inspection, Property, Apartment, Defect, Image, Measurement
+from app.models import PDFVersion, Inspection, Apartment, Defect, Image, Measurement
 from app.extensions import db
 from app.utils.errors import ValidationError, NotFoundError
 from app.config import Config
