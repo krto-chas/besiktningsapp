@@ -22,12 +22,8 @@ Available services:
 
 from app.services.auth_service import AuthService
 from app.services.storage_service import StorageService
-from app.services.local_storage import LocalStorage
-from app.services.s3_storage import S3Storage
 
 __all__ = [
     "AuthService",
     "StorageService",
-    "LocalStorage",
-    "S3Storage",
 ]
