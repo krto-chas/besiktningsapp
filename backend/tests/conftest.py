@@ -36,7 +36,12 @@ def database(app):
     Function scope ensures committed rows in one test never bleed into the
     next (avoids unique-constraint violations on repeated fixture data such
     as test@example.com).
+
+    drop_all() before create_all() ensures a clean schema even in integration
+    tests where `flask db upgrade` may have already created tables with an
+    older schema (e.g. missing deleted_at, wrong enum case).
     """
+    _db.drop_all()
     _db.create_all()
 
     yield _db
