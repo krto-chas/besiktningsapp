@@ -11,8 +11,7 @@ Stores processed operations to prevent duplicate processing.
 
 from datetime import datetime, timedelta
 
-from sqlalchemy import Column, String, Integer, DateTime, Text, JSON, Index
-from sqlalchemy.dialects.postgresql import UUID as PGUUID
+from sqlalchemy import Column, String, Integer, DateTime, Text, JSON, Index, Uuid
 
 from app.models.base import BaseModel
 
@@ -86,7 +85,7 @@ class SyncLog(BaseModel):
     
     # Entity IDs
     client_id = Column(
-        PGUUID(as_uuid=True),
+        Uuid(as_uuid=True),
         nullable=True,
         comment="Client-generated UUID for the entity",
     )

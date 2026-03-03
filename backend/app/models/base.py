@@ -17,8 +17,7 @@ from datetime import datetime
 from typing import Any, Dict
 from uuid import UUID
 
-from sqlalchemy import Column, Integer, String, DateTime, ForeignKey, event
-from sqlalchemy.dialects.postgresql import UUID as PGUUID
+from sqlalchemy import Column, Integer, String, DateTime, ForeignKey, Uuid, event
 from sqlalchemy.ext.declarative import declared_attr
 
 from app.extensions import db
@@ -50,7 +49,7 @@ class BaseModel(db.Model):
     
     # Client-generated UUID (for offline-first sync)
     client_id = Column(
-        PGUUID(as_uuid=True),
+        Uuid(as_uuid=True),
         unique=True,
         nullable=True,
         index=True,
